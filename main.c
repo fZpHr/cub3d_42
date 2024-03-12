@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:48:24 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/11 19:27:00 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/12 21:37:00 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,51 +130,23 @@ int	main(int ac, char **av)
 {
 	t_map cube;
 
-	(void)av;
+	ft_init(&cube);
 	ft_check_args(ac);
-	ft_check_map(av[1]);
-	map_into_array(&cube);
-
-	/* 	mlx_t mlx;
-		int w;
-		int h;
-		int dummy;
-
-		mlx.mlx = mlx_init();
-		mlx.win = mlx_new_window(mlx.mlx, 400, 400, "My window");
-
-		mlx_set_fps_goal(mlx.mlx, 60);
-
-		mlx_on_event(mlx.mlx, mlx.win, MLX_KEYDOWN, key_hook, &mlx);
-		mlx_on_event(mlx.mlx, mlx.win, MLX_WINDOW_EVENT, window_hook, &mlx);
-
-		mlx.logo_png = mlx_png_file_to_image(mlx.mlx, "42_logo.png", &dummy,
-				&dummy);
-		mlx.logo_bmp = mlx_bmp_file_to_image(mlx.mlx, "42_logo.bmp", &dummy,
-				&dummy);
-		mlx.logo_jpg = mlx_jpg_file_to_image(mlx.mlx, "42_logo.jpg", &dummy,
-				&dummy);
-
-		mlx_pixel_put(mlx.mlx, mlx.win, 200, 10, 0xFFFF00FF);
-		mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.logo_png, 10, 190);
-
-		mlx.img = create_image(&mlx);
-
-		mlx_set_font_scale(mlx.mlx, mlx.win, "font.ttf", 16.f);
-		mlx_string_put(mlx.mlx, mlx.win, 20, 20, 0xFF0020FF,
-			"that text will disappear");
-
-		mlx_loop_hook(mlx.mlx, update, &mlx);
-		mlx_loop(mlx.mlx);
-
-		mlx_get_screens_size(mlx.mlx, mlx.win, &w, &h);
-		printf("screen size : %dx%d\n", w, h);
-		mlx_destroy_image(mlx.mlx, mlx.logo_png);
-		mlx_destroy_image(mlx.mlx, mlx.logo_jpg);
-		mlx_destroy_image(mlx.mlx, mlx.logo_bmp);
-		mlx_destroy_image(mlx.mlx, mlx.img);
-		mlx_destroy_window(mlx.mlx, mlx.win);
-		mlx_destroy_display(mlx.mlx); */
+	ft_check_map_file(&cube, av[1]);
+	ft_map_into_array(&cube, av[1]);
+	ft_find_player_position(&cube);
+	ft_check_wall(&cube, cube.player_position[0], cube.player_position[1]);
+	int i = 0;
+	while (i <= cube.map_size_y)
+	{
+		printf("%s\n", cube.map_array[i]);
+		i++;
+	}
+	ft_free_array(cube.map_array);
+	free(cube.no);
+	free(cube.so);
+	free(cube.we);
+	free(cube.ea);
 
 	return (0);
 }

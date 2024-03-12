@@ -72,6 +72,8 @@ SRCS	=	ft_atoi.c \
 	printf_putstr.c \
 	printf_utilis.c \
 	printf.c \
+	ft_malloc.c \
+	ft_free_array.c \
 
 OBJTS	=	${SRCS:.c=.o} 
 

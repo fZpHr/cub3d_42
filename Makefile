@@ -18,6 +18,9 @@ SRCS	=	main.c \
 		srcs/utils/ft_error_handle.c \
 		srcs/data/ft_map_into_array.c \
 		srcs/parses/ft_check_map_content.c \
+		srcs/parses/ft_check_texture.c \
+		srcs/utils/ft_function.c \
+		srcs/utils/ft_init.c \
 
 
 
