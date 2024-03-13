@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:22:23 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/12 19:07:55 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/13 16:55:40 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 void	ft_init(t_map *cube)
 {
 	cube->map_array = NULL;
+	cube->map_array_copy = NULL;
 	cube->no = NULL;
 	cube->so = NULL;
 	cube->we = NULL;
 	cube->ea = NULL;
-	cube->floor[0] = -1;
-	cube->ceiling[0] = -1;
+	cube->floor_c[0] = -1;
+	cube->ceiling_c[0] = -1;
 	cube->player_direction[0] = 0;
 	cube->player_direction[1] = 0;
 	cube->player_direction[2] = 0;
