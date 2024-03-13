@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:48:24 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/13 18:15:46 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/13 19:23:46 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,8 @@ int	main(int ac, char **av)
 	ft_cp_array(&cube);
 	ft_check_wall(&cube, cube.player_position[0], cube.player_position[1]);
 
-
 	test_print_parsing(&cube);
 
-	
 	ft_free_array(cube.map_array_copy);
 	ft_free_array(cube.map_array);
 	free(cube.no);

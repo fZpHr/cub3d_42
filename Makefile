@@ -49,7 +49,7 @@ $(OBJ_DIR)/%.o: %.c
 			\033[36m$*.c\033[00m\  [Error] ❌ \033[00m"; fi
 
 $(NAME): $(OBJTS) $(LIBFT)
-	@cc -o $(NAME) $(OBJTS) $(CFLAGS) $(HEADER) $(LIBS) minilibx-linux/libmlx.a -lSDL2
+	@cc -o $(NAME) $(OBJTS) $(CFLAGS) $(HEADER) $(LIBS) minilibx-linux/libmlx.a -lXext -lX11 -lm -lbsd
 	@echo "\033[01m\033[4;33mCompilation done\033[00m\033[1;31m =▶\033[00m\033[1;32m ./${NAME}\033[00m"
 
 $(LIBFT):
