@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
+#    By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/03/14 11:25:35 by ysabik           ###   ########.fr        #
+#    Updated: 2024/03/14 19:53:35 by hbelle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC					= gcc
 CFLAGS				= -Werror -Wall -Wextra -g
-NAME				= cub3d
+NAME				= cub3D
 INCLUDES			= ./includes
 SRC_FILES			= \
 						srcs/main.c \
@@ -24,7 +24,9 @@ SRC_FILES			= \
 						srcs/parses/ft_check_texture.c \
 						srcs/utils/ft_function.c \
 						srcs/utils/ft_init.c \
-						srcs/parses/ft_access_texture.c
+						srcs/parses/ft_access_texture.c \
+						srcs/parses/ft_parse_checker.c \
+						srcs/data/ft_assign_to_cube.c
 
 BUILD_FOLDER		= ./build
 
@@ -154,7 +156,7 @@ fclean :
 	@echo "$(C_RESET)"
 	@echo -n "$(C_RED)$(C_BOLD)$(C_UNDERLINE)"
 	@echo "FCleaning $(MLX_FOLDER)... :$(C_RESET)$(C_DIM)"
-	@make -C $(MLX_FOLDER) fclean
+	@make -C $(MLX_FOLDER) clean
 	@echo "$(C_RESET)"
 	$(call del, "./$(NAME)" "$(BUILD_FOLDER)" $(BUILD_FILES))
 	@rm -rf $(NAME) $(BUILD_FILES) $(BUILD_FOLDER)

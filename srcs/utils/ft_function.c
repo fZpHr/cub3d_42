@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_function.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:24:55 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/14 11:17:30 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/14 21:11:42 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ void	ft_skip_spaces(char *line, int *i, int *count)
 	}
 }
 
+/**
+ * @brief Cut the extra '\n' at the end of the string put by the get_next_line function
+ * 
+ * @param str string to cut
+ * @return void
+*/
 void	cut_extra_char(char *str)
 {
 	int	i;
@@ -42,6 +48,13 @@ void	cut_extra_char(char *str)
 		str[i - 1] = '\0';
 }
 
+/**
+ * @brief Fill the line with 'A' character
+ * 
+ * @param line line to fill
+ * @param size size of the line
+ * @return void
+*/
 void	ft_fill_line(char *line, int size)
 {
 	int	i;
@@ -55,50 +68,56 @@ void	ft_fill_line(char *line, int size)
 	line[i] = '\0';
 }
 
-void	ft_init_array(t_map *cube, int l)
+void	ft_init_array(t_map *map, int l)
 {
 	int	j;
 
 	j = 0;
 	while (j < l)
 	{
-		cube->map_array_copy[j] = (char *)malloc(sizeof(char)
-				* (cube->map_size_x + 1));
-		if (!cube->map_array[j])
+		map->map_array_copy[j] = (char *)malloc(sizeof(char)
+				* (map->map_size_x + 1));
+		if (!map->map_array[j])
 		{
 			while (j >= 0)
 			{
-				free(cube->map_array[j]);
+				free(map->map_array[j]);
 				j--;
 			}
-			free(cube->map_array);
-			ft_error_handle(cube, "Error\n", "Malloc failed", 1);
+			free(map->map_array);
+			ft_error_handle(map, "Error\n", "Malloc failed", 1);
 		}
 		j++;
 	}
 }
 
-void	ft_cp_array(t_map *cube)
+/**
+ * @brief Copy the map array into a new array, to check if the map is close with wall with flood fill algorithm
+ * 
+ * @param map struct of the map
+ * @return void
+*/
+void	ft_cp_array(t_map *map)
 {
 	int	i;
 	int	j;
 	int	l;
 
-	l = cube->map_size_y;
+	l = map->map_size_y;
 	j = 0;
 	i = 0;
-	cube->map_array_copy = (char **)ft_malloc(sizeof(char *) * (l + 1));
-	ft_init_array(cube, l);
-	while (j < cube->map_size_y)
+	map->map_array_copy = (char **)ft_malloc(sizeof(char *) * (l + 1));
+	ft_init_array(map, l);
+	while (j < map->map_size_y)
 	{
 		i = 0;
-		while (cube->map_array[j][i])
+		while (map->map_array[j][i])
 		{
-			cube->map_array_copy[j][i] = cube->map_array[j][i];
+			map->map_array_copy[j][i] = map->map_array[j][i];
 			i++;
 		}
-		cube->map_array_copy[j][i] = '\0';
+		map->map_array_copy[j][i] = '\0';
 		j++;
 	}
-	cube->map_array_copy[j] = NULL;
+	map->map_array_copy[j] = NULL;
 }

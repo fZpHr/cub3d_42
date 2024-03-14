@@ -3,42 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_into_array.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:56:58 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/14 11:18:07 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/14 18:53:59 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	loop_fill_array(t_map *cube, char *line, int fd, int *j)
+void	handle_line(t_map *map, char *line, int *j, int *i)
+{
+	if (line[(*i)] == ' ' || line[(*i)] == '\n')
+		line[(*i)] = 'A';
+	map->map_array[(*j)][(*i)] = line[(*i)];
+	(*i)++;
+}
+
+void	loop_fill_array(t_map *map, char *line, int fd, int *j)
 {
 	int	i;
+	int size;
 
 	i = 0;
-	while ((*j) < cube->map_size_y)
+	size = 0;
+	while ((*j) < map->map_size_y)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		while (line[i])
+		while (size < map->map_size_x)
 		{
-			if (line[i] == ' ')
-				line[i] = 'A';
-			else if (line[i] == '\n')
-				line[i] = 'A';
-			cube->map_array[(*j)][i] = line[i];
-			i++;
+			if (line[i] != '\0')
+				handle_line(map, line, j, &i);
+			else
+				map->map_array[(*j)][size] = 'A';
+			size++;
 		}
-		cube->map_array[(*j)][i] = '\0';
+		map->map_array[(*j)][size] = '\0';
+		size = 0;
 		i = 0;
 		free(line);
 		(*j)++;
 	}
 }
 
-void	fill_array(t_map *cube, char *map)
+void	fill_array(t_map *map, char *map_file)
 {
 	char	*line;
 	int		fd;
@@ -47,41 +57,48 @@ void	fill_array(t_map *cube, char *map)
 
 	i = 0;
 	j = 0;
-	fd = open(map, O_RDONLY);
-	while (i < cube->map_position)
+	fd = open(map_file, O_RDONLY);
+	while (i < map->map_position)
 	{
 		line = get_next_line(fd);
 		free(line);
 		i++;
 	}
-	loop_fill_array(cube, line, fd, &j);
-	cube->map_array[j] = NULL;
+	loop_fill_array(map, line, fd, &j);
+	map->map_array[j] = NULL;
 	close(fd);
 }
 
-void	ft_map_into_array(t_map *cube, char *map)
+/**
+ * @brief Fill the map array with the position of the map in the file, and replace spaces and newlines by 'A'
+ * 
+ * @param map struct of the map
+ * @param map_file name of the file
+ * @return void
+*/
+void	ft_map_into_array(t_map *map, char *map_file)
 {
 	int	i;
 	int	l;
 
 	i = 0;
-	l = cube->map_size_y;
-	cube->map_array = (char **)ft_malloc(sizeof(char *) * (l + 1));
+	l = map->map_size_y;
+	map->map_array = (char **)ft_malloc(sizeof(char *) * (l + 1));
 	while (i < l)
 	{
-		cube->map_array[i] = (char *)malloc(sizeof(char)
-				* cube->map_size_x + 1);
-		if (!cube->map_array[i])
+		map->map_array[i] = (char *)malloc(sizeof(char)
+				* map->map_size_x + 1);
+		if (!map->map_array[i])
 		{
 			while (i >= 0)
 			{
-				free(cube->map_array[i]);
+				free(map->map_array[i]);
 				i--;
 			}
-			free(cube->map_array);
-			ft_error_handle(cube, "Error\n", "Malloc failed", 1);
+			free(map->map_array);
+			ft_error_handle(map, "Error\n", "Malloc failed", 1);
 		}
 		i++;
 	}
-	fill_array(cube, map);
+	fill_array(map, map_file);
 }

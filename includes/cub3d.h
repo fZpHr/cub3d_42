@@ -13,6 +13,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "parsing.h"
 # include "mlx.h"
 # include "libft.h"
 # include <errno.h>
@@ -21,6 +22,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <math.h>
 
 typedef enum e_direction
 {
@@ -71,35 +73,35 @@ typedef struct s_cub
 {
 	void		*mlx;
 	void		*mlx_win;
-
 	char		**map_array;
 	t_ipos		map_size;
-
 	int			floor_c;
 	int			ceiling_c;
 	t_texture	no;
 	t_texture	so;
 	t_texture	we;
 	t_texture	ea;
-
 	float		orientation;
 	t_pos		position;
 }	t_cub;
 
-void ft_parse();
+
+
+void	ft_assign_to_cube(t_cub *cub, t_map *map);
+void	ft_parse_checker(t_cub *cub, int ac, char **av);
 
 // UTILS
 
-void	ft_init(t_map *cube);
-void	ft_error_handle(t_map *cube, char *error, char *str, int status);
-void	ft_error_handle_color(t_map *cube, char *line);
+void	ft_init(t_map *map);
+void	ft_error_handle(t_map *map, char *error, char *str, int status);
+void	ft_error_handle_color(t_map *map, char *line);
 void	ft_skip_spaces(char *line, int *i, int *count);
 void	cut_extra_char(char *str);
 void	ft_fill_line(char *line, int size);
 
 // DATA
 
-void	ft_cp_array(t_map *cube);
-void	ft_map_into_array(t_map *cube, char *map);
+void	ft_cp_array(t_map *map);
+void	ft_map_into_array(t_map *map, char *map_file);
 
 #endif

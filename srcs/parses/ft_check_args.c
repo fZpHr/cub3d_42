@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 17:57:19 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/14 11:17:56 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/14 16:52:31 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/**
+ * @brief Check if the number of arguments is correct
+ * 
+ * @param ac number of arguments
+ * @return void
+ */
 void	ft_check_args(int ac)
 {
 	if (ac <= 1)
