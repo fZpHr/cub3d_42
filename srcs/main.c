@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:48:24 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/13 19:23:46 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/14 11:30:45 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "cub3d.h"
 
 void	test_print_parsing(t_map *cube)
 {

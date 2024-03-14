@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_map_file.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:00:16 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/13 16:55:00 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/14 11:17:45 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 
 void	ft_loop_map(t_map *cube, char *line, int fd, int full)
 {

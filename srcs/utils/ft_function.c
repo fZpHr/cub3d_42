@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_function.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:24:55 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/13 17:06:06 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/14 11:17:30 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 
 void	ft_skip_spaces(char *line, int *i, int *count)
 {

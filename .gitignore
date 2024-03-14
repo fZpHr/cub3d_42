@@ -1,0 +1,7 @@
+.vscode
+*.o
+*.old
+build
+libft
+minilibx-linux
+cub3d

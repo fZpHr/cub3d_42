@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_into_array.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:56:58 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/13 17:08:57 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/14 11:18:07 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 
 void	loop_fill_array(t_map *cube, char *line, int fd, int *j)
 {

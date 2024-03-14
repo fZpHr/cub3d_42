@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error_handle.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:03:58 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/13 16:53:17 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/14 15:05:26 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 
 void	ft_free_end(t_map *cube, int status)
 {
 	int	i;
 
 	i = 3;
-	if (cube->ea)
-		free(cube->ea);
+	free(cube->ea);
+	cube->ea = NULL;
 	if (cube->we)
 		free(cube->we);
 	if (cube->so)

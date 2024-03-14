@@ -2,22 +2,19 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+
-	+:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+
-	+#+        */
-/*                                                +#+#+#+#+#+
-	+#+           */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:47:27 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/11 16:47:27 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/14 11:18:25 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <../minilibx-linux/mlx.h>
-# include <../libft/libft.h>
+# include "mlx.h"
+# include "libft.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -25,32 +22,71 @@
 # include <string.h>
 # include <unistd.h>
 
-typedef struct s_map
+typedef enum e_direction
 {
-	char	**map_array;
-	char	**map_array_copy;
-	int		map_size_y;
-	int		map_size_x;
-	int		map_position;
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	int		floor_c[3];
-	int		ceiling_c[3];
-	int		player_direction[4];
-	int		player_position[2];
-}	t_map;
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST
+}	t_direction;
 
-// PARSES
+typedef struct s_pos
+{
+	float	x;
+	float	y;
+}	t_pos;
 
-void	ft_acces_texture(t_map *cube, char *line, int i);
-void	ft_check_wall(t_map *cube, int x, int y);
-void	ft_find_player_position(t_map *cube);
-void	ft_check_args(int ac);
-void	ft_check_map_file(t_map *cube, char *map);
-int		ft_check_texture(t_map *cube, char *line);
-void	ft_check_map_content(t_map *cube, int fd);
+typedef struct s_ipos
+{
+	int	x;
+	int	y;
+}	t_ipos;
+
+typedef struct s_texture {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_size;
+	int		width;
+	int		height;
+	int		endian;
+}	t_texture;
+
+/**
+ * @brief Structure for the game
+ * 
+ * @param map_array		2D array of the map \
+ * 						1 = wall, 0 = empty space
+ * @param map_size		Size of the map (int, int)
+ * @param orientation	Orientation of the player (in radian)
+ * @param pos			Position of the player (float, float)
+ * @param no			north texture
+ * @param so			south texture
+ * @param we			west texture
+ * @param ea			east texture
+ * @param floor_c		Color of the floor (ARGB)
+ * @param ceiling_c		Color of the ceiling (ARGB)
+*/
+typedef struct s_cub
+{
+	void		*mlx;
+	void		*mlx_win;
+
+	char		**map_array;
+	t_ipos		map_size;
+
+	int			floor_c;
+	int			ceiling_c;
+	t_texture	no;
+	t_texture	so;
+	t_texture	we;
+	t_texture	ea;
+
+	float		orientation;
+	t_pos		position;
+}	t_cub;
+
+void ft_parse();
 
 // UTILS
 

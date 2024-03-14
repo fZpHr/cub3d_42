@@ -3,73 +3,162 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+         #
+#    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/05 17:52:23 by hbelle            #+#    #+#              #
-#    Updated: 2024/02/29 13:36:21 by hbelle           ###   ########.fr        #
+#    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
+#    Updated: 2024/03/14 11:25:35 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	cub3D
+CC					= gcc
+CFLAGS				= -Werror -Wall -Wextra -g
+NAME				= cub3d
+INCLUDES			= ./includes
+SRC_FILES			= \
+						srcs/main.c \
+						srcs/parses/ft_check_args.c \
+						srcs/parses/ft_check_map_file.c \
+						srcs/utils/ft_error_handle.c \
+						srcs/data/ft_map_into_array.c \
+						srcs/parses/ft_check_map_content.c \
+						srcs/parses/ft_check_texture.c \
+						srcs/utils/ft_function.c \
+						srcs/utils/ft_init.c \
+						srcs/parses/ft_access_texture.c
 
-NAME_BONUS	=
+BUILD_FOLDER		= ./build
 
-SRCS	=	main.c \
-		srcs/parses/ft_check_args.c \
-		srcs/parses/ft_check_map_file.c \
-		srcs/utils/ft_error_handle.c \
-		srcs/data/ft_map_into_array.c \
-		srcs/parses/ft_check_map_content.c \
-		srcs/parses/ft_check_texture.c \
-		srcs/utils/ft_function.c \
-		srcs/utils/ft_init.c \
-		srcs/parses/ft_access_texture.c \
+LIBFT_FOLDER		= ./libft
+LIBFT_A				= $(LIBFT_FOLDER)/libft.a
+LIBFT_FLAGS			= -L $(LIBFT_FOLDER) -lft -I $(LIBFT_FOLDER)
 
-SRCS_BONUS =
+MLX_FOLDER			= ./minilibx-linux
+MLX_A				= $(MLX_FOLDER)/libmlx.a
+MLX_FLAGS			= -L $(MLX_FOLDER) -lmlx -lXext -lX11 -lm -lbsd -I $(MLX_FOLDER)
 
-OBJ_DIR = .o
-OBJTS = $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
-OBJTS_BONUS = $(addprefix $(OBJ_DIR)/, $(SRCS_BONUS:%.c=%.o))
-LIBFT	=	libft/libft.a
+C_RESET				= \033[0m
+C_BOLD				= \033[1m
+C_DIM				= \033[2m
+C_UNDERLINE			= \033[4m
+C_BLINK				= \033[5m
+C_BLACK				= \033[30m
+C_RED				= \033[31m
+C_GREEN				= \033[32m
+C_YELLOW			= \033[33m
+C_BLUE				= \033[34m
+C_MAGENTA			= \033[35m
+C_CYAN				= \033[36m
+C_WHITE				= \033[37m
 
-RM	=	rm -f
-HEADER =	-I includes 
-LIBS =	-Llibft/ -lft
+OBJ_FILES			= $(SRC_FILES:.c=.o)
+BUILD_FILES			= $(addprefix $(BUILD_FOLDER)/, $(OBJ_FILES))
 
-CFLAGS = -Wall -Wextra -Werror -g
+TO_COMPILE			= 0
 
-$(OBJ_DIR)/%.o: %.c
+all : $(NAME)
+
+$(NAME) : $(BUILD_FILES)
+	@echo ""
+	@echo -n "  > $(C_YELLOW)$(C_BOLD)./$(NAME)$(C_RESET):  $(C_DIM)"
+	$(CC) $(CFLAGS) -o $(NAME) $(BUILD_FILES) -I $(INCLUDES) $(LIBFT_FLAGS) $(MLX_FLAGS)
+	@echo "$(C_RESET)"
+	@echo ""
+	@echo -n "$(C_BOLD)$(C_MAGENTA)>$(C_BLUE)>$(C_CYAN)>$(C_GREEN)"
+	@echo -n " Compilation success ! "
+	@echo "$(C_CYAN)<$(C_BLUE)<$(C_MAGENTA)<$(C_RESET)"
+	@echo ""
+
+m_line_break :
+	@echo ""
+
+bonus:
+	@echo "$(C_RED)$(C_BOLD)There is no bonus for this project.$(C_RESET)"
+
+$(LIBFT_A):
+	@echo -n "$(C_CYAN)$(C_BOLD)$(C_UNDERLINE)"
+	@echo "Compiling $(C_YELLOW)$(LIBFT_A)$(C_CYAN)... :$(C_RESET)"
+	@echo ""
+	@make -C $(LIBFT_FOLDER)
+	@echo "$(C_RESET)"
+	@echo ""
+
+$(MLX_A):
+	@echo -n "$(C_CYAN)$(C_BOLD)$(C_UNDERLINE)"
+	@echo "Compiling $(C_YELLOW)$(MLX_A)$(C_CYAN)... :$(C_RESET)"
+	@echo ""
+	@make -C $(MLX_FOLDER)
+	@echo "$(C_RESET)"
+	@echo ""
+
+$(BUILD_FOLDER)/%.o : %.c | $(LIBFT_A) $(MLX_A)
+	@if [ $(TO_COMPILE) -eq 0 ] ; then \
+		echo -n "$(C_CYAN)$(C_BOLD)$(C_UNDERLINE)" ; \
+		echo "Compiling $(C_YELLOW)./$(NAME)$(C_CYAN)... :$(C_RESET)" ; \
+		echo "" ; \
+	fi
+	@$(eval TO_COMPILE := 1)
+	@echo -n "  - $(C_GREEN)$<$(C_RESET):  $(C_DIM)"
 	@mkdir -p $(@D)
-	@cc $(CFLAGS) $(HEADER) -c  $< -o $@
-	@if test -s $*.c; then\
-			echo "\033[01m\033[35mCompiling ⌛\033[00m\
-			\033[36m$*.c\033[032m  [OK] ✅ \033[00m";\
-			else \
-			echo "\033[01m\033[33mCompiling \033[00m\
-			\033[36m$*.c\033[00m\  [Error] ❌ \033[00m"; fi
+	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES) $(LIBFT_FLAGS) $(MLX_FLAGS)
+	@echo -n "$(C_RESET)"
 
-$(NAME): $(OBJTS) $(LIBFT)
-	@cc -o $(NAME) $(OBJTS) $(CFLAGS) $(HEADER) $(LIBS) minilibx-linux/libmlx.a -lXext -lX11 -lm -lbsd
-	@echo "\033[01m\033[4;33mCompilation done\033[00m\033[1;31m =▶\033[00m\033[1;32m ./${NAME}\033[00m"
+define del =
+	@echo -n "$(C_RED)$(C_BOLD)$(C_UNDERLINE)"
+	@echo "Deleting files... :$(C_RESET)$(C_RED)"
+	@\
+	l=-1 ; \
+	for file in $(1) ; do \
+		if [ $${#file} -gt $$l ] ; then \
+			l=$${#file} ; \
+		fi ; \
+	done ; \
+	cols=$$((64 / $$l)) ; \
+	i=0 ; \
+	for file in $(1) ; do \
+		if [ $$i -eq 0 ] ; then \
+			echo -n "    " ; \
+		fi ; \
+		if [ "$$file" = "./$(NAME)" ] ; then \
+			printf "$(C_YELLOW)%-$$((l))s  $(C_RED)" "$$file" ; \
+		else \
+			printf "%-$$((l))s  " "$$file" ; \
+		fi ; \
+		if [ $$i -gt $$cols ] ; then \
+			echo "" ; \
+			i=-1; \
+		fi ; \
+		i=$$(($$i + 1)); \
+	done ; \
+	if [ $$i -ne -1 ] ; then \
+		echo "" ; \
+	fi
+	@echo "$(C_RESET)"
+endef
 
-$(LIBFT):
-	@make -C libft/ -s
+clean :
+	@echo -n "$(C_RED)$(C_BOLD)$(C_UNDERLINE)"
+	@echo "Cleaning $(LIBFT_FOLDER)... :$(C_RESET)$(C_DIM)"
+	@make -C $(LIBFT_FOLDER) clean
+	@echo "$(C_RESET)"
+	@echo -n "$(C_RED)$(C_BOLD)$(C_UNDERLINE)"
+	@echo "Cleaning $(MLX_FOLDER)... :$(C_RESET)$(C_DIM)"
+	@make -C $(MLX_FOLDER) clean
+	@echo "$(C_RESET)"
+	$(call del, "$(BUILD_FOLDER)" $(BUILD_FILES))
+	@rm -rf $(BUILD_FILES) $(BUILD_FOLDER)
 
-all:	${NAME}
+fclean :
+	@echo -n "$(C_RED)$(C_BOLD)$(C_UNDERLINE)"
+	@echo "FCleaning $(LIBFT_FOLDER)... :$(C_RESET)$(C_DIM)"
+	@make -C $(LIBFT_FOLDER) fclean
+	@echo "$(C_RESET)"
+	@echo -n "$(C_RED)$(C_BOLD)$(C_UNDERLINE)"
+	@echo "FCleaning $(MLX_FOLDER)... :$(C_RESET)$(C_DIM)"
+	@make -C $(MLX_FOLDER) fclean
+	@echo "$(C_RESET)"
+	$(call del, "./$(NAME)" "$(BUILD_FOLDER)" $(BUILD_FILES))
+	@rm -rf $(NAME) $(BUILD_FILES) $(BUILD_FOLDER)
 
-bonus: $(OBJTS_BONUS) $(LIBFT)
-	@cc -o $(NAME_BONUS) $(OBJTS_BONUS) $(LIBS) $(CFLAGS) $(HEADER)
-	@echo "\033[01m\033[4;33mCompilation done\033[00m\033[1;31m -->\033[00m\033[1;32m ${NAME_BONUS}\033[00m"
+re : fclean m_line_break all
 
-clean:
-	@${RM} -r $(OBJ_DIR) 
-	@echo "\033[01m\033[31mRemoving objects ...\033[00m"
-	@make -C libft/ fclean -s
-
-fclean:	clean
-	@${RM} ${NAME} ${NAME_BONUS}
-	@echo "\033[01m\033[31mRemoving exec : ${NAME} ...\033[00m"
-
-re:	fclean $(LIBFT) all
-
-.PHONY: all clean fclean re bonus
+.PHONY : all bonus clean fclean re

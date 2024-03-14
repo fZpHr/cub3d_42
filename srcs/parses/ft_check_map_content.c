@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_map_content.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:53:42 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/13 16:31:58 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/14 11:17:51 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 
 void	ft_find_player_position(t_map *cube)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_access_texture.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:24:32 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/13 17:43:59 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/14 11:18:01 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 
 void	ft_check_extension(t_map *cube, char *line)
 {
