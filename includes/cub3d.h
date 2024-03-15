@@ -180,7 +180,7 @@ void	ft_init(t_map *map);
 void	ft_error_handle(t_map *map, char *error, char *str, int status);
 void	ft_error_handle_color(t_map *map, char *line);
 void	ft_skip_spaces(char *line, int *i, int *count);
-void	cut_extra_char(char *str);
+void	ft_cut_extra_char(char *str);
 void	ft_fill_line(char *line, int size);
 
 // DATA

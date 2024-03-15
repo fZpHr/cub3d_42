@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:56:58 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/14 18:53:59 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/15 19:36:01 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	handle_line(t_map *map, char *line, int *j, int *i)
 void	loop_fill_array(t_map *map, char *line, int fd, int *j)
 {
 	int	i;
-	int size;
+	int	size;
 
 	i = 0;
 	size = 0;
@@ -70,12 +70,13 @@ void	fill_array(t_map *map, char *map_file)
 }
 
 /**
- * @brief Fill the map array with the position of the map in the file, and replace spaces and newlines by 'A'
- * 
+ * @brief Fill the map array with the position of the map in the file,
+	and replace spaces and newlines by 'A'
+ *
  * @param map struct of the map
  * @param map_file name of the file
  * @return void
-*/
+ */
 void	ft_map_into_array(t_map *map, char *map_file)
 {
 	int	i;
@@ -86,8 +87,7 @@ void	ft_map_into_array(t_map *map, char *map_file)
 	map->map_array = (char **)ft_malloc(sizeof(char *) * (l + 1));
 	while (i < l)
 	{
-		map->map_array[i] = (char *)malloc(sizeof(char)
-				* map->map_size_x + 1);
+		map->map_array[i] = (char *)malloc(sizeof(char) * map->map_size_x + 1);
 		if (!map->map_array[i])
 		{
 			while (i >= 0)

@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:00:56 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/14 21:11:42 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/15 19:40:17 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct s_map
 	int		player_direction[4];
 	int		player_position[2];
 }	t_map;
-
 
 void	ft_acces_texture(t_map *map, char *line, int i);
 void	ft_check_wall(t_map *map, int x, int y);

@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:00:16 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/14 16:38:02 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/15 19:43:12 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_loop_map(t_map *map, char *line, int fd, int full)
 		}
 		free(line);
 		line = get_next_line(fd);
-		cut_extra_char(line);
+		ft_cut_extra_char(line);
 	}
 	free(line);
 	if (full == 0)
@@ -59,7 +59,7 @@ void	ft_check_map_file(t_map *map, char *map_file)
 	if (fd < 0)
 		ft_error_handle(map, "Invalid file : ", map_file, 1);
 	line = get_next_line(fd);
-	cut_extra_char(line);
+	ft_cut_extra_char(line);
 	if (!line)
 	{
 		free(line);

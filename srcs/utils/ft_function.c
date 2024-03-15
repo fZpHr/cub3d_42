@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:24:55 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/14 21:11:42 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/15 19:36:55 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ void	ft_skip_spaces(char *line, int *i, int *count)
 }
 
 /**
- * @brief Cut the extra '\n' at the end of the string put by the get_next_line function
- * 
+ * @brief Cut the extra '\n' at the end of the string
+ * 			put by the get_next_line function
+ *
  * @param str string to cut
  * @return void
-*/
-void	cut_extra_char(char *str)
+ */
+void	ft_cut_extra_char(char *str)
 {
 	int	i;
 
@@ -50,11 +51,11 @@ void	cut_extra_char(char *str)
 
 /**
  * @brief Fill the line with 'A' character
- * 
+ *
  * @param line line to fill
  * @param size size of the line
  * @return void
-*/
+ */
 void	ft_fill_line(char *line, int size)
 {
 	int	i;
@@ -75,8 +76,8 @@ void	ft_init_array(t_map *map, int l)
 	j = 0;
 	while (j < l)
 	{
-		map->map_array_copy[j] = (char *)malloc(sizeof(char)
-				* (map->map_size_x + 1));
+		map->map_array_copy[j] = (char *)malloc(sizeof(char) * (map->map_size_x
+					+ 1));
 		if (!map->map_array[j])
 		{
 			while (j >= 0)
@@ -92,11 +93,12 @@ void	ft_init_array(t_map *map, int l)
 }
 
 /**
- * @brief Copy the map array into a new array, to check if the map is close with wall with flood fill algorithm
- * 
+ * @brief Copy the map array into a new array,
+	to check if the map is close with wall with flood fill algorithm
+ *
  * @param map struct of the map
  * @return void
-*/
+ */
 void	ft_cp_array(t_map *map)
 {
 	int	i;

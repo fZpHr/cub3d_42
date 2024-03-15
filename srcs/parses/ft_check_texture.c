@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:35:02 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/14 16:52:31 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/15 19:29:32 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,11 @@ void	ft_check_color(t_map *map, char *line, int *i, int *color)
 		ft_error_handle_color(map, line);
 	(*i)++;
 	color[2] = ft_atoi(line + (*i));
-	(*i)++;
-	if (line[(*i)] == ' ')
-		ft_skip_spaces(line, i, NULL);
-	if (line[(*i)] != '\n' && line[(*i + 1)] != '\0')
-		ft_error_handle_color(map, line);
 	while (line[(*i)] >= '0' && line[(*i)] <= '9')
 		(*i)++;
+	if ((line[(*i)] != '\n' && line[(*i + 1)] != '\0') || line[(*i)] != '\0'
+		|| line[(*i)] == ' ')
+		ft_error_handle_color(map, line);
 	if (color[0] < 0 || color[0] > 255 || color[1] < 0 || color[1] > 255
 		|| color[2] < 0 || color[2] > 255)
 		ft_error_handle_color(map, line);
@@ -96,11 +94,11 @@ void	ft_select_color(t_map *map, char *line, int *i, int select)
 
 /**
  * @brief Check if the line is a texture or a color
- * 
+ *
  * @param map struct of the map
  * @param line line to check send by gnl, can be a texture, a color or nothing
  * @return int 0 if the line is empty, 1 if the line is not a texture or a color
-*/
+ */
 int	ft_check_texture(t_map *map, char *line)
 {
 	int	i;

@@ -6,18 +6,18 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:53:42 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/14 17:47:24 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/15 20:29:26 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /**
-* @brief Find the player position in the map, and store it in the struct
-* 
-* @param map struct of the map
-* @return void
-**/
+ * @brief Find the player position in the map, and store it in the struct
+ *
+ * @param map struct of the map
+ * @return void
+ **/
 void	ft_find_player_position(t_map *map)
 {
 	int	i;
@@ -44,14 +44,15 @@ void	ft_find_player_position(t_map *map)
 	if (map->player_position[0] == 0 && map->player_position[1] == 0)
 		ft_error_handle(map, "Error\n", "No player position", 1);
 }
+
 /**
  * @brief Check if the map is close with wall, with flood fill algorithm
- * 
+ *
  * @param map struct of the map
  * @param x position of the player x in the map
  * @param y position of the player y in the map
  * @return void
-*/
+ */
 void	ft_check_wall(t_map *map, int x, int y)
 {
 	if (y < 0 || y >= map->map_size_y || x < 0 || x >= map->map_size_x)
@@ -70,7 +71,6 @@ void	ft_check_wall(t_map *map, int x, int y)
 	ft_check_wall(map, x, y - 1);
 }
 
-
 void	ft_player_direction(t_map *map, char *line, int i)
 {
 	if (map->player_direction[0] == 1 || map->player_direction[1] == 1
@@ -79,13 +79,13 @@ void	ft_player_direction(t_map *map, char *line, int i)
 		free(line);
 		ft_error_handle(map, "Error\n", "Multiple player position", 1);
 	}
-	if (line[i] == 'N')
+	if (line[i] == 'E')
 		map->player_direction[0] = 1;
 	else if (line[i] == 'S')
 		map->player_direction[1] = 1;
 	else if (line[i] == 'W')
 		map->player_direction[2] = 1;
-	else if (line[i] == 'E')
+	else if (line[i] == 'N')
 		map->player_direction[3] = 1;
 }
 
@@ -118,11 +118,11 @@ void	else_map_content(t_map *map, char *line, int *i, int *count_tmp_x)
 
 /**
  * @brief Check if the map content is valid
- * 
+ *
  * @param map struct of the map
  * @param fd file descriptor of the map, already used by gnl
  * @return void
-*/
+ */
 void	ft_check_map_content(t_map *map, int fd)
 {
 	char	*line;
