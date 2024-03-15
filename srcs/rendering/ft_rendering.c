@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/15 17:56:55 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/15 17:59:11 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,7 +218,7 @@ void	ft_mlx_init(t_cub *cub)
 	cub->mlx_win = mlx_new_window(cub->mlx, WIDTH, HEIGHT, NAME);
 	cub->frame.img = NULL;
 	cub->frame = ft_mlx_new_frame(cub, TRUE);
-	mlx_do_key_autorepeatoff(cub->mlx);
+	mlx_do_key_autorepeaton(cub->mlx);
 	mlx_loop_hook(cub->mlx, &ft_game_loop, cub);
 	mlx_hook(cub->mlx_win, ON_DESTROY, 0L, &ft_game_quit, cub);
 	mlx_hook(cub->mlx_win, ON_KEYDOWN, MASK_KEY_PRESS, &ft_game_keydown, cub);
