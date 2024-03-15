@@ -24,6 +24,13 @@
 # include <unistd.h>
 # include <math.h>
 
+/**
+ * @brief Structure for the game`
+*/
+# define	HIGHT	720
+# define	WIDTH	1080
+# define	FOV		60
+
 typedef enum e_direction
 {
 	NORTH,
@@ -84,8 +91,6 @@ typedef struct s_cub
 	float		orientation;
 	t_pos		position;
 }	t_cub;
-
-
 
 void	ft_assign_to_cube(t_cub *cub, t_map *map);
 void	ft_parse_checker(t_cub *cub, int ac, char **av);
