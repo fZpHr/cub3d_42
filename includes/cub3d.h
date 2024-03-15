@@ -29,6 +29,7 @@
 # define PI_3		1.04719755119659774615
 # define PI_4		0.78539816339744830962
 # define PI_6		0.52359877559829887308
+# define PI_12		0.26179938779914943654
 
 /**
  * @brief Name of the window
@@ -68,12 +69,12 @@
 /**
  * @brief Walking speed (in pixels per frame)
 */
-# define	WALK_SPEED		0.1
+# define	WALK_SPEED		0.04
 
 /**
  * @brief Rotation speed (in radian per frame)
 */
-# define	ROT_SPEED		PI_6 / 4
+# define	ROT_SPEED		PI_12 / 12
 
 typedef unsigned long long	t_ull;
 
@@ -84,6 +85,12 @@ typedef enum e_direction
 	WEST,
 	EAST
 }	t_direction;
+
+typedef enum e_bool
+{
+	FALSE,
+	TRUE
+}	t_bool;
 
 typedef struct s_pos
 {
@@ -107,39 +114,59 @@ typedef struct s_texture {
 	int		endian;
 }	t_texture;
 
+typedef struct s_keys
+{
+	t_bool	forward;
+	t_bool	backward;
+	t_bool	rot_left;
+	t_bool	rot_right;
+}	t_keys;
+
 /**
  * @brief Structure for the game
  * 
  * @param mlx 			Pointer to the mlx instance
  * @param mlx_win 		Pointer to the mlx window
+ * @param frame 		Canvas of the game (for optimization purpose)
+ * 
  * @param map_array 	2D array of the map:
  * 						1 = wall, 0 = empty space
  * @param map_size 		Size of the map (int, int)
- * @param orientation 	Orientation of the player (in radian)
- * @param pos 			Position of the player (float, float)
+ * 
+ * @param floor_c 		Color of the floor (ARGB)
+ * @param ceiling_c 	Color of the ceiling (ARGB)
  * @param no 			north texture (see t_texture)
  * @param so 			south texture (see t_texture)
  * @param we 			west texture (see t_texture)
  * @param ea 			east texture (see t_texture)
- * @param floor_c 		Color of the floor (ARGB)
- * @param ceiling_c 	Color of the ceiling (ARGB)
+ * 
+ * @param orientation 	Orientation of the player (in radian)
+ * @param position 		Position of the player (float, float)
+ * @param keys 			Keys pressed by the player
+ * 
+ * @param frames 		Number of frames
 */
 typedef struct s_cub
 {
 	void		*mlx;
 	void		*mlx_win;
+	t_texture	frame;
+
 	char		**map_array;
 	t_ipos		map_size;
+
 	int			floor_c;
 	int			ceiling_c;
 	t_texture	no;
 	t_texture	so;
 	t_texture	we;
 	t_texture	ea;
+
 	float		orientation;
 	t_pos		position;
+	t_keys		keys;
 
-	t_ull		frame;
+	t_ull		frames;
 }	t_cub;
 
 void	ft_assign_to_cube(t_cub *cub, t_map *map);

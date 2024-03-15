@@ -6,19 +6,27 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/15 17:10:36 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/15 17:56:55 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rendering.h"
 
+void	ft_set_pixel(t_texture frame, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = frame.addr + (y * frame.line_size + x * (frame.bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
+
 void	ft_render_floor(t_cub *cub)
 {
 	for (int i = 0; i < WIDTH; i++)
 	{
-		for (int j = HEIGHT / 2; j < HEIGHT; j++)
+		for (int j = HEIGHT / 2 - 1; j < HEIGHT; j++)
 		{
-			mlx_pixel_put(cub->mlx, cub->mlx_win, i, j, cub->floor_c);
+			ft_set_pixel(cub->frame, i, j, cub->floor_c);
 		}
 	}
 }
@@ -29,7 +37,7 @@ void	ft_render_ceiling(t_cub *cub)
 	{
 		for (int j = 0; j < HEIGHT / 2; j++)
 		{
-			mlx_pixel_put(cub->mlx, cub->mlx_win, i, j, cub->ceiling_c);
+			ft_set_pixel(cub->frame, i, j, cub->ceiling_c);
 		}
 	}
 }
@@ -46,7 +54,9 @@ t_casting	ft_cast_ray(t_cub *cub, float angle)
 	step_x = cos(angle) * RAY_STEP;
 	step_y = sin(angle) * RAY_STEP;
 	steps = 0;
-	while (steps < RAY_MAX_STEPS && (int) casting.y >= 0 && (int) casting.y < cub->map_size.y && (int) casting.x >= 0 && (int) casting.x < cub->map_size.x
+	while (steps < RAY_MAX_STEPS
+		&& (int) casting.y >= 0 && (int) casting.y < cub->map_size.y
+		&& (int) casting.x >= 0 && (int) casting.x < cub->map_size.x
 		&& cub->map_array[(int) casting.y][(int) casting.x] != '1')
 	{
 		casting.x += step_x;
@@ -54,7 +64,10 @@ t_casting	ft_cast_ray(t_cub *cub, float angle)
 		steps++;
 	}
 	casting.angle = angle;
-	if (cub->map_array[(int) casting.y][(int) casting.x] != '1')
+	if (steps < RAY_MAX_STEPS
+		&& (int) casting.y >= 0 && (int) casting.y < cub->map_size.y
+		&& (int) casting.x >= 0 && (int) casting.x < cub->map_size.x
+		&& cub->map_array[(int) casting.y][(int) casting.x] != '1')
 		casting.distance = -1;
 	else
 		casting.distance = steps * RAY_STEP;
@@ -71,7 +84,7 @@ void	ft_put_chunk(t_cub *cub, int x, t_ipos size, int color)
 	{
 		for (int j = 0; j < size.y; j++)
 		{
-			mlx_pixel_put(cub->mlx, cub->mlx_win, x + i, (HEIGHT - size.y) / 2 + j, color);
+			ft_set_pixel(cub->frame, x + i, (HEIGHT - size.y) / 2 + j, color);
 		}
 	}
 }
@@ -97,15 +110,11 @@ void	ft_render(t_cub *cub)
 	
 	}
 
-	cub->frame++;
+	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->frame.img, 0, 0);
+
+	cub->frames++;
 	// if (cub->frame % 10 == 0)
 	// 	printf("Frame: %lld\n", cub->frame);
-}
-
-int	ft_game_loop(t_cub *cub)
-{
-	ft_render(cub);
-	return (0);
 }
 
 int	ft_game_quit(t_cub *cub)
@@ -122,29 +131,54 @@ int	ft_game_keydown(int keycode, t_cub *cub)
 	(void)keycode;
 	(void)cub;
 	printf("Keydown: %d\n", keycode);
+	printf("  Player\n");
+	printf("    > pos: %10f, %10f\n", cub->position.x, cub->position.y);
+	printf("    > dir: %10frad (%3fdeg)\n", cub->orientation, cub->orientation * 180 / PI);
 	if (keycode == XK_Escape)
 		ft_game_quit(cub);
-	if (keycode == XK_space || 1)
-	{
-		printf("Player\n");
-		printf("  > pos: %10f, %10f\n", cub->position.x, cub->position.y);
-		printf("  > dir: %10frad (%3fdeg)\n", cub->orientation, cub->orientation * 180 / PI);
-	}
 	if (keycode == XK_w)
+		cub->keys.forward = TRUE;
+	if (keycode == XK_s)
+		cub->keys.backward = TRUE;
+	if (keycode == XK_a)
+		cub->keys.rot_left = TRUE;
+	if (keycode == XK_d)
+		cub->keys.rot_right = TRUE;
+	return (0);
+}
+
+int	ft_game_keyup(int keycode, t_cub *cub)
+{
+	(void)cub;
+	printf("Keyup: %d\n", keycode);
+	if (keycode == XK_w)
+		cub->keys.forward = FALSE;
+	if (keycode == XK_s)
+		cub->keys.backward = FALSE;
+	if (keycode == XK_a)
+		cub->keys.rot_left = FALSE;
+	if (keycode == XK_d)
+		cub->keys.rot_right = FALSE;
+	return (0);
+}
+
+void ft_handle_keys(t_cub *cub)
+{
+	if (cub->keys.forward)
 	{
 		cub->position.x += cos(cub->orientation) * WALK_SPEED;
 		cub->position.y += sin(cub->orientation) * WALK_SPEED;
 	}
-	if (keycode == XK_s)
+	if (cub->keys.backward)
 	{
 		cub->position.x -= cos(cub->orientation) * WALK_SPEED;
 		cub->position.y -= sin(cub->orientation) * WALK_SPEED;
 	}
-	if (keycode == XK_a)
+	if (cub->keys.rot_left)
 	{
 		cub->orientation -= ROT_SPEED;
 	}
-	if (keycode == XK_d)
+	if (cub->keys.rot_right)
 	{
 		cub->orientation += ROT_SPEED;
 	}
@@ -152,52 +186,59 @@ int	ft_game_keydown(int keycode, t_cub *cub)
 		cub->orientation -= 2 * PI;
 	else if (cub->orientation < 0)
 		cub->orientation += 2 * PI;
+}
+
+int	ft_game_loop(t_cub *cub)
+{
+	ft_handle_keys(cub);
+	ft_render(cub);
 	return (0);
+}
+
+t_texture	ft_mlx_new_frame(t_cub *cub, t_bool free_old)
+{
+	t_texture	frame;
+
+	if (free_old && cub->frame.img)
+	{
+		mlx_destroy_image(cub->mlx, cub->frame.img);
+		cub->frame.img = NULL;
+	}
+	frame.img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
+	frame.addr = mlx_get_data_addr(frame.img,
+		&frame.bits_per_pixel, &frame.line_size, &frame.endian);
+	// if (!frame.img || !frame.addr)
+	// 	TODO: Do stuff...
+	return (frame);
 }
 
 void	ft_mlx_init(t_cub *cub)
 {
 	cub->mlx = mlx_init();
 	cub->mlx_win = mlx_new_window(cub->mlx, WIDTH, HEIGHT, NAME);
-	mlx_do_key_autorepeaton(cub->mlx);
+	cub->frame.img = NULL;
+	cub->frame = ft_mlx_new_frame(cub, TRUE);
+	mlx_do_key_autorepeatoff(cub->mlx);
 	mlx_loop_hook(cub->mlx, &ft_game_loop, cub);
 	mlx_hook(cub->mlx_win, ON_DESTROY, 0L, &ft_game_quit, cub);
 	mlx_hook(cub->mlx_win, ON_KEYDOWN, MASK_KEY_PRESS, &ft_game_keydown, cub);
+	mlx_hook(cub->mlx_win, ON_KEYUP, MASK_KEY_RELEASE, &ft_game_keyup, cub);
+}
+
+void	ft_keys_init(t_keys *keys)
+{
+	keys->forward = FALSE;
+	keys->backward = FALSE;
+	keys->rot_left = FALSE;
+	keys->rot_right = FALSE;
 }
 
 void	ft_rendering(t_cub *cub)
 {
 	(void)cub;
 
-	printf("Rendering...\n");
-	printf("Rendering...\n");
-	printf("Rendering...\n");
-	printf("Rendering...\n");
-	printf("Rendering...\n");
-	printf("Rendering...\n");
-	printf("Rendering...\n");
-	printf("Rendering...\n");
-
-	for (int i = 0; i < cub->map_size.y; i++)
-	{
-		write(1, "|", 1);
-		for (int j = 0; j < cub->map_size.x; j++)
-		{
-			write(1, &(char){cub->map_array[i][j]}, 1);
-		}
-		write(1, "|\n", 2);
-	}
-	
-	printf("Rendering...\n");
-	printf("Rendering...\n");
-	printf("Rendering...\n");
-	printf("Rendering...\n");
-	printf("Rendering...\n");
-	printf("Rendering...\n");
-	printf("Rendering...\n");
-	printf("Rendering...\n");
-	printf("Rendering...\n");
-	cub->frame = 0;
+	cub->frames = 0;
+	ft_keys_init(&cub->keys);
 	ft_mlx_init(cub);
 	mlx_loop(cub->mlx);
 }
