@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_checker.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:35:34 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/15 16:24:41 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/15 20:38:29 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,26 @@
 
 void	test_print_parsing(t_map *map, t_cub *cub)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	printf("no = %s\n", map->no);
 	printf("so = %s\n", map->so);
 	printf("we = %s\n", map->we);
 	printf("ea = %s\n", map->ea);
 	printf("\n");
-	printf("floor_color = %d, %d, %d\n", map->floor_c[0], map->floor_c[1], map->floor_c[2]);
-	printf("ceiling_color = %d, %d, %d\n", map->ceiling_c[0], map->ceiling_c[1], map->ceiling_c[2]);
+	printf("floor_color = %d, %d, %d\n", map->floor_c[0], map->floor_c[1],
+		map->floor_c[2]);
+	printf("ceiling_color = %d, %d, %d\n", map->ceiling_c[0], map->ceiling_c[1],
+		map->ceiling_c[2]);
 	printf("\n");
 	printf("map_size_x = %d\n", map->map_size_x);
 	printf("map_size_y = %d\n", map->map_size_y);
-	printf("player_position = %d, %d\n", map->player_position[0], map->player_position[1]);
-	printf("player_direction = %d, %d, %d, %d\n", map->player_direction[0], map->player_direction[1], map->player_direction[2], map->player_direction[3]);
+	printf("player_position = %d, %d\n", map->player_position[0],
+		map->player_position[1]);
+	printf("player_direction = %d, %d, %d, %d\n", map->player_direction[0],
+		map->player_direction[1], map->player_direction[2],
+		map->player_direction[3]);
 	printf("\n");
 	printf("current map :\n");
 	while (i < map->map_size_y)
@@ -84,18 +91,18 @@ void	test_print_parsing(t_map *map, t_cub *cub)
 	printf("ea width = %d\n", cub->ea.width);
 	printf("ea height = %d\n", cub->ea.height);
 	printf("endian = %d\n", cub->ea.endian);
-
 }
 
-
 /**
- * @brief Initialize the map struct and parse the map file then assign to the cub struct
- * 
+
+	* @brief Initialize the map struct and
+				parse the map file then assign to the cub struct
+ *
  * @param cube cub struct
  * @param ac number of arguments
  * @param av arguments
  * @return void
-*/
+ */
 void	ft_parse_checker(t_cub *cube, int ac, char **av)
 {
 	t_map	map;
@@ -108,12 +115,9 @@ void	ft_parse_checker(t_cub *cube, int ac, char **av)
 	ft_cp_array(&map);
 	ft_check_wall(&map, map.player_position[0], map.player_position[1]);
 	ft_assign_to_cube(cube, &map);
-
 	test_print_parsing(&map, cube);
 	ft_free_array(map.map_array_copy);
-
 	ft_assign_to_cube(cube, &map);
-
 	free(map.no);
 	free(map.so);
 	free(map.we);
