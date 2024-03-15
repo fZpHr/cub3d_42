@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_checker.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:35:34 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/14 21:10:01 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/15 16:24:41 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ void	ft_parse_checker(t_cub *cube, int ac, char **av)
 
 	ft_assign_to_cube(cube, &map);
 
-	ft_free_array(map.map_array);
 	free(map.no);
 	free(map.so);
 	free(map.we);

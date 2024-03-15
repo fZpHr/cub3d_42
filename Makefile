@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+         #
+#    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/03/14 19:53:35 by hbelle           ###   ########.fr        #
+#    Updated: 2024/03/15 16:59:12 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRC_FILES			= \
 						srcs/utils/ft_init.c \
 						srcs/parses/ft_access_texture.c \
 						srcs/parses/ft_parse_checker.c \
-						srcs/data/ft_assign_to_cube.c
+						srcs/data/ft_assign_to_cube.c \
+						srcs/rendering/ft_rendering.c
 
 BUILD_FOLDER		= ./build
 
@@ -163,4 +164,14 @@ fclean :
 
 re : fclean m_line_break all
 
-.PHONY : all bonus clean fclean re
+soft_clean :
+	$(call del, "$(BUILD_FOLDER)" $(BUILD_FILES))
+	@rm -rf $(BUILD_FILES) $(BUILD_FOLDER)
+
+soft_fclean :
+	$(call del, "./$(NAME)" "$(BUILD_FOLDER)" $(BUILD_FILES))
+	@rm -rf $(NAME) $(BUILD_FILES) $(BUILD_FOLDER)
+
+soft_re : soft_fclean m_line_break all
+
+.PHONY : all bonus clean fclean re soft_clean soft_fclean soft_re m_line_break

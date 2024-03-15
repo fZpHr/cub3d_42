@@ -24,12 +24,58 @@
 # include <unistd.h>
 # include <math.h>
 
+# define PI			3.14159265358979323846
+# define PI_2		1.57079632679489661923
+# define PI_3		1.04719755119659774615
+# define PI_4		0.78539816339744830962
+# define PI_6		0.52359877559829887308
+
 /**
- * @brief Structure for the game`
+ * @brief Name of the window
 */
-# define	HIGHT	720
-# define	WIDTH	1080
-# define	FOV		60
+# define	NAME			"Cub3D"
+
+/**
+ * @brief Height of the window (in pixels)
+*/
+# define	HEIGHT			720
+
+/**
+ * @brief Width of the window (in pixels)
+*/
+# define	WIDTH			1080
+
+/**
+ * @brief Field of view (in radian)
+*/
+# define	FOV				PI_3
+
+/**
+ * @brief Number of rays
+*/
+# define	RAYS			200
+
+/**
+ * @brief Ray collision verification step (in pixels)
+*/
+# define	RAY_STEP		0.001
+
+/**
+ * @brief Maximum distance of the ray
+*/
+# define	RAY_MAX_STEPS	1000000000
+
+/**
+ * @brief Walking speed (in pixels per frame)
+*/
+# define	WALK_SPEED		0.1
+
+/**
+ * @brief Rotation speed (in radian per frame)
+*/
+# define	ROT_SPEED		PI_6 / 4
+
+typedef unsigned long long	t_ull;
 
 typedef enum e_direction
 {
@@ -64,17 +110,19 @@ typedef struct s_texture {
 /**
  * @brief Structure for the game
  * 
- * @param map_array		2D array of the map \
+ * @param mlx 			Pointer to the mlx instance
+ * @param mlx_win 		Pointer to the mlx window
+ * @param map_array 	2D array of the map:
  * 						1 = wall, 0 = empty space
- * @param map_size		Size of the map (int, int)
- * @param orientation	Orientation of the player (in radian)
- * @param pos			Position of the player (float, float)
- * @param no			north texture
- * @param so			south texture
- * @param we			west texture
- * @param ea			east texture
- * @param floor_c		Color of the floor (ARGB)
- * @param ceiling_c		Color of the ceiling (ARGB)
+ * @param map_size 		Size of the map (int, int)
+ * @param orientation 	Orientation of the player (in radian)
+ * @param pos 			Position of the player (float, float)
+ * @param no 			north texture (see t_texture)
+ * @param so 			south texture (see t_texture)
+ * @param we 			west texture (see t_texture)
+ * @param ea 			east texture (see t_texture)
+ * @param floor_c 		Color of the floor (ARGB)
+ * @param ceiling_c 	Color of the ceiling (ARGB)
 */
 typedef struct s_cub
 {
@@ -90,10 +138,14 @@ typedef struct s_cub
 	t_texture	ea;
 	float		orientation;
 	t_pos		position;
+
+	t_ull		frame;
 }	t_cub;
 
 void	ft_assign_to_cube(t_cub *cub, t_map *map);
 void	ft_parse_checker(t_cub *cub, int ac, char **av);
+
+void	ft_rendering(t_cub *cub);
 
 // UTILS
 
