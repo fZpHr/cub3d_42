@@ -1,7 +1,7 @@
-NO ./textures/colorstone.xpm
-SO ./textures/greystone.xpm
-WE ./textures/bluestone.xpm
-EA ./textures/wood.xpm
+NO ./textures/bricks-blue-00.xpm
+SO ./textures/bricks-blue-00.xpm
+WE ./textures/bricks-blue-00.xpm
+EA ./textures/bricks-blue-00.xpm
 
 F 200,40,20
 C 50,100,255

@@ -54,7 +54,7 @@
 /**
  * @brief Number of rays
 */
-# define	RAYS			200
+# define	RAYS			100
 
 /**
  * @brief Walking speed (in pixels per frame)

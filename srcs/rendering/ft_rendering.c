@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/16 04:18:27 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/16 22:59:05 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,19 +196,69 @@ t_casting	ft_cast_ray(t_cub *cub, double angle)
 	return (casting);
 }
 
-void	ft_put_chunk(t_cub *cub, int x, t_ipos size, int color)
+void	ft_put_chunk(t_cub *cub, int x, t_ipos size, t_casting casting)
 {
-	if (size.x > WIDTH)
-		size.x = WIDTH;
-	if (size.y > HEIGHT)
-		size.y = HEIGHT;
-	for (int i = 0; i < size.x; i++)
+	t_texture	texture;
+	if (casting.facing == NORTH)
+		texture = cub->no;
+	else if (casting.facing == SOUTH)
+		texture = cub->so;
+	else if (casting.facing == WEST)
+		texture = cub->we;
+	else if (casting.facing == EAST)
+		texture = cub->ea;
+
+	int	chunk_height = size.y / texture.height;
+	// int	y_offset = 0;
+	// if (size.y >= HEIGHT)
+	// {
+	// 	y_offset = (size.y - HEIGHT) / 2;
+	// 	size.y = HEIGHT;
+	// }
+	
+	int	texture_x = (int) (casting.x / 2) % texture.width;
+	// int	texture_y = y_offset * chunk_height;
+
+	// printf("Chunck-loader:\n");
+	// printf("  X .......... : %8d |\n", x);
+	// printf("  Size ....... : %8d, y: %8d |\n", size.x, size.y);
+	// printf("  Texture .... : %8d, y: %8d |\n", texture.width, texture.height);
+	// printf("  Chunk Height : %8d |\n", chunk_height);
+	// printf("  Texture X .. : %8d |\n", texture_x);
+
+	for (int texture_y = 0; texture_y < texture.height; texture_y++)
 	{
-		for (int j = 0; j < size.y; j++)
+		int max_y = (HEIGHT - size.y) / 2 + chunk_height * (texture_y + 1);
+		for (int window_y = (HEIGHT - size.y) / 2 + chunk_height * texture_y;
+				window_y < max_y;
+				window_y++)
 		{
-			ft_set_pixel(cub->frame, x + i, (HEIGHT - size.y) / 2 + j, color);
+			if (window_y < 0 || window_y >= HEIGHT)
+				continue ;
+			for (int window_x = x; window_x < x + size.x; window_x++)
+			{
+				if (window_x < 0 || window_x >= WIDTH)
+					continue ;
+				int	color = *(int *)(char *)(texture.addr
+					+ (texture_y * texture.line_size
+						+ texture_x * (texture.bits_per_pixel / 8)));
+				ft_set_pixel(cub->frame, window_x, window_y, color);
+				// if (window_x == x && window_y == (HEIGHT - size.y) / 2 + chunk_height * texture_y)
+				// 	printf("x: %d, y: %d, color: %d\n", window_x, window_y, color);
+			}
 		}
 	}
+
+	
+	// for (int j = 0; j < size.y; j++)
+	// {
+	// 	int	color = 0x00FFFFFF;
+	// 	// if (j + y_offset >= texture.height)
+	// 	// 	continue ;
+	// 	color = *(int *)(char *)(texture.addr + (texture_y * texture.line_size + texture_x * (texture.bits_per_pixel / 8)));
+	// 	ft_set_pixel(cub->frame, x, j, color);
+	// 	texture_y += chunk_height;
+	// }
 }
 
 void	ft_render_minimap(t_cub *cub, t_casting castings[RAYS])
@@ -286,19 +336,13 @@ void	ft_render(t_cub *cub)
 		if (a >= 2 * PI)
 			a -= 2 * PI;
 		t_casting	casting = ft_cast_ray(cub, a);
-		casting.distance *= cos(cub->orientation - casting.angle);
-		int			height = ((HEIGHT / casting.distance) * 1.5);
-		int			x = ray * width;
-		int			color = 0x00FFFFFF;
-		if (casting.facing == NORTH)
-			color = 0x00FF0000;
-		else if (casting.facing == SOUTH)
-			color = 0x0000FF00;
-		else if (casting.facing == WEST)
-			color = 0x000000FF;
-		else if (casting.facing == EAST)
-			color = 0x00FFFF00;
-		ft_put_chunk(cub, x, (t_ipos){width + 1, height}, color);
+		if (casting.distance != -1)
+		{
+			casting.distance *= cos(cub->orientation - casting.angle);
+			int			height = ((HEIGHT / casting.distance) * 1.5);
+			int			x = ray * width;
+			ft_put_chunk(cub, x, (t_ipos){width + 1, height}, casting);
+		}
 		castings[ray] = casting;
 		ray++;
 	}
@@ -361,11 +405,13 @@ void	ft_move_forward(t_cub *cub)
 
 	rollback = cub->position;
 	cub->position.x += cos(cub->orientation) * WALK_SPEED;
-	cub->position.y += sin(cub->orientation) * WALK_SPEED;
 	if (cub->position.x < 0 || cub->position.x >= cub->map_size.x
-		|| cub->position.y < 0 || cub->position.y >= cub->map_size.y
 		|| cub->map_array[(int) cub->position.y][(int) cub->position.x] == '1')
-		cub->position = rollback;
+		cub->position.x = rollback.x;
+	cub->position.y += sin(cub->orientation) * WALK_SPEED;
+	if (cub->position.y < 0 || cub->position.y >= cub->map_size.y
+		|| cub->map_array[(int) cub->position.y][(int) cub->position.x] == '1')
+		cub->position.y = rollback.y;
 }
 
 void	ft_move_backward(t_cub *cub)
@@ -374,11 +420,13 @@ void	ft_move_backward(t_cub *cub)
 
 	rollback = cub->position;
 	cub->position.x -= cos(cub->orientation) * WALK_SPEED;
-	cub->position.y -= sin(cub->orientation) * WALK_SPEED;
 	if (cub->position.x < 0 || cub->position.x >= cub->map_size.x
-		|| cub->position.y < 0 || cub->position.y >= cub->map_size.y
 		|| cub->map_array[(int) cub->position.y][(int) cub->position.x] == '1')
-		cub->position = rollback;
+		cub->position.x = rollback.x;
+	cub->position.y -= sin(cub->orientation) * WALK_SPEED;
+	if (cub->position.y < 0 || cub->position.y >= cub->map_size.y
+		|| cub->map_array[(int) cub->position.y][(int) cub->position.x] == '1')
+		cub->position.y = rollback.y;
 }
 
 void	ft_handle_keys(t_cub *cub)
