@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/16 04:09:13 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/16 04:18:27 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -355,26 +355,42 @@ int	ft_game_keyup(int keycode, t_cub *cub)
 	return (0);
 }
 
-void ft_handle_keys(t_cub *cub)
+void	ft_move_forward(t_cub *cub)
+{
+	t_pos	rollback;
+
+	rollback = cub->position;
+	cub->position.x += cos(cub->orientation) * WALK_SPEED;
+	cub->position.y += sin(cub->orientation) * WALK_SPEED;
+	if (cub->position.x < 0 || cub->position.x >= cub->map_size.x
+		|| cub->position.y < 0 || cub->position.y >= cub->map_size.y
+		|| cub->map_array[(int) cub->position.y][(int) cub->position.x] == '1')
+		cub->position = rollback;
+}
+
+void	ft_move_backward(t_cub *cub)
+{
+	t_pos	rollback;
+
+	rollback = cub->position;
+	cub->position.x -= cos(cub->orientation) * WALK_SPEED;
+	cub->position.y -= sin(cub->orientation) * WALK_SPEED;
+	if (cub->position.x < 0 || cub->position.x >= cub->map_size.x
+		|| cub->position.y < 0 || cub->position.y >= cub->map_size.y
+		|| cub->map_array[(int) cub->position.y][(int) cub->position.x] == '1')
+		cub->position = rollback;
+}
+
+void	ft_handle_keys(t_cub *cub)
 {
 	if (cub->keys.forward)
-	{
-		cub->position.x += cos(cub->orientation) * WALK_SPEED;
-		cub->position.y += sin(cub->orientation) * WALK_SPEED;
-	}
+		ft_move_forward(cub);
 	if (cub->keys.backward)
-	{
-		cub->position.x -= cos(cub->orientation) * WALK_SPEED;
-		cub->position.y -= sin(cub->orientation) * WALK_SPEED;
-	}
+		ft_move_backward(cub);
 	if (cub->keys.rot_left)
-	{
 		cub->orientation -= ROT_SPEED;
-	}
 	if (cub->keys.rot_right)
-	{
 		cub->orientation += ROT_SPEED;
-	}
 	if (cub->orientation > 2 * PI)
 		cub->orientation -= 2 * PI;
 	else if (cub->orientation < 0)

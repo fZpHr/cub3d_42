@@ -84,8 +84,8 @@ typedef enum e_bool
 
 typedef struct s_pos
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 }	t_pos;
 
 typedef struct s_ipos
@@ -131,7 +131,7 @@ typedef struct s_keys
  * @param ea 			east texture (see t_texture)
  * 
  * @param orientation 	Orientation of the player (in radian)
- * @param position 		Position of the player (float, float)
+ * @param position 		Position of the player (double, double)
  * @param keys 			Keys pressed by the player
  * 
  * @param frames 		Number of frames
@@ -152,7 +152,7 @@ typedef struct s_cub
 	t_texture	we;
 	t_texture	ea;
 
-	float		orientation;
+	double		orientation;
 	t_pos		position;
 	t_keys		keys;
 
