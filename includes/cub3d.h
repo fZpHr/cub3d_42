@@ -74,7 +74,7 @@
 /**
  * @brief Rotation speed (in radian per frame)
 */
-# define	ROT_SPEED		PI_12 / 12
+# define	ROT_SPEED		PI_12 / 30
 
 typedef unsigned long long	t_ull;
 

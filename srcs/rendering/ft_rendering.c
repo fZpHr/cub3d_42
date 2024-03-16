@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/15 22:47:02 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/16 03:50:07 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,36 @@ void	ft_set_pixel(t_texture frame, int x, int y, int color)
 
 	dst = frame.addr + (y * frame.line_size + x * (frame.bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
+}
+
+void	ft_put_rect(t_texture frame, t_ipos pos, t_ipos size, int color)
+{
+	for (int i = 0; i < size.x; i++)
+	{
+		for (int j = 0; j < size.y; j++)
+		{
+			ft_set_pixel(frame, pos.x + i, pos.y + j, color);
+		}
+	}
+}
+
+void	ft_put_line(t_texture frame, t_ipos start, t_ipos end, int color)
+{
+	int		dx;
+	int		dy;
+	int		steps;
+	double	x;
+	double	y;
+
+	dx = end.x - start.x;
+	dy = end.y - start.y;
+	steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+	x = (double) dx / steps;
+	y = (double) dy / steps;
+	for (int i = 0; i < steps; i++)
+	{
+		ft_set_pixel(frame, start.x + x * i, start.y + y * i, color);
+	}
 }
 
 void	ft_render_floor(t_cub *cub)
@@ -42,35 +72,125 @@ void	ft_render_ceiling(t_cub *cub)
 	}
 }
 
-t_casting	ft_cast_ray(t_cub *cub, float angle)
+// t_casting	ft_cast_ray(t_cub *cub, double angle)
+// {
+// 	t_casting	casting;
+// 	t_ull		steps;
+// 	double		step_x;
+// 	double		step_y;
+
+// 	casting.x = cub->position.x;
+// 	casting.y = cub->position.y;
+// 	step_x = cos(angle) * RAY_STEP;
+// 	step_y = sin(angle) * RAY_STEP;
+// 	steps = 0;
+// 	while (steps < RAY_MAX_STEPS
+// 		&& (int) casting.y >= 0 && (int) casting.y < cub->map_size.y
+// 		&& (int) casting.x >= 0 && (int) casting.x < cub->map_size.x
+// 		&& cub->map_array[(int) casting.y][(int) casting.x] != '1')
+// 	{
+// 		casting.x += step_x;
+// 		casting.y += step_y;
+// 		steps++;
+// 	}
+// 	casting.angle = angle;
+// 	if (steps < RAY_MAX_STEPS
+// 		&& (int) casting.y >= 0 && (int) casting.y < cub->map_size.y
+// 		&& (int) casting.x >= 0 && (int) casting.x < cub->map_size.x
+// 		&& cub->map_array[(int) casting.y][(int) casting.x] != '1')
+// 		casting.distance = -1;
+// 	else
+// 		casting.distance = steps * RAY_STEP;
+// 	return (casting);
+// }
+
+void	ft_hor_casting(t_cub *cub, t_casting *casting)
+{
+	casting->hor_y = (int) cub->position.y;
+	if (casting->angle < PI)
+		casting->hor_y++;
+	casting->hor_x = cub->position.x - (cub->position.y - casting->hor_y) / tan(casting->angle);
+
+	casting->hor_step_y = -1;
+	if (casting->angle < PI)
+		casting->hor_step_y = 1;
+	casting->hor_step_x = 1 / tan(-casting->angle);
+	if (casting->angle < PI)
+		casting->hor_step_x = -casting->hor_step_x;
+
+	while (casting->hor_y >= 0 && casting->hor_y < cub->map_size.y
+		&& casting->hor_x >= 0 && casting->hor_x < cub->map_size.x
+		&& cub->map_array[(int) casting->hor_y - (casting->angle < PI ? 0 : 1)][(int) casting->hor_x] != '1')
+	{
+		casting->hor_x += casting->hor_step_x;
+		casting->hor_y += casting->hor_step_y;
+	}
+
+	if (casting->hor_y < 0 || casting->hor_y >= cub->map_size.y
+		|| casting->hor_x < 0 || casting->hor_x >= cub->map_size.x
+		|| cub->map_array[(int) casting->hor_y - (casting->angle < PI ? 0 : 1)][(int) casting->hor_x] != '1')
+		casting->hor_dist = -1;
+	else
+		casting->hor_dist = sqrt(pow(cub->position.x - casting->hor_x, 2)
+			+ pow(cub->position.y - casting->hor_y, 2));
+}
+
+void	ft_ver_casting(t_cub *cub, t_casting *casting)
+{
+	casting->ver_x = (int) cub->position.x;
+	if (casting->angle < PI_2 || casting->angle > 3 * PI_2)
+		casting->ver_x++;
+	casting->ver_y = cub->position.y - (cub->position.x - casting->ver_x) * tan(casting->angle);
+
+	casting->ver_step_x = -1;
+	if (casting->angle < PI_2 || casting->angle > 3 * PI_2)
+		casting->ver_step_x = 1;
+	casting->ver_step_y = tan(-casting->angle);
+	if (casting->angle < PI_2 || casting->angle > 3 * PI_2)
+		casting->ver_step_y = -casting->ver_step_y;
+
+	while (casting->ver_y >= 0 && casting->ver_y < cub->map_size.y
+		&& casting->ver_x >= 0 && casting->ver_x < cub->map_size.x
+		&& cub->map_array[(int) casting->ver_y][(int) casting->ver_x - (casting->angle < PI_2 || casting->angle > 3 * PI_2 ? 0 : 1)] != '1')
+	{
+		casting->ver_x += casting->ver_step_x;
+		casting->ver_y += casting->ver_step_y;
+	}
+
+	if (casting->ver_y < 0 || casting->ver_y >= cub->map_size.y
+		|| casting->ver_x < 0 || casting->ver_x >= cub->map_size.x
+		|| cub->map_array[(int) casting->ver_y][(int) casting->ver_x - (casting->angle < PI_2 || casting->angle > 3 * PI_2 ? 0 : 1)] != '1')
+		casting->ver_dist = -1;
+	else
+		casting->ver_dist = sqrt(pow(cub->position.x - casting->ver_x, 2)
+			+ pow(cub->position.y - casting->ver_y, 2));
+}
+
+t_casting	ft_cast_ray(t_cub *cub, double angle)
 {
 	t_casting	casting;
-	t_ull		steps;
-	float		step_x;
-	float		step_y;
 
-	casting.x = cub->position.x;
-	casting.y = cub->position.y;
-	step_x = cos(angle) * RAY_STEP;
-	step_y = sin(angle) * RAY_STEP;
-	steps = 0;
-	while (steps < RAY_MAX_STEPS
-		&& (int) casting.y >= 0 && (int) casting.y < cub->map_size.y
-		&& (int) casting.x >= 0 && (int) casting.x < cub->map_size.x
-		&& cub->map_array[(int) casting.y][(int) casting.x] != '1')
-	{
-		casting.x += step_x;
-		casting.y += step_y;
-		steps++;
-	}
 	casting.angle = angle;
-	if (steps < RAY_MAX_STEPS
-		&& (int) casting.y >= 0 && (int) casting.y < cub->map_size.y
-		&& (int) casting.x >= 0 && (int) casting.x < cub->map_size.x
-		&& cub->map_array[(int) casting.y][(int) casting.x] != '1')
-		casting.distance = -1;
+	casting.hor_dist = -1;
+	casting.ver_dist = -1;
+	ft_hor_casting(cub, &casting);
+	ft_ver_casting(cub, &casting);
+	if (casting.hor_dist != -1 && (casting.hor_dist <= casting.ver_dist || casting.ver_dist == -1))
+	{
+		casting.x = casting.hor_x;
+		casting.y = casting.hor_y;
+		casting.distance = casting.hor_dist;
+		casting.facing = (casting.angle < PI) ? NORTH : SOUTH;
+	}
+	else if (casting.ver_dist != -1 && (casting.ver_dist <= casting.hor_dist || casting.hor_dist == -1))
+	{
+		casting.x = casting.ver_x;
+		casting.y = casting.ver_y;
+		casting.distance = casting.ver_dist;
+		casting.facing = (casting.angle < PI_2 || casting.angle > 3 * PI_2) ? WEST : EAST;
+	}
 	else
-		casting.distance = steps * RAY_STEP;
+		casting.distance = -1;
 	return (casting);
 }
 
@@ -89,25 +209,102 @@ void	ft_put_chunk(t_cub *cub, int x, t_ipos size, int color)
 	}
 }
 
+void	ft_render_minimap(t_cub *cub, t_casting castings[RAYS])
+{
+	// int		TILE_SIZE = 15;
+	// int		PLAYER_SIZE = 5;
+	int		TILE_SIZE = 30;
+	int		PLAYER_SIZE = 10;
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < cub->map_size.y)
+	{
+		j = 0;
+		while (j < cub->map_size.x)
+		{
+			if (cub->map_array[i][j] == '1' || cub->map_array[i][j] == '0')
+			{
+				ft_put_rect(cub->frame,
+					(t_ipos){j * TILE_SIZE + TILE_SIZE, i * TILE_SIZE + TILE_SIZE},
+					(t_ipos){TILE_SIZE, TILE_SIZE}, 0x00CCCCCC);
+				ft_put_rect(cub->frame,
+					(t_ipos){j * TILE_SIZE + TILE_SIZE + 1, i * TILE_SIZE + TILE_SIZE + 1},
+					(t_ipos){TILE_SIZE - 2, TILE_SIZE - 2},
+					cub->map_array[i][j] == '1' ? 0x00EEEEEE : 0x00000000);
+			}
+			j++;
+		}
+		i++;
+	}
+
+	for (int rc = 0; rc < RAYS; rc++)
+	{
+		t_casting c = castings[rc];
+		if (c.distance != -1)
+			ft_put_line(cub->frame,
+				(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE, cub->position.y * TILE_SIZE + TILE_SIZE},
+				(t_ipos){c.x * TILE_SIZE + TILE_SIZE, c.y * TILE_SIZE + TILE_SIZE},
+				0x0000FFFF);
+	}
+	
+	t_casting c = ft_cast_ray(cub, cub->orientation);
+	if (c.distance != -1)
+		ft_put_line(cub->frame,
+			(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE, cub->position.y * TILE_SIZE + TILE_SIZE},
+			(t_ipos){c.x * TILE_SIZE + TILE_SIZE, c.y * TILE_SIZE + TILE_SIZE},
+			0x00FF00FF);
+	// if (c.hor_dist != -1)
+	// 	ft_put_line(cub->frame,
+	// 		(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE, cub->position.y * TILE_SIZE + TILE_SIZE},
+	// 		(t_ipos){c.hor_x * TILE_SIZE + TILE_SIZE, c.hor_y * TILE_SIZE + TILE_SIZE},
+	// 		0x00FF00FF);
+	// if (c.ver_dist != -1)
+	// 	ft_put_line(cub->frame,
+	// 		(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE, cub->position.y * TILE_SIZE + TILE_SIZE},
+	// 		(t_ipos){c.ver_x * TILE_SIZE + TILE_SIZE, c.ver_y * TILE_SIZE + TILE_SIZE},
+	// 		0x00FF00FF);
+
+	ft_put_line(cub->frame,
+		(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE, cub->position.y * TILE_SIZE + TILE_SIZE},
+		(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE + cos(cub->orientation) * TILE_SIZE,
+			cub->position.y * TILE_SIZE + TILE_SIZE + sin(cub->orientation) * TILE_SIZE},
+		0x00FF0000);
+	ft_put_rect(cub->frame,
+		(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE - PLAYER_SIZE / 2,
+			cub->position.y * TILE_SIZE + TILE_SIZE - PLAYER_SIZE / 2},
+		(t_ipos){PLAYER_SIZE, PLAYER_SIZE}, 0x0000FF00);
+}
+
 void	ft_render(t_cub *cub)
 {
 	ft_render_floor(cub);
 	ft_render_ceiling(cub);
 
-	float	angle = cub->orientation - FOV / 2;
-	float	step = (float) FOV / RAYS;
-	float	width = (float) WIDTH / RAYS;
+	t_casting	castings[RAYS];
+
+	double	angle = cub->orientation - FOV / 2;
+	if (angle < 0)
+		angle += 2 * PI;
+	double	step = (double) FOV / RAYS;
+	double	width = (double) WIDTH / RAYS;
 	int		ray = 0;
 	while (ray < RAYS)
 	{
-		float		a = angle + step * ray;
+		double		a = angle + step * ray;
+		if (a >= 2 * PI)
+			a -= 2 * PI;
 		t_casting	casting = ft_cast_ray(cub, a);
 		int			height = ((HEIGHT / casting.distance) * 1.5);
 		int			x = ray * width;
 		// printf("RAY: %d, %10f, %10f, %10f, %10f, [%8d]\n", ray, casting.x, casting.y, casting.angle, casting.distance, height);
 		ft_put_chunk(cub, x, (t_ipos){width + 1, height}, 0x00FFFFFF);
+		castings[ray] = casting;
 		ray++;
 	}
+
+	ft_render_minimap(cub, castings);
 
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->frame.img, 0, 0);
 
@@ -235,6 +432,10 @@ void	ft_keys_init(t_keys *keys)
 void	ft_rendering(t_cub *cub)
 {
 	(void)cub;
+
+	cub->position.x = 5.661107;
+	cub->position.y = 10.273338;
+	cub->orientation = 1.919818;
 
 	cub->frames = 0;
 	ft_keys_init(&cub->keys);

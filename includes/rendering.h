@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:39 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/15 15:55:14 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/16 02:04:55 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,44 @@
 /**
  * @brief Result of a single ray casting
  * 
- * @param x 		X position of the collision
- * @param y 		Y position of the collision
- * @param angle 	Angle of the ray
- * @param distance 	Distance between the throwing and the hitting point
- * 					(-1 if no collision)
+ * @param hor_x 		X position of the horizontal collision
+ * @param hor_y 		Y position of the horizontal collision
+ * @param hor_step_x 	Horizontal step (for calculus)
+ * @param hor_step_y 	Horizontal step (for calculus)
+ * @param hor_dist 		Horizontal distance to the hitting point
+ * 
+ * @param ver_x 		X position of the vertical collision
+ * @param ver_y 		Y position of the vertical collision
+ * @param ver_step_x 	Vertical step (for calculus)
+ * @param ver_step_y 	Vertical step (for calculus)
+ * @param ver_dist 		Vertical distance to the hitting point
+ * 
+ * @param x 			X position of the collision
+ * @param y 			Y position of the collision
+ * @param angle 		Angle of the ray
+ * @param distance 		Distance between the throwing and the hitting point
+ * 						(-1 if no collision)
+ * @param facing 		Facing of the collision
 */
 typedef struct s_casting
 {
-	float	x;
-	float	y;
-	float	angle;
-	float	distance;
+	float		hor_x;
+	float		hor_y;
+	float		hor_step_x;
+	float		hor_step_y;
+	float		hor_dist;
+
+	float		ver_x;
+	float		ver_y;
+	float		ver_step_x;
+	float		ver_step_y;
+	float		ver_dist;
+	
+	float		x;
+	float		y;
+	float		angle;
+	float		distance;
+	t_direction	facing;
 }	t_casting;
 
 
