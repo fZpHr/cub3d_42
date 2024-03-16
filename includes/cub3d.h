@@ -57,16 +57,6 @@
 # define	RAYS			200
 
 /**
- * @brief Ray collision verification step (in pixels)
-*/
-# define	RAY_STEP		0.001
-
-/**
- * @brief Maximum distance of the ray
-*/
-# define	RAY_MAX_STEPS	1000000000
-
-/**
  * @brief Walking speed (in pixels per frame)
 */
 # define	WALK_SPEED		0.04
@@ -74,7 +64,7 @@
 /**
  * @brief Rotation speed (in radian per frame)
 */
-# define	ROT_SPEED		PI_12 / 30
+# define	ROT_SPEED		PI_12 / 12
 
 typedef unsigned long long	t_ull;
 

@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/16 03:50:07 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/16 04:09:13 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	ft_render_ceiling(t_cub *cub)
 
 // t_casting	ft_cast_ray(t_cub *cub, double angle)
 // {
+// 	double		RAY_STEP = 0.001;
+// 	int			RAY_MAX_STEPS = 1000000000;
 // 	t_casting	casting;
 // 	t_ull		steps;
 // 	double		step_x;
@@ -118,7 +120,7 @@ void	ft_hor_casting(t_cub *cub, t_casting *casting)
 	if (casting->angle < PI)
 		casting->hor_step_x = -casting->hor_step_x;
 
-	while (casting->hor_y >= 0 && casting->hor_y < cub->map_size.y
+	while (casting->hor_y - (casting->angle < PI ? 0 : 1) >= 0 && casting->hor_y < cub->map_size.y
 		&& casting->hor_x >= 0 && casting->hor_x < cub->map_size.x
 		&& cub->map_array[(int) casting->hor_y - (casting->angle < PI ? 0 : 1)][(int) casting->hor_x] != '1')
 	{
@@ -126,7 +128,7 @@ void	ft_hor_casting(t_cub *cub, t_casting *casting)
 		casting->hor_y += casting->hor_step_y;
 	}
 
-	if (casting->hor_y < 0 || casting->hor_y >= cub->map_size.y
+	if (casting->hor_y - (casting->angle < PI ? 0 : 1) < 0 || casting->hor_y >= cub->map_size.y
 		|| casting->hor_x < 0 || casting->hor_x >= cub->map_size.x
 		|| cub->map_array[(int) casting->hor_y - (casting->angle < PI ? 0 : 1)][(int) casting->hor_x] != '1')
 		casting->hor_dist = -1;
@@ -150,7 +152,7 @@ void	ft_ver_casting(t_cub *cub, t_casting *casting)
 		casting->ver_step_y = -casting->ver_step_y;
 
 	while (casting->ver_y >= 0 && casting->ver_y < cub->map_size.y
-		&& casting->ver_x >= 0 && casting->ver_x < cub->map_size.x
+		&& casting->ver_x - (casting->angle < PI_2 || casting->angle > 3 * PI_2 ? 0 : 1) >= 0 && casting->ver_x < cub->map_size.x
 		&& cub->map_array[(int) casting->ver_y][(int) casting->ver_x - (casting->angle < PI_2 || casting->angle > 3 * PI_2 ? 0 : 1)] != '1')
 	{
 		casting->ver_x += casting->ver_step_x;
@@ -158,7 +160,7 @@ void	ft_ver_casting(t_cub *cub, t_casting *casting)
 	}
 
 	if (casting->ver_y < 0 || casting->ver_y >= cub->map_size.y
-		|| casting->ver_x < 0 || casting->ver_x >= cub->map_size.x
+		|| casting->ver_x - (casting->angle < PI_2 || casting->angle > 3 * PI_2 ? 0 : 1) < 0 || casting->ver_x >= cub->map_size.x
 		|| cub->map_array[(int) casting->ver_y][(int) casting->ver_x - (casting->angle < PI_2 || casting->angle > 3 * PI_2 ? 0 : 1)] != '1')
 		casting->ver_dist = -1;
 	else
@@ -211,10 +213,8 @@ void	ft_put_chunk(t_cub *cub, int x, t_ipos size, int color)
 
 void	ft_render_minimap(t_cub *cub, t_casting castings[RAYS])
 {
-	// int		TILE_SIZE = 15;
-	// int		PLAYER_SIZE = 5;
-	int		TILE_SIZE = 30;
-	int		PLAYER_SIZE = 10;
+	int		TILE_SIZE = 15;
+	int		PLAYER_SIZE = 8;
 	int		i;
 	int		j;
 
@@ -239,7 +239,7 @@ void	ft_render_minimap(t_cub *cub, t_casting castings[RAYS])
 		i++;
 	}
 
-	for (int rc = 0; rc < RAYS; rc++)
+	for (int rc = 0; rc < RAYS; rc += 20)
 	{
 		t_casting c = castings[rc];
 		if (c.distance != -1)
@@ -255,16 +255,6 @@ void	ft_render_minimap(t_cub *cub, t_casting castings[RAYS])
 			(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE, cub->position.y * TILE_SIZE + TILE_SIZE},
 			(t_ipos){c.x * TILE_SIZE + TILE_SIZE, c.y * TILE_SIZE + TILE_SIZE},
 			0x00FF00FF);
-	// if (c.hor_dist != -1)
-	// 	ft_put_line(cub->frame,
-	// 		(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE, cub->position.y * TILE_SIZE + TILE_SIZE},
-	// 		(t_ipos){c.hor_x * TILE_SIZE + TILE_SIZE, c.hor_y * TILE_SIZE + TILE_SIZE},
-	// 		0x00FF00FF);
-	// if (c.ver_dist != -1)
-	// 	ft_put_line(cub->frame,
-	// 		(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE, cub->position.y * TILE_SIZE + TILE_SIZE},
-	// 		(t_ipos){c.ver_x * TILE_SIZE + TILE_SIZE, c.ver_y * TILE_SIZE + TILE_SIZE},
-	// 		0x00FF00FF);
 
 	ft_put_line(cub->frame,
 		(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE, cub->position.y * TILE_SIZE + TILE_SIZE},
@@ -296,10 +286,19 @@ void	ft_render(t_cub *cub)
 		if (a >= 2 * PI)
 			a -= 2 * PI;
 		t_casting	casting = ft_cast_ray(cub, a);
+		casting.distance *= cos(cub->orientation - casting.angle);
 		int			height = ((HEIGHT / casting.distance) * 1.5);
 		int			x = ray * width;
-		// printf("RAY: %d, %10f, %10f, %10f, %10f, [%8d]\n", ray, casting.x, casting.y, casting.angle, casting.distance, height);
-		ft_put_chunk(cub, x, (t_ipos){width + 1, height}, 0x00FFFFFF);
+		int			color = 0x00FFFFFF;
+		if (casting.facing == NORTH)
+			color = 0x00FF0000;
+		else if (casting.facing == SOUTH)
+			color = 0x0000FF00;
+		else if (casting.facing == WEST)
+			color = 0x000000FF;
+		else if (casting.facing == EAST)
+			color = 0x00FFFF00;
+		ft_put_chunk(cub, x, (t_ipos){width + 1, height}, color);
 		castings[ray] = casting;
 		ray++;
 	}
@@ -309,8 +308,6 @@ void	ft_render(t_cub *cub)
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->frame.img, 0, 0);
 
 	cub->frames++;
-	// if (cub->frame % 10 == 0)
-	// 	printf("Frame: %lld\n", cub->frame);
 }
 
 int	ft_game_quit(t_cub *cub)
@@ -432,10 +429,6 @@ void	ft_keys_init(t_keys *keys)
 void	ft_rendering(t_cub *cub)
 {
 	(void)cub;
-
-	cub->position.x = 5.661107;
-	cub->position.y = 10.273338;
-	cub->orientation = 1.919818;
 
 	cub->frames = 0;
 	ft_keys_init(&cub->keys);
