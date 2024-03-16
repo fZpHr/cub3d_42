@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_rendering.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/15 20:31:29 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/15 22:47:02 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,19 +95,18 @@ void	ft_render(t_cub *cub)
 	ft_render_ceiling(cub);
 
 	float	angle = cub->orientation - FOV / 2;
-	float	step = FOV / RAYS;
-	int		width = WIDTH / RAYS;
+	float	step = (float) FOV / RAYS;
+	float	width = (float) WIDTH / RAYS;
 	int		ray = 0;
 	while (ray < RAYS)
 	{
-		t_casting	casting = ft_cast_ray(cub, angle);
+		float		a = angle + step * ray;
+		t_casting	casting = ft_cast_ray(cub, a);
 		int			height = ((HEIGHT / casting.distance) * 1.5);
 		int			x = ray * width;
 		// printf("RAY: %d, %10f, %10f, %10f, %10f, [%8d]\n", ray, casting.x, casting.y, casting.angle, casting.distance, height);
-		ft_put_chunk(cub, x, (t_ipos){width, height}, 0x00FFFFFF);
-		angle += step;
+		ft_put_chunk(cub, x, (t_ipos){width + 1, height}, 0x00FFFFFF);
 		ray++;
-	
 	}
 
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->frame.img, 0, 0);
