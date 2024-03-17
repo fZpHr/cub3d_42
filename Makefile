@@ -6,7 +6,7 @@
 #    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/03/15 16:59:12 by ysabik           ###   ########.fr        #
+#    Updated: 2024/03/17 06:12:12 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,10 +74,12 @@ $(NAME) : $(BUILD_FILES)
 m_line_break :
 	@echo ""
 
-bonus:
-	@echo "$(C_RED)$(C_BOLD)There is no bonus for this project.$(C_RESET)"
+b_flags :
+	@$(eval CFLAGS += -D BONUS=1)
 
-$(LIBFT_A):
+bonus : b_flags all
+
+$(LIBFT_A) :
 	@echo -n "$(C_CYAN)$(C_BOLD)$(C_UNDERLINE)"
 	@echo "Compiling $(C_YELLOW)$(LIBFT_A)$(C_CYAN)... :$(C_RESET)"
 	@echo ""
@@ -85,7 +87,7 @@ $(LIBFT_A):
 	@echo "$(C_RESET)"
 	@echo ""
 
-$(MLX_A):
+$(MLX_A) :
 	@echo -n "$(C_CYAN)$(C_BOLD)$(C_UNDERLINE)"
 	@echo "Compiling $(C_YELLOW)$(MLX_A)$(C_CYAN)... :$(C_RESET)"
 	@echo ""
@@ -164,6 +166,8 @@ fclean :
 
 re : fclean m_line_break all
 
+re_bonus : fclean m_line_break bonus
+
 soft_clean :
 	$(call del, "$(BUILD_FOLDER)" $(BUILD_FILES))
 	@rm -rf $(BUILD_FILES) $(BUILD_FOLDER)
@@ -174,4 +178,9 @@ soft_fclean :
 
 soft_re : soft_fclean m_line_break all
 
-.PHONY : all bonus clean fclean re soft_clean soft_fclean soft_re m_line_break
+soft_re_bonus : soft_fclean m_line_break bonus
+
+.PHONY : all bonus clean fclean re re_bonus \
+			soft_clean soft_fclean soft_re soft_re_bonus \
+			m_line_break b_flags
+

@@ -31,6 +31,10 @@
 # define PI_6		0.52359877559829887308
 # define PI_12		0.26179938779914943654
 
+# ifndef BONUS
+#  define BONUS		0
+# endif
+
 /**
  * @brief Name of the window
 */

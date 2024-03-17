@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 05:10:11 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 06:24:30 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -542,7 +542,11 @@ int	ft_game_keyup(int keycode, t_cub *cub)
 */
 t_bool	ft_does_collide(t_cub *cub, t_pos position)
 {
+	if (!BONUS)
+		return (position.x < 0 || position.x >= cub->map_size.x
+				|| position.y < 0 || position.y >= cub->map_size.y);
 	return (position.x < 0 || position.x >= cub->map_size.x
+		|| position.y < 0 || position.y >= cub->map_size.y
 		|| cub->map_array[(int) position.y][(int) position.x] == '1');
 }
 
