@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:21:11 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 11:21:23 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 13:13:26 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@
 */
 void	ft_handle_action(t_cub *cub)
 {
-	t_pos	pos = (t_pos){cub->position.x + cos(cub->orientation),
-							cub->position.y + sin(cub->orientation)};
+	t_pos	pos;
+
+	pos = (t_pos){cub->position.x + cos(cub->orientation),
+		cub->position.y + sin(cub->orientation)};
 	if (pos.x >= 0 && pos.x < cub->map_size.x
 		&& pos.y >= 0 && pos.y < cub->map_size.y)
 	{
@@ -36,7 +38,8 @@ void	ft_handle_action(t_cub *cub)
 			cub->map_array[(int) pos.y][(int) pos.x].is_solid = FALSE;
 		}
 		else if (cub->map_array[(int) pos.y][(int) pos.x].type == 'O'
-					&& cub->map_array[(int) cub->position.y][(int) cub->position.x].type != 'O')
+			&& cub->map_array[(int) cub->position.y] \
+				[(int) cub->position.x].type != 'O')
 		{
 			cub->map_array[(int) pos.y][(int) pos.x].type = 'X';
 			cub->map_array[(int) pos.y][(int) pos.x].is_solid = TRUE;

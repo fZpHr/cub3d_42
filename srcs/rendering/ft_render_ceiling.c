@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:05:35 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 11:07:13 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 13:10:34 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,18 @@
 */
 void	ft_render_ceiling(t_cub *cub)
 {
-	for (int i = 0; i < WIDTH; i++)
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < WIDTH)
 	{
-		for (int j = 0; j < HEIGHT / 2; j++)
+		j = 0;
+		while (j < HEIGHT / 2)
 		{
 			ft_put_pixel(cub->frame, i, j, cub->ceiling_c);
+			j++;
 		}
+		i++;
 	}
 }

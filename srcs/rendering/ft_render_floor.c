@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:05:01 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 11:07:13 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 13:10:44 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,18 @@
 */
 void	ft_render_floor(t_cub *cub)
 {
-	for (int i = 0; i < WIDTH; i++)
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < WIDTH)
 	{
-		for (int j = HEIGHT / 2 - 1; j < HEIGHT; j++)
+		j = HEIGHT / 2 - 1;
+		while (j < HEIGHT)
 		{
 			ft_put_pixel(cub->frame, i, j, cub->floor_c);
+			j++;
 		}
+		i++;
 	}
 }

@@ -6,11 +6,13 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:09:02 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 11:09:21 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 13:18:14 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rendering.h"
+
+static void	ft_update_casting(t_casting *casting);
 
 /**
  * @brief Cast a ray from the player position to the given angle.
@@ -52,21 +54,32 @@ t_casting	ft_cast_ray(t_cub *cub, float angle)
 	casting.ver_dist = -1;
 	ft_hor_casting(cub, &casting);
 	ft_ver_casting(cub, &casting);
-	if (casting.hor_dist != -1 && (casting.hor_dist <= casting.ver_dist || casting.ver_dist == -1))
+	ft_update_casting(&casting);
+	return (casting);
+}
+
+static void	ft_update_casting(t_casting *casting)
+{
+	if (casting->hor_dist != -1
+		&& (casting->hor_dist <= casting->ver_dist || casting->ver_dist == -1))
 	{
-		casting.x = casting.hor_x;
-		casting.y = casting.hor_y;
-		casting.distance = casting.hor_dist;
-		casting.facing = (casting.angle < PI) ? NORTH : SOUTH;
+		casting->x = casting->hor_x;
+		casting->y = casting->hor_y;
+		casting->distance = casting->hor_dist;
+		casting->facing = SOUTH;
+		if (casting->angle < PI)
+			casting->facing = NORTH;
 	}
-	else if (casting.ver_dist != -1 && (casting.ver_dist <= casting.hor_dist || casting.hor_dist == -1))
+	else if (casting->ver_dist != -1
+		&& (casting->ver_dist <= casting->hor_dist || casting->hor_dist == -1))
 	{
-		casting.x = casting.ver_x;
-		casting.y = casting.ver_y;
-		casting.distance = casting.ver_dist;
-		casting.facing = (casting.angle < PI_2 || casting.angle > 3 * PI_2) ? WEST : EAST;
+		casting->x = casting->ver_x;
+		casting->y = casting->ver_y;
+		casting->distance = casting->ver_dist;
+		casting->facing = EAST;
+		if (casting->angle < PI_2 || casting->angle > 3 * PI_2)
+			casting->facing = WEST;
 	}
 	else
-		casting.distance = -1;
-	return (casting);
+		casting->distance = -1;
 }

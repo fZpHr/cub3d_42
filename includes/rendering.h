@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:39 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 11:54:18 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 13:05:40 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,13 @@ typedef struct s_casting
 	float		ver_step_x;
 	float		ver_step_y;
 	float		ver_dist;
-	
+
 	float		x;
 	float		y;
 	float		angle;
 	float		distance;
 	t_direction	facing;
 }	t_casting;
-
 
 enum e_mlx_events {
 	ON_KEYDOWN = 2,
@@ -99,34 +98,33 @@ enum e_mlx_masks {
 	MASK_OWNER_GRAB_BUTTON = 1L<<24
 };
 
-t_bool	ft_does_collide(t_cub *cub, t_pos position);
-void	ft_handle_action(t_cub *cub);
-void	ft_handle_keys(t_cub *cub);
-void	ft_move_backward(t_cub *cub);
-void	ft_move_forward(t_cub *cub);
+t_bool		ft_does_collide(t_cub *cub, t_pos position);
+void		ft_handle_action(t_cub *cub);
+void		ft_handle_keys(t_cub *cub);
+void		ft_move_backward(t_cub *cub);
+void		ft_move_forward(t_cub *cub);
 
-int	ft_game_keydown(int keycode, t_cub *cub);
-int	ft_game_keyup(int keycode, t_cub *cub);
-int	ft_game_loop(t_cub *cub);
-int	ft_game_mouse(int x, int y, t_cub *cub);
-int	ft_game_quit(t_cub *cub);
-int	ft_mlx_init(t_cub *cub);
-t_frame	ft_mlx_new_frame(t_cub *cub, t_bool free_old);
+int			ft_game_keydown(int keycode, t_cub *cub);
+int			ft_game_keyup(int keycode, t_cub *cub);
+int			ft_game_loop(t_cub *cub);
+int			ft_game_mouse(int x, int y, t_cub *cub);
+int			ft_game_quit(t_cub *cub);
+int			ft_mlx_init(t_cub *cub);
+t_frame		ft_mlx_new_frame(t_cub *cub, t_bool free_old);
 
-void	ft_put_line(t_frame frame, t_ipos start, t_ipos end, int color);
-void	ft_put_pixel(t_frame frame, int x, int y, int color);
-void	ft_put_rect(t_frame frame, t_ipos pos, t_ipos size, int color);
+void		ft_put_line(t_frame frame, t_ipos start, t_ipos end, int color);
+void		ft_put_pixel(t_frame frame, int x, int y, int color);
+void		ft_put_rect(t_frame frame, t_ipos pos, t_ipos size, int color);
 
 t_casting	ft_cast_ray(t_cub *cub, float angle);
-void	ft_hor_casting(t_cub *cub, t_casting *casting);
-void	ft_ver_casting(t_cub *cub, t_casting *casting);
+void		ft_hor_casting(t_cub *cub, t_casting *casting);
+void		ft_ver_casting(t_cub *cub, t_casting *casting);
 
-void	ft_render_ceiling(t_cub *cub);
-void	ft_render_chunk(t_cub *cub, int x, t_ipos size, t_casting casting);
-void	ft_render_floor(t_cub *cub);
-void	ft_render_info(t_cub *cub);
-void	ft_render_minimap(t_cub *cub, t_casting castings[RAYS]);
-void	ft_render(t_cub *cub);
-
+void		ft_render_ceiling(t_cub *cub);
+void		ft_render_chunk(t_cub *cub, int x, t_ipos size, t_casting casting);
+void		ft_render_floor(t_cub *cub);
+void		ft_render_info(t_cub *cub);
+void		ft_render_minimap(t_cub *cub, t_casting castings[RAYS]);
+void		ft_render(t_cub *cub);
 
 #endif

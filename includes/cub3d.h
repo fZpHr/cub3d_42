@@ -62,32 +62,32 @@
 /**
  * @brief Name of the window
 */
-# define	NAME			"Cub3D"
+# define NAME			"Cub3D"
 
 /**
  * @brief Height of the window (in px)
 */
-# define	HEIGHT			720
+# define HEIGHT			720
 
 /**
  * @brief Width of the window (in px)
 */
-# define	WIDTH			1080
+# define WIDTH			1080
 
 /**
  * @brief Field of view (in rad)
 */
-# define	FOV				PI_3
+# define FOV				PI_3
 
 /**
  * @brief Number of rays
 */
-# define	RAYS			200
+# define RAYS			200
 
 /**
  * @brief Walking speed (in px/frame)
 */
-# define	WALK_SPEED		0.05
+# define WALK_SPEED		0.05
 
 /**
  * @brief Rotation speed (in rad/frame)
@@ -96,14 +96,14 @@
  * 
  * @note	`PI_12 / 9` is `0.02908882086641849395`.
 */
-# define	ROT_SPEED		0.02908882086641849395
+# define ROT_SPEED		0.02908882086641849395
 
 /**
  * @brief Rotation speed (in rad/frame)
  * 
  * @brief	- Using MOUSE
 */
-# define	ROT_SPEED_MOUSE	0.00175
+# define ROT_SPEED_MOUSE	0.00175
 
 typedef unsigned long long	t_ull;
 
@@ -154,17 +154,6 @@ typedef struct s_ivec3
 	int	y;
 	int	z;
 }	t_ivec3;
-
-/**
- * @brief Integer vector4 type (int, int, int, int)
-*/
-typedef struct s_ivec4
-{
-	int	x;
-	int	y;
-	int	a;
-	int	b;
-}	t_ivec4;
 
 /**
  * @brief Frame type

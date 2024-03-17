@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:08:11 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 11:08:24 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 13:39:44 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,22 @@
 */
 void	ft_put_line(t_frame frame, t_ipos start, t_ipos end, int color)
 {
-	int		dx;
-	int		dy;
+	t_ipos	delta;
 	int		steps;
-	float	x;
-	float	y;
+	t_pos	pos;
+	int		i;
 
-	dx = end.x - start.x;
-	dy = end.y - start.y;
-	steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
-	x = (float) dx / steps;
-	y = (float) dy / steps;
-	for (int i = 0; i < steps; i++)
+	delta.x = end.x - start.x;
+	delta.y = end.y - start.y;
+	steps = abs(delta.x);
+	if (abs(delta.y) > steps)
+		steps = abs(delta.y);
+	pos.x = (float) delta.x / steps;
+	pos.y = (float) delta.y / steps;
+	i = 0;
+	while (i < steps)
 	{
-		ft_put_pixel(frame, start.x + x * i, start.y + y * i, color);
+		ft_put_pixel(frame, start.x + pos.x * i, start.y + pos.y * i, color);
+		i++;
 	}
 }

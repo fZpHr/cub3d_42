@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:11:54 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 11:12:04 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 13:12:18 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_bool	ft_does_collide(t_cub *cub, t_pos position)
 {
 	if (!BONUS)
 		return (position.x < 0 || position.x >= cub->map_size.x
-				|| position.y < 0 || position.y >= cub->map_size.y);
+			|| position.y < 0 || position.y >= cub->map_size.y);
 	return (position.x < 0 || position.x >= cub->map_size.x
 		|| position.y < 0 || position.y >= cub->map_size.y
 		|| cub->map_array[(int) position.y][(int) position.x].is_solid);

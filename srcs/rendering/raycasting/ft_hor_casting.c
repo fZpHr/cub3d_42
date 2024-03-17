@@ -6,11 +6,16 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:06:01 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 11:06:30 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 13:36:40 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rendering.h"
+
+static void	ft_closest_hor_line(t_cub *cub, t_casting *casting);
+static void	ft_define_steps(t_cub *cub, t_casting *casting);
+static void	ft_parcours_until_collision(t_cub *cub, t_casting *casting);
+static void	ft_save_distance(t_cub *cub, t_casting *casting);
 
 /**
  * @brief Check if the ray is hitting horizontally a wall.
@@ -30,31 +35,62 @@
 */
 void	ft_hor_casting(t_cub *cub, t_casting *casting)
 {
+	ft_closest_hor_line(cub, casting);
+	ft_define_steps(cub, casting);
+	ft_parcours_until_collision(cub, casting);
+	ft_save_distance(cub, casting);
+}
+
+static void	ft_closest_hor_line(t_cub *cub, t_casting *casting)
+{
 	casting->hor_y = (int) cub->position.y;
 	if (casting->angle < PI)
 		casting->hor_y++;
-	casting->hor_x = cub->position.x - (cub->position.y - casting->hor_y) / tan(casting->angle);
+	casting->hor_x = cub->position.x
+		- (cub->position.y - casting->hor_y) / tan(casting->angle);
+}
 
+static void	ft_define_steps(t_cub *cub, t_casting *casting)
+{
+	(void)cub;
 	casting->hor_step_y = -1;
 	if (casting->angle < PI)
 		casting->hor_step_y = 1;
 	casting->hor_step_x = 1 / tan(-casting->angle);
 	if (casting->angle < PI)
 		casting->hor_step_x = -casting->hor_step_x;
+}
 
-	while (casting->hor_y - (casting->angle < PI ? 0 : 1) >= 0 && casting->hor_y < cub->map_size.y
+static void	ft_parcours_until_collision(t_cub *cub, t_casting *casting)
+{
+	int	off;
+
+	off = 1;
+	if (casting->angle < PI)
+		off = 0;
+	while (casting->hor_y - off >= 0 && casting->hor_y < cub->map_size.y
 		&& casting->hor_x >= 0 && casting->hor_x < cub->map_size.x
-		&& !cub->map_array[(int) casting->hor_y - (casting->angle < PI ? 0 : 1)][(int) casting->hor_x].is_solid)
+		&& !cub->map_array[(int) casting->hor_y - off] \
+			[(int) casting->hor_x].is_solid)
 	{
 		casting->hor_x += casting->hor_step_x;
 		casting->hor_y += casting->hor_step_y;
 	}
+}
 
-	if (casting->hor_y - (casting->angle < PI ? 0 : 1) < 0 || casting->hor_y >= cub->map_size.y
+static void	ft_save_distance(t_cub *cub, t_casting *casting)
+{
+	int	off;
+
+	off = 1;
+	if (casting->angle < PI)
+		off = 0;
+	if (casting->hor_y - off < 0 || casting->hor_y >= cub->map_size.y
 		|| casting->hor_x < 0 || casting->hor_x >= cub->map_size.x
-		|| !cub->map_array[(int) casting->hor_y - (casting->angle < PI ? 0 : 1)][(int) casting->hor_x].is_solid)
+		|| !cub->map_array[(int) casting->hor_y - off] \
+			[(int) casting->hor_x].is_solid)
 		casting->hor_dist = -1;
 	else
 		casting->hor_dist = sqrt(pow(cub->position.x - casting->hor_x, 2)
-			+ pow(cub->position.y - casting->hor_y, 2));
+				+ pow(cub->position.y - casting->hor_y, 2));
 }
