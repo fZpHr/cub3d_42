@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/16 22:59:05 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 02:58:36 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ void	ft_put_line(t_texture frame, t_ipos start, t_ipos end, int color)
 	int		dx;
 	int		dy;
 	int		steps;
-	double	x;
-	double	y;
+	float	x;
+	float	y;
 
 	dx = end.x - start.x;
 	dy = end.y - start.y;
 	steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
-	x = (double) dx / steps;
-	y = (double) dy / steps;
+	x = (float) dx / steps;
+	y = (float) dy / steps;
 	for (int i = 0; i < steps; i++)
 	{
 		ft_set_pixel(frame, start.x + x * i, start.y + y * i, color);
@@ -72,14 +72,14 @@ void	ft_render_ceiling(t_cub *cub)
 	}
 }
 
-// t_casting	ft_cast_ray(t_cub *cub, double angle)
+// t_casting	ft_cast_ray(t_cub *cub, float angle)
 // {
-// 	double		RAY_STEP = 0.001;
+// 	float		RAY_STEP = 0.001;
 // 	int			RAY_MAX_STEPS = 1000000000;
 // 	t_casting	casting;
 // 	t_ull		steps;
-// 	double		step_x;
-// 	double		step_y;
+// 	float		step_x;
+// 	float		step_y;
 
 // 	casting.x = cub->position.x;
 // 	casting.y = cub->position.y;
@@ -168,7 +168,7 @@ void	ft_ver_casting(t_cub *cub, t_casting *casting)
 			+ pow(cub->position.y - casting->ver_y, 2));
 }
 
-t_casting	ft_cast_ray(t_cub *cub, double angle)
+t_casting	ft_cast_ray(t_cub *cub, float angle)
 {
 	t_casting	casting;
 
@@ -199,66 +199,50 @@ t_casting	ft_cast_ray(t_cub *cub, double angle)
 void	ft_put_chunk(t_cub *cub, int x, t_ipos size, t_casting casting)
 {
 	t_texture	texture;
+	int			texture_x;
 	if (casting.facing == NORTH)
+	{
 		texture = cub->no;
+		texture_x = texture.width - 1 - (int) (casting.x * texture.width) % texture.width;
+	}
 	else if (casting.facing == SOUTH)
+	{
 		texture = cub->so;
+		texture_x = (int) (casting.x * texture.width) % texture.width;
+		
+	}
 	else if (casting.facing == WEST)
+	{
 		texture = cub->we;
+		texture_x = (int) (casting.y * texture.width) % texture.width;
+	}
 	else if (casting.facing == EAST)
+	{
 		texture = cub->ea;
-
-	int	chunk_height = size.y / texture.height;
-	// int	y_offset = 0;
-	// if (size.y >= HEIGHT)
-	// {
-	// 	y_offset = (size.y - HEIGHT) / 2;
-	// 	size.y = HEIGHT;
-	// }
-	
-	int	texture_x = (int) (casting.x / 2) % texture.width;
-	// int	texture_y = y_offset * chunk_height;
+		texture_x = texture.width - 1 - (int) (casting.y * texture.width) % texture.width;
+	}
 
 	// printf("Chunck-loader:\n");
 	// printf("  X .......... : %8d |\n", x);
 	// printf("  Size ....... : %8d, y: %8d |\n", size.x, size.y);
 	// printf("  Texture .... : %8d, y: %8d |\n", texture.width, texture.height);
-	// printf("  Chunk Height : %8d |\n", chunk_height);
 	// printf("  Texture X .. : %8d |\n", texture_x);
+	// printf("  Cast dist .. : %.15f |\n", casting.distance);
+	// printf("  IDEA ....... : %.15f |\n", (HEIGHT / casting.distance) * 1.5);
 
-	for (int texture_y = 0; texture_y < texture.height; texture_y++)
+	int	texture_y, color;
+	int win_y_offset = (HEIGHT - size.y) / 2;
+	for (int win_y = 0; win_y < size.y && win_y + win_y_offset < HEIGHT; win_y++)
 	{
-		int max_y = (HEIGHT - size.y) / 2 + chunk_height * (texture_y + 1);
-		for (int window_y = (HEIGHT - size.y) / 2 + chunk_height * texture_y;
-				window_y < max_y;
-				window_y++)
+		for (int win_x = 0; win_x < size.x && win_x + x < WIDTH; win_x++)
 		{
-			if (window_y < 0 || window_y >= HEIGHT)
-				continue ;
-			for (int window_x = x; window_x < x + size.x; window_x++)
-			{
-				if (window_x < 0 || window_x >= WIDTH)
-					continue ;
-				int	color = *(int *)(char *)(texture.addr
-					+ (texture_y * texture.line_size
-						+ texture_x * (texture.bits_per_pixel / 8)));
-				ft_set_pixel(cub->frame, window_x, window_y, color);
-				// if (window_x == x && window_y == (HEIGHT - size.y) / 2 + chunk_height * texture_y)
-				// 	printf("x: %d, y: %d, color: %d\n", window_x, window_y, color);
-			}
+			texture_y = texture.height * (float) win_y / size.y;
+			color = *(int *)(char *)(texture.addr
+				+ (texture_y * texture.line_size + texture_x * 4));
+			if (win_x > -x && win_y > -win_y_offset)
+				ft_set_pixel(cub->frame, win_x + x, win_y + win_y_offset, color);
 		}
 	}
-
-	
-	// for (int j = 0; j < size.y; j++)
-	// {
-	// 	int	color = 0x00FFFFFF;
-	// 	// if (j + y_offset >= texture.height)
-	// 	// 	continue ;
-	// 	color = *(int *)(char *)(texture.addr + (texture_y * texture.line_size + texture_x * (texture.bits_per_pixel / 8)));
-	// 	ft_set_pixel(cub->frame, x, j, color);
-	// 	texture_y += chunk_height;
-	// }
 }
 
 void	ft_render_minimap(t_cub *cub, t_casting castings[RAYS])
@@ -324,21 +308,23 @@ void	ft_render(t_cub *cub)
 
 	t_casting	castings[RAYS];
 
-	double	angle = cub->orientation - FOV / 2;
+	float	angle = cub->orientation - FOV / 2;
 	if (angle < 0)
 		angle += 2 * PI;
-	double	step = (double) FOV / RAYS;
-	double	width = (double) WIDTH / RAYS;
+	float	step = (float) FOV / RAYS;
+	float	width = (float) WIDTH / RAYS;
 	int		ray = 0;
 	while (ray < RAYS)
 	{
-		double		a = angle + step * ray;
+		float		a = angle + step * ray;
 		if (a >= 2 * PI)
 			a -= 2 * PI;
 		t_casting	casting = ft_cast_ray(cub, a);
 		if (casting.distance != -1)
 		{
 			casting.distance *= cos(cub->orientation - casting.angle);
+			if (casting.distance < 0.15)
+				casting.distance = 0.15;
 			int			height = ((HEIGHT / casting.distance) * 1.5);
 			int			x = ray * width;
 			ft_put_chunk(cub, x, (t_ipos){width + 1, height}, casting);

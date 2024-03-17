@@ -54,17 +54,17 @@
 /**
  * @brief Number of rays
 */
-# define	RAYS			100
+# define	RAYS			200
 
 /**
  * @brief Walking speed (in pixels per frame)
 */
-# define	WALK_SPEED		0.04
+# define	WALK_SPEED		0.07
 
 /**
  * @brief Rotation speed (in radian per frame)
 */
-# define	ROT_SPEED		PI_12 / 12
+# define	ROT_SPEED		PI_12 / 10
 
 typedef unsigned long long	t_ull;
 
@@ -84,8 +84,8 @@ typedef enum e_bool
 
 typedef struct s_pos
 {
-	double	x;
-	double	y;
+	float	x;
+	float	y;
 }	t_pos;
 
 typedef struct s_ipos
@@ -131,7 +131,7 @@ typedef struct s_keys
  * @param ea 			east texture (see t_texture)
  * 
  * @param orientation 	Orientation of the player (in radian)
- * @param position 		Position of the player (double, double)
+ * @param position 		Position of the player (float, float)
  * @param keys 			Keys pressed by the player
  * 
  * @param frames 		Number of frames
@@ -152,7 +152,7 @@ typedef struct s_cub
 	t_texture	we;
 	t_texture	ea;
 
-	double		orientation;
+	float		orientation;
 	t_pos		position;
 	t_keys		keys;
 
