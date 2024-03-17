@@ -280,6 +280,7 @@ void	ft_error_handle_color(t_map *map, char *line);
 void	ft_skip_spaces(char *line, int *i, int *count);
 void	ft_cut_extra_char(char *str);
 void	ft_fill_line(char *line, int size);
+int		ft_error(char *str);
 
 // DATA
 

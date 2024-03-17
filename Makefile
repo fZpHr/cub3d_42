@@ -6,7 +6,7 @@
 #    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/03/17 10:33:54 by ysabik           ###   ########.fr        #
+#    Updated: 2024/03/17 11:36:12 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,18 +16,42 @@ NAME				= cub3D
 INCLUDES			= ./includes
 SRC_FILES			= \
 						srcs/main.c \
+						srcs/data/ft_map_into_array.c \
+						srcs/data/ft_assign_to_cube.c \
 						srcs/parses/ft_check_args.c \
 						srcs/parses/ft_check_map_file.c \
-						srcs/utils/ft_error_handle.c \
-						srcs/data/ft_map_into_array.c \
 						srcs/parses/ft_check_map_content.c \
 						srcs/parses/ft_check_texture.c \
-						srcs/utils/ft_function.c \
-						srcs/utils/ft_init.c \
 						srcs/parses/ft_access_texture.c \
 						srcs/parses/ft_parse_checker.c \
-						srcs/data/ft_assign_to_cube.c \
-						srcs/rendering/ft_rendering.c
+						srcs/rendering/interactions/ft_does_collide.c \
+						srcs/rendering/interactions/ft_handle_action.c \
+						srcs/rendering/interactions/ft_handle_keys.c \
+						srcs/rendering/interactions/ft_move_backward.c \
+						srcs/rendering/interactions/ft_move_forward.c \
+						srcs/rendering/mlx/ft_game_keydown.c \
+						srcs/rendering/mlx/ft_game_keyup.c \
+						srcs/rendering/mlx/ft_game_loop.c \
+						srcs/rendering/mlx/ft_game_mouse.c \
+						srcs/rendering/mlx/ft_game_quit.c \
+						srcs/rendering/mlx/ft_mlx_init.c \
+						srcs/rendering/mlx/ft_mlx_new_frame.c \
+						srcs/rendering/put/ft_put_line.c \
+						srcs/rendering/put/ft_put_pixel.c \
+						srcs/rendering/put/ft_put_rect.c \
+						srcs/rendering/raycasting/ft_cast_ray.c \
+						srcs/rendering/raycasting/ft_hor_casting.c \
+						srcs/rendering/raycasting/ft_ver_casting.c \
+						srcs/rendering/ft_render.c \
+						srcs/rendering/ft_render_ceiling.c \
+						srcs/rendering/ft_render_chunk.c \
+						srcs/rendering/ft_render_floor.c \
+						srcs/rendering/ft_rendering.c \
+						srcs/rendering/ft_render_minimap.c \
+						srcs/utils/ft_function.c \
+						srcs/utils/ft_init.c \
+						srcs/utils/ft_error_handle.c \
+						srcs/utils/ft_error.c
 
 BUILD_FOLDER		= ./build
 
