@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 09:57:29 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 10:33:43 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -484,7 +484,8 @@ void	ft_render(t_cub *cub)
 int	ft_game_quit(t_cub *cub)
 {
 	mlx_do_key_autorepeaton(cub->mlx);
-	// mlx_mouse_show(cub->mlx, cub->mlx_win);
+	if (BONUS && HIDE_MOUSE)
+		mlx_mouse_show(cub->mlx, cub->mlx_win);
 	for (int i = 0; i < 128; i++)
 	{
 		for (t_ull j = 0; j < cub->textures[i].anim_no; j++)
@@ -518,7 +519,7 @@ int	ft_game_quit(t_cub *cub)
 int	ft_game_mouse(int x, int y, t_cub *cub)
 {
 	(void)y;
-	if (!BONUS)
+	if (!BONUS || !HIDE_MOUSE)
 		return (0);
 	mlx_mouse_move(cub->mlx, cub->mlx_win, WIDTH / 2, HEIGHT / 2);
 	x -= WIDTH / 2;
@@ -767,21 +768,22 @@ t_frame	ft_mlx_new_frame(t_cub *cub, t_bool free_old)
  * 
  * @param cub 	The game structure
 */
-void	ft_mlx_init(t_cub *cub)
+int	ft_mlx_init(t_cub *cub)
 {
 	cub->mlx = mlx_init();
 	cub->mlx_win = mlx_new_window(cub->mlx, WIDTH, HEIGHT, NAME);
 	cub->frame.img = NULL;
 	cub->frame = ft_mlx_new_frame(cub, TRUE);
 	mlx_do_key_autorepeatoff(cub->mlx);
-	// if (BONUS)
-	// 	mlx_mouse_hide(cub->mlx, cub->mlx_win);
+	if (BONUS && HIDE_MOUSE)
+		mlx_mouse_hide(cub->mlx, cub->mlx_win);
 	mlx_mouse_move(cub->mlx, cub->mlx_win, WIDTH / 2, HEIGHT / 2);
 	mlx_loop_hook(cub->mlx, &ft_game_loop, cub);
 	mlx_hook(cub->mlx_win, ON_DESTROY, 0L, &ft_game_quit, cub);
 	mlx_hook(cub->mlx_win, ON_KEYDOWN, MASK_KEY_PRESS, &ft_game_keydown, cub);
 	mlx_hook(cub->mlx_win, ON_KEYUP, MASK_KEY_RELEASE, &ft_game_keyup, cub);
 	mlx_hook(cub->mlx_win, ON_MOUSEMOVE, MASK_MOUSE_MOVE, &ft_game_mouse, cub);
+	return (0);
 }
 
 /**
@@ -827,7 +829,11 @@ void	ft_rendering(t_cub *cub)
 
 	cub->frames = 0;
 	ft_keys_init(&cub->keys);
-	ft_mlx_init(cub);
+	if (ft_mlx_init(cub))
+	{
+		printf("Error: MLX initialization failed.\n");
+		return ;
+	}
 
 	cub->minimap = BONUS;
 

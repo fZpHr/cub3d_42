@@ -41,6 +41,24 @@
 #  define BONUS		0
 # endif
 
+# ifndef HIDE_MOUSE
+/**
+ * @brief Hide mouse (`0`: off, `1`: on)
+ * 
+ * @note	- The hide function of the MLX LEAKS !
+ * 			And there is no possibility to either
+ * 			free the memory, or to hide the mouse without using it.
+ * 
+ * @note	---
+ * 
+ * @note	- By default, the mouse is not hidden. (Valgrind is happy !)
+ * 
+ * @note	- And when `HIDE_MOUSE` is `1`, the mouse IS hidden.
+ * 			(But valgrind is not happy...)
+*/
+#  define HIDE_MOUSE		0
+# endif
+
 /**
  * @brief Name of the window
 */

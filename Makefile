@@ -6,7 +6,7 @@
 #    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/03/17 06:12:12 by ysabik           ###   ########.fr        #
+#    Updated: 2024/03/17 10:33:54 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,7 @@ m_line_break :
 
 b_flags :
 	@$(eval CFLAGS += -D BONUS=1)
+	@$(eval CFLAGS += -D HIDE_MOUSE=1)
 
 bonus : b_flags all
 
