@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 11:51:51 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 14:08:27 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,25 @@ void	ft_rendering(t_cub *cub)
 			cub->map_array[i][j].is_solid = cub->textures[(int) cub->map_array[i][j].type].no != NULL;
 		}
 	}
+
+	printf("Commands :\n");
+	printf("\n");
+	printf("  > Esc        : Quit\n");
+	printf("\n");
+	printf("  > W or Up    : Move forward\n");
+	printf("  > S or Down  : Move backward\n");
+	printf("  > A or Left  : Rotate left\n");
+	printf("  > D or Right : Rotate right\n");
+	if (BONUS && HIDE_MOUSE)
+		printf("  > Mouse (X)  : Rotate\n");
+	if (BONUS)
+		printf("\n  > E or Space : Open/Close doors\n");
+	printf("\n");
+	printf("  > I          : Toggle info\n");
+	if (BONUS)
+		printf("  > M or Tab   : Toggle minimap\n");
+	printf("\n");
+	printf("---\n");
 
 	mlx_loop(cub->mlx);
 }
