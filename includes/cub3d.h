@@ -37,17 +37,17 @@
 # define	NAME			"Cub3D"
 
 /**
- * @brief Height of the window (in pixels)
+ * @brief Height of the window (in px)
 */
 # define	HEIGHT			720
 
 /**
- * @brief Width of the window (in pixels)
+ * @brief Width of the window (in px)
 */
 # define	WIDTH			1080
 
 /**
- * @brief Field of view (in radian)
+ * @brief Field of view (in rad)
 */
 # define	FOV				PI_3
 
@@ -57,12 +57,12 @@
 # define	RAYS			200
 
 /**
- * @brief Walking speed (in pixels per frame)
+ * @brief Walking speed (in px/frame)
 */
 # define	WALK_SPEED		0.05
 
 /**
- * @brief Rotation speed (in radian per frame)
+ * @brief Rotation speed (in rad/frame)
 */
 # define	ROT_SPEED		PI_12 / 9
 
@@ -123,14 +123,14 @@ typedef struct s_keys
  * 						1 = wall, 0 = empty space
  * @param map_size 		Size of the map (int, int)
  * 
- * @param floor_c 		Color of the floor (ARGB)
- * @param ceiling_c 	Color of the ceiling (ARGB)
+ * @param floor_c 		Color of the floor (in ARGB format)
+ * @param ceiling_c 	Color of the ceiling (in ARGB format)
  * @param no 			north texture (see t_texture)
  * @param so 			south texture (see t_texture)
  * @param we 			west texture (see t_texture)
  * @param ea 			east texture (see t_texture)
  * 
- * @param orientation 	Orientation of the player (in radian)
+ * @param orientation 	Orientation of the player (in rad)
  * @param position 		Position of the player (float, float)
  * @param keys 			Keys pressed by the player
  * 

@@ -6,12 +6,22 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 03:24:33 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 05:10:11 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rendering.h"
 
+
+/**
+ * @brief Set the pixel of the frame at the given position
+ * 			to the given color using addresses.
+ * 
+ * @param frame 	The frame to edit
+ * @param x 		The x position of the pixel
+ * @param y 		The y position of the pixel
+ * @param color 	The color to set (in ARGB format)
+*/
 void	ft_set_pixel(t_texture frame, int x, int y, int color)
 {
 	char	*dst;
@@ -20,6 +30,15 @@ void	ft_set_pixel(t_texture frame, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+
+/**
+ * @brief Fill a rectangle of the frame with the given color (see ft_set_pixel).
+ * 
+ * @param frame 	The frame to edit
+ * @param pos 		The position of the rectangle (in px)
+ * @param size 		The size of the rectangle (width, height, in px)
+ * @param color 	The color to set (in ARGB format)
+*/
 void	ft_put_rect(t_texture frame, t_ipos pos, t_ipos size, int color)
 {
 	for (int i = 0; i < size.x; i++)
@@ -31,6 +50,14 @@ void	ft_put_rect(t_texture frame, t_ipos pos, t_ipos size, int color)
 	}
 }
 
+/**
+ * @brief Draw a line between two points of the frame with the given color.
+ * 
+ * @param frame 	The frame to edit
+ * @param start 	The start position of the line (in px)
+ * @param end 		The end position of the line (in px)
+ * @param color 	The color to set (in ARGB format)
+*/
 void	ft_put_line(t_texture frame, t_ipos start, t_ipos end, int color)
 {
 	int		dx;
@@ -50,6 +77,12 @@ void	ft_put_line(t_texture frame, t_ipos start, t_ipos end, int color)
 	}
 }
 
+/**
+ * @brief The floor == colored rectangle, expanding along the width
+ * 			from the middle to the bottom of the screen.
+ * 
+ * @param cub 	The game structure
+*/
 void	ft_render_floor(t_cub *cub)
 {
 	for (int i = 0; i < WIDTH; i++)
@@ -61,6 +94,12 @@ void	ft_render_floor(t_cub *cub)
 	}
 }
 
+/**
+ * @brief The ceiling == colored rectangle, expanding along the width
+ * 			from the top to the middle of the screen.
+ * 
+ * @param cub 	The game structure
+*/
 void	ft_render_ceiling(t_cub *cub)
 {
 	for (int i = 0; i < WIDTH; i++)
@@ -72,40 +111,22 @@ void	ft_render_ceiling(t_cub *cub)
 	}
 }
 
-// t_casting	ft_cast_ray(t_cub *cub, float angle)
-// {
-// 	float		RAY_STEP = 0.001;
-// 	int			RAY_MAX_STEPS = 1000000000;
-// 	t_casting	casting;
-// 	t_ull		steps;
-// 	float		step_x;
-// 	float		step_y;
-
-// 	casting.x = cub->position.x;
-// 	casting.y = cub->position.y;
-// 	step_x = cos(angle) * RAY_STEP;
-// 	step_y = sin(angle) * RAY_STEP;
-// 	steps = 0;
-// 	while (steps < RAY_MAX_STEPS
-// 		&& (int) casting.y >= 0 && (int) casting.y < cub->map_size.y
-// 		&& (int) casting.x >= 0 && (int) casting.x < cub->map_size.x
-// 		&& cub->map_array[(int) casting.y][(int) casting.x] != '1')
-// 	{
-// 		casting.x += step_x;
-// 		casting.y += step_y;
-// 		steps++;
-// 	}
-// 	casting.angle = angle;
-// 	if (steps < RAY_MAX_STEPS
-// 		&& (int) casting.y >= 0 && (int) casting.y < cub->map_size.y
-// 		&& (int) casting.x >= 0 && (int) casting.x < cub->map_size.x
-// 		&& cub->map_array[(int) casting.y][(int) casting.x] != '1')
-// 		casting.distance = -1;
-// 	else
-// 		casting.distance = steps * RAY_STEP;
-// 	return (casting);
-// }
-
+/**
+ * @brief Check if the ray is hitting horizontally a wall.
+ * 
+ * @brief	1. Step to the closest horizontal grid line
+ * @brief		- `y = closest y coordinate of a horizontal grid line`
+ * @brief		- `x = pos.x - (pos.y - y) / tan(a)` --> The x of the ray at y
+ * 
+ * @brief	2. Define deltas to checks all the other horizontal grid lines
+ * @brief		- `delta_y = -1 if ray facing up else 1`
+ * @brief		- `delta_x = 1 / tan(-a) if ray facing left else -1 / tan(-a)`
+ * 
+ * @note `-a` is used trigo instead of `a` because the Y axis is inverted.
+ * 
+ * @param cub 		The game structure
+ * @param casting 	The ray casting structure, with all the results !
+*/
 void	ft_hor_casting(t_cub *cub, t_casting *casting)
 {
 	casting->hor_y = (int) cub->position.y;
@@ -137,6 +158,22 @@ void	ft_hor_casting(t_cub *cub, t_casting *casting)
 			+ pow(cub->position.y - casting->hor_y, 2));
 }
 
+/**
+ * @brief Check if the ray is hitting vertically a wall.
+ * 
+ * @brief	1. Step to the closest vertical grid line
+ * @brief		- `x = closest x coordinate of a vertical grid line`
+ * @brief		- `y = pos.y - (pos.x - x) * tan(a)` --> The y of the ray at x
+ * 
+ * @brief	2. Define deltas to checks all the other vertical grid lines
+ * @brief		- `delta_x = -1 if ray facing left else 1`
+ * @brief		- `delta_y = tan(-a) if ray facing up else -tan(-a)`
+ * 
+ * @note `-a` is used trigo instead of `a` because the Y axis is inverted.
+ * 
+ * @param cub 		The game structure
+ * @param casting 	The ray casting structure, with all the results !
+*/
 void	ft_ver_casting(t_cub *cub, t_casting *casting)
 {
 	casting->ver_x = (int) cub->position.x;
@@ -168,6 +205,37 @@ void	ft_ver_casting(t_cub *cub, t_casting *casting)
 			+ pow(cub->position.y - casting->ver_y, 2));
 }
 
+/**
+ * @brief Cast a ray from the player position to the given angle.
+ * 
+ * @brief	1. Make an horizontal collision detection:
+ * @brief		- If the ray hits, save the
+ * @brief			- x and y position of the collision
+ * @brief			- distance to the collision
+ * @brief			- facing of the wall (either `NORTH` or `SOUTH`)
+ * @brief		- else, save `-1` as the distance.
+ * 
+ * @brief	2. Make a vertical collision detection:
+ * @brief		- If the ray hits, save the
+ * @brief			- x and y position of the collision
+ * @brief			- distance to the collision
+ * @brief			- facing of the wall (either `WEST` or `EAST`)
+ * @brief		- else, save `-1` as the distance.
+ * 
+ * @brief	3. Take the closest collision, save it and return it.
+ * @brief		- If the ray hits, save the
+ * @brief			- x and y position of the collision
+ * @brief			- distance to the collision
+ * @brief			- facing of the wall (either `WEST` or `EAST`)
+ * @brief		- else, save `-1` as the distance.
+ * 
+ * @brief	- This way, we check max `map's height + map's width` collisions !
+ * 
+ * @param cub 		The game structure
+ * @param angle 	The angle of the ray (in rad)
+ * 
+ * @return t_casting 	The result of the ray casting
+*/
 t_casting	ft_cast_ray(t_cub *cub, float angle)
 {
 	t_casting	casting;
@@ -196,6 +264,27 @@ t_casting	ft_cast_ray(t_cub *cub, float angle)
 	return (casting);
 }
 
+/**
+ * @brief Put a chunk of the texture on the frame at the given position.
+ * 
+ * @brief	1. Get the texture and the texture_x position
+ * @brief		- Depending on the facing of the wall, the texture is different
+ * @brief		- `NORTH`: `tx = tw - 1 - (x * tw) % tw`
+ * @brief		- `SOUTH`: `tx = (x * tw) % tw`
+ * @brief		- `WEST`: `tx = (y * tw) % tw`
+ * @brief		- `EAST`: `tx = tw - 1 - (y * tw) % tw`
+ * 
+ * @brief	2. Let's draw ! For each vertical pixel (from `0` to `size.y`):
+ * @brief		- `ty = (y * th) / size.y`
+ * @brief		- The color is taken from the texture using addresses
+ * @brief		- To center vertically, we offset `y` by `(HEIGHT - size.y) / 2`
+ * @brief		- Update the pixels of the line `y` (from `x` to `x + size.x`)
+ * 
+ * @param cub 		The game structure
+ * @param x 		The x screen's pos of the left side of the chunk (in px)
+ * @param size 		The size of the chunk (width, height, in px)
+ * @param casting 	The result of the ray casting
+*/
 void	ft_put_chunk(t_cub *cub, int x, t_ipos size, t_casting casting)
 {
 	t_texture	texture;
@@ -222,14 +311,6 @@ void	ft_put_chunk(t_cub *cub, int x, t_ipos size, t_casting casting)
 		texture_x = texture.width - 1 - (int) (casting.y * texture.width) % texture.width;
 	}
 
-	// printf("Chunck-loader:\n");
-	// printf("  X .......... : %8d |\n", x);
-	// printf("  Size ....... : %8d, y: %8d |\n", size.x, size.y);
-	// printf("  Texture .... : %8d, y: %8d |\n", texture.width, texture.height);
-	// printf("  Texture X .. : %8d |\n", texture_x);
-	// printf("  Cast dist .. : %.15f |\n", casting.distance);
-	// printf("  IDEA ....... : %.15f |\n", (HEIGHT / casting.distance) * 1.5);
-
 	int	texture_y, color;
 	int win_y_offset = (HEIGHT - size.y) / 2;
 	for (int win_y = 0; win_y < size.y && win_y + win_y_offset < HEIGHT; win_y++)
@@ -247,6 +328,22 @@ void	ft_put_chunk(t_cub *cub, int x, t_ipos size, t_casting casting)
 	}
 }
 
+/**
+ * @brief Render the minimap.
+ * 
+ * @brief	1. Draw the map
+ * @brief		- For each tile of the map:
+ * @brief			- Draw a gray rectangle (to make the border)
+ * @brief			- Draw a smaller rectangle, representing the content
+ * 
+ * @brief	2. Draw the player
+ * @brief		- Draw the rays (1 every 20 rays)
+ * @brief		- Draw a ray representing the player's orientation
+ * @brief		- Draw a rectangle for the player
+ * 
+ * @param cub 		The game structure
+ * @param castings 	The result of the ray casting
+*/
 void	ft_render_minimap(t_cub *cub, t_casting castings[RAYS])
 {
 	int		TILE_SIZE = 15;
@@ -292,17 +389,38 @@ void	ft_render_minimap(t_cub *cub, t_casting castings[RAYS])
 			(t_ipos){c.x * TILE_SIZE + TILE_SIZE, c.y * TILE_SIZE + TILE_SIZE},
 			0x00FF00FF);
 
-	ft_put_line(cub->frame,
-		(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE, cub->position.y * TILE_SIZE + TILE_SIZE},
-		(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE + cos(cub->orientation) * TILE_SIZE,
-			cub->position.y * TILE_SIZE + TILE_SIZE + sin(cub->orientation) * TILE_SIZE},
-		0x00FF0000);
+	// ft_put_line(cub->frame,
+	// 	(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE, cub->position.y * TILE_SIZE + TILE_SIZE},
+	// 	(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE + cos(cub->orientation) * TILE_SIZE,
+	// 		cub->position.y * TILE_SIZE + TILE_SIZE + sin(cub->orientation) * TILE_SIZE},
+	// 	0x00FF0000);
 	ft_put_rect(cub->frame,
 		(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE - PLAYER_SIZE / 2,
 			cub->position.y * TILE_SIZE + TILE_SIZE - PLAYER_SIZE / 2},
 		(t_ipos){PLAYER_SIZE, PLAYER_SIZE}, 0x0000FF00);
 }
 
+/**
+ * @brief Render a frame.
+ * 
+ * @brief	1. Render the floor and the ceiling
+ * 				(see ft_render_floor and ft_render_ceiling)
+ * 
+ * @brief	2. Ray casting (see ft_cast_ray)
+ * @brief		- Cast `RAYS` rays evenly from
+ * 					`dir - FOV / 2` to `dir + FOV / 2`
+ * @brief		- Cast and save the result in `castings` (for the minimap)
+ * 
+ * @brief	3. Calculate wall height
+ * @brief		- Fish-eye correction: `dist *= cos(dir - a)`
+ * @brief		- `height = (HEIGHT / dist) * 1.5`
+ * 
+ * @brief	4. Draw the wall (see ft_put_chunk)
+ * 
+ * @brief	5. Draw the minimap (see ft_render_minimap)
+ * 
+ * @param cub 	The game structure
+*/
 void	ft_render(t_cub *cub)
 {
 	ft_render_floor(cub);
@@ -342,6 +460,13 @@ void	ft_render(t_cub *cub)
 	cub->frames++;
 }
 
+/**
+ * @brief Quit the game.
+ * 
+ * @param cub 	The game structure
+ * 
+ * @return int 	Always `0`
+*/
 int	ft_game_quit(t_cub *cub)
 {
 	mlx_destroy_window(cub->mlx, cub->mlx_win);
@@ -351,48 +476,90 @@ int	ft_game_quit(t_cub *cub)
 	return (0);
 }
 
+/**
+ * @brief Handle the keydown event.
+ * 
+ * @brief	- `Escape`: Quit the game
+ * 
+ * @brief	- `WASD` or arrows: Toggle the moving variables
+ * 
+ * @param keycode 	The key pressed
+ * @param cub 		The game structure
+ * 
+ * @return int 		Always `0`
+*/
 int	ft_game_keydown(int keycode, t_cub *cub)
 {
 	(void)keycode;
 	(void)cub;
-	// printf("Keydown: %d\n", keycode);
-	// printf("  Player\n");
-	// printf("    > pos: %10f, %10f\n", cub->position.x, cub->position.y);
-	// printf("    > dir: %10frad (%3fdeg)\n", cub->orientation, cub->orientation * 180 / PI);
 	if (keycode == XK_Escape)
 		ft_game_quit(cub);
-	if (keycode == XK_w)
+	if (keycode == XK_w || keycode == XK_Up)
 		cub->keys.forward = TRUE;
-	if (keycode == XK_s)
+	if (keycode == XK_s || keycode == XK_Down)
 		cub->keys.backward = TRUE;
-	if (keycode == XK_a)
+	if (keycode == XK_a || keycode == XK_Left)
 		cub->keys.rot_left = TRUE;
-	if (keycode == XK_d)
+	if (keycode == XK_d || keycode == XK_Right)
 		cub->keys.rot_right = TRUE;
 	return (0);
 }
 
+/**
+ * @brief Handle the keyup event.
+ * 
+ * @brief	- `WASD` or arrows: Toggle the moving variables
+ * 
+ * @param keycode 	The key released
+ * @param cub 		The game structure
+ * 
+ * @return int 		Always `0`
+*/
 int	ft_game_keyup(int keycode, t_cub *cub)
 {
 	(void)cub;
 	printf("Keyup: %d\n", keycode);
-	if (keycode == XK_w)
+	if (keycode == XK_w || keycode == XK_Up)
 		cub->keys.forward = FALSE;
-	if (keycode == XK_s)
+	if (keycode == XK_s || keycode == XK_Down)
 		cub->keys.backward = FALSE;
-	if (keycode == XK_a)
+	if (keycode == XK_a || keycode == XK_Left)
 		cub->keys.rot_left = FALSE;
-	if (keycode == XK_d)
+	if (keycode == XK_d || keycode == XK_Right)
 		cub->keys.rot_right = FALSE;
 	return (0);
 }
 
+
+/**
+ * @brief Check if the player is colliding with a wall at the given position,
+ * 			or if he is out of the map.
+ * 
+ * @param cub 		The game structure
+ * @param position 	The position to check
+ * 
+ * @return t_bool 	`TRUE` if the player shouldn't be here, `FALSE` otherwise
+*/
 t_bool	ft_does_collide(t_cub *cub, t_pos position)
 {
 	return (position.x < 0 || position.x >= cub->map_size.x
 		|| cub->map_array[(int) position.y][(int) position.x] == '1');
 }
 
+/**
+ * @brief Handle forward player movement.
+ * 
+ * @brief	1. Update X coordinate
+ * @brief		- If collide 3 steps X-forward, rollback.
+ * 
+ * @brief	2. Update Y coordinate
+ * @brief		- If collide 3 steps Y-forward, rollback.
+ * 
+ * @brief	- Updating separately X and Y coordinates makes
+ * 				the player slide on the walls if he can !
+ * 
+ * @param cub 	The game structure
+*/
 void	ft_move_forward(t_cub *cub)
 {
 	t_pos	rollback;
@@ -410,6 +577,20 @@ void	ft_move_forward(t_cub *cub)
 		cub->position.y = rollback.y;
 }
 
+/**
+ * @brief Handle backward player movement.
+ * 
+ * @brief	1. Update X coordinate
+ * @brief		- If collide 3 steps X-backward, rollback.
+ * 
+ * @brief	2. Update Y coordinate
+ * @brief		- If collide 3 steps Y-backward, rollback.
+ * 
+ * @brief	- Updating separately X and Y coordinates makes
+ * 				the player slide on the walls if he can !
+ * 
+ * @param cub 	The game structure
+*/
 void	ft_move_backward(t_cub *cub)
 {
 	t_pos	rollback;
@@ -427,6 +608,11 @@ void	ft_move_backward(t_cub *cub)
 		cub->position.y = rollback.y;
 }
 
+/**
+ * @brief Check if a key is pressed --> move of the player if needed.
+ * 
+ * @param cub 	The game structure
+*/
 void	ft_handle_keys(t_cub *cub)
 {
 	if (cub->keys.forward)
@@ -443,6 +629,13 @@ void	ft_handle_keys(t_cub *cub)
 		cub->orientation += 2 * PI;
 }
 
+/**
+ * @brief The game loop.
+ * 
+ * @param cub 	The game structure
+ * 
+ * @return int 	Always `0`
+*/
 int	ft_game_loop(t_cub *cub)
 {
 	ft_handle_keys(cub);
@@ -450,6 +643,15 @@ int	ft_game_loop(t_cub *cub)
 	return (0);
 }
 
+
+/**
+ * @brief Create a new MLX frame (screen sized) and return all the info.
+ * 
+ * @param cub 		The game structure
+ * @param free_old 	Should we free the old frame ? (in cub is not NULL)
+ * 
+ * @return t_texture 	The new frame
+*/
 t_texture	ft_mlx_new_frame(t_cub *cub, t_bool free_old)
 {
 	t_texture	frame;
@@ -467,6 +669,12 @@ t_texture	ft_mlx_new_frame(t_cub *cub, t_bool free_old)
 	return (frame);
 }
 
+
+/**
+ * @brief Initialize the MLX (window, configs, hooks).
+ * 
+ * @param cub 	The game structure
+*/
 void	ft_mlx_init(t_cub *cub)
 {
 	cub->mlx = mlx_init();
@@ -480,6 +688,13 @@ void	ft_mlx_init(t_cub *cub)
 	mlx_hook(cub->mlx_win, ON_KEYUP, MASK_KEY_RELEASE, &ft_game_keyup, cub);
 }
 
+/**
+ * @brief Initialize the keys structure.
+ * 
+ * @note	Point: avoid `uninitialized values` errors.
+ * 
+ * @param keys 	The keys structure
+*/
 void	ft_keys_init(t_keys *keys)
 {
 	keys->forward = FALSE;
@@ -488,6 +703,11 @@ void	ft_keys_init(t_keys *keys)
 	keys->rot_right = FALSE;
 }
 
+/**
+ * @brief Initialize the MLX and start the rendering loop.
+ * 
+ * @param cub 	The game structure
+*/
 void	ft_rendering(t_cub *cub)
 {
 	(void)cub;
