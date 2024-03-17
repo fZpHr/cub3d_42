@@ -59,12 +59,12 @@
 /**
  * @brief Walking speed (in pixels per frame)
 */
-# define	WALK_SPEED		0.07
+# define	WALK_SPEED		0.05
 
 /**
  * @brief Rotation speed (in radian per frame)
 */
-# define	ROT_SPEED		PI_12 / 10
+# define	ROT_SPEED		PI_12 / 9
 
 typedef unsigned long long	t_ull;
 

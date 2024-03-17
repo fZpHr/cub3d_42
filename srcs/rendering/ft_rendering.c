@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 02:58:36 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 03:24:33 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,12 +234,14 @@ void	ft_put_chunk(t_cub *cub, int x, t_ipos size, t_casting casting)
 	int win_y_offset = (HEIGHT - size.y) / 2;
 	for (int win_y = 0; win_y < size.y && win_y + win_y_offset < HEIGHT; win_y++)
 	{
+		if (win_y + win_y_offset < 0)
+			continue;
 		for (int win_x = 0; win_x < size.x && win_x + x < WIDTH; win_x++)
 		{
 			texture_y = texture.height * (float) win_y / size.y;
 			color = *(int *)(char *)(texture.addr
 				+ (texture_y * texture.line_size + texture_x * 4));
-			if (win_x > -x && win_y > -win_y_offset)
+			if (win_x + x >= 0 && win_y + win_y_offset < HEIGHT)
 				ft_set_pixel(cub->frame, win_x + x, win_y + win_y_offset, color);
 		}
 	}
@@ -323,8 +325,8 @@ void	ft_render(t_cub *cub)
 		if (casting.distance != -1)
 		{
 			casting.distance *= cos(cub->orientation - casting.angle);
-			if (casting.distance < 0.15)
-				casting.distance = 0.15;
+			if (casting.distance < 0.2)
+				casting.distance = 0.2;
 			int			height = ((HEIGHT / casting.distance) * 1.5);
 			int			x = ray * width;
 			ft_put_chunk(cub, x, (t_ipos){width + 1, height}, casting);
@@ -353,10 +355,10 @@ int	ft_game_keydown(int keycode, t_cub *cub)
 {
 	(void)keycode;
 	(void)cub;
-	printf("Keydown: %d\n", keycode);
-	printf("  Player\n");
-	printf("    > pos: %10f, %10f\n", cub->position.x, cub->position.y);
-	printf("    > dir: %10frad (%3fdeg)\n", cub->orientation, cub->orientation * 180 / PI);
+	// printf("Keydown: %d\n", keycode);
+	// printf("  Player\n");
+	// printf("    > pos: %10f, %10f\n", cub->position.x, cub->position.y);
+	// printf("    > dir: %10frad (%3fdeg)\n", cub->orientation, cub->orientation * 180 / PI);
 	if (keycode == XK_Escape)
 		ft_game_quit(cub);
 	if (keycode == XK_w)
@@ -385,33 +387,43 @@ int	ft_game_keyup(int keycode, t_cub *cub)
 	return (0);
 }
 
+t_bool	ft_does_collide(t_cub *cub, t_pos position)
+{
+	return (position.x < 0 || position.x >= cub->map_size.x
+		|| cub->map_array[(int) position.y][(int) position.x] == '1');
+}
+
 void	ft_move_forward(t_cub *cub)
 {
 	t_pos	rollback;
+	float	x;
+	float	y;
 
 	rollback = cub->position;
-	cub->position.x += cos(cub->orientation) * WALK_SPEED;
-	if (cub->position.x < 0 || cub->position.x >= cub->map_size.x
-		|| cub->map_array[(int) cub->position.y][(int) cub->position.x] == '1')
+	x = cos(cub->orientation) * WALK_SPEED;
+	cub->position.x += x;
+	if (ft_does_collide(cub, (t_pos){cub->position.x + x + x, cub->position.y}))
 		cub->position.x = rollback.x;
-	cub->position.y += sin(cub->orientation) * WALK_SPEED;
-	if (cub->position.y < 0 || cub->position.y >= cub->map_size.y
-		|| cub->map_array[(int) cub->position.y][(int) cub->position.x] == '1')
+	y = sin(cub->orientation) * WALK_SPEED;
+	cub->position.y += y;
+	if (ft_does_collide(cub, (t_pos){cub->position.x, cub->position.y + y + y}))
 		cub->position.y = rollback.y;
 }
 
 void	ft_move_backward(t_cub *cub)
 {
 	t_pos	rollback;
+	float	x;
+	float	y;
 
 	rollback = cub->position;
-	cub->position.x -= cos(cub->orientation) * WALK_SPEED;
-	if (cub->position.x < 0 || cub->position.x >= cub->map_size.x
-		|| cub->map_array[(int) cub->position.y][(int) cub->position.x] == '1')
+	x = cos(cub->orientation) * WALK_SPEED;
+	cub->position.x -= x;
+	if (ft_does_collide(cub, (t_pos){cub->position.x - x - x, cub->position.y}))
 		cub->position.x = rollback.x;
-	cub->position.y -= sin(cub->orientation) * WALK_SPEED;
-	if (cub->position.y < 0 || cub->position.y >= cub->map_size.y
-		|| cub->map_array[(int) cub->position.y][(int) cub->position.x] == '1')
+	y = sin(cub->orientation) * WALK_SPEED;
+	cub->position.y -= y;
+	if (ft_does_collide(cub, (t_pos){cub->position.x, cub->position.y - y - y}))
 		cub->position.y = rollback.y;
 }
 
