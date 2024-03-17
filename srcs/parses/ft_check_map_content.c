@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_map_content.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:53:42 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/15 20:29:26 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/17 08:12:44 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,13 @@ void	else_map_content(t_map *map, char *line, int *i, int *count_tmp_x)
 			free(line);
 			ft_error_handle(map, "Error\n", "Invalid map", 1);
 		}
-		else if (line[(*i)] != '0' && line[(*i)] != '1' && line[(*i)] != '2'
-			&& line[(*i)] != 'N' && line[(*i)] != 'S' && line[(*i)] != 'W'
-			&& line[(*i)] != 'E' && line[(*i)] != ' ' && line[(*i)] != '\n')
-		{
-			free(line);
-			ft_error_handle(map, "Error\n", "Invalid map", 1);
-		}
+		// else if (line[(*i)] != '0' && line[(*i)] != '1' && line[(*i)] != '2'
+		// 	&& line[(*i)] != 'N' && line[(*i)] != 'S' && line[(*i)] != 'W'
+		// 	&& line[(*i)] != 'E' && line[(*i)] != ' ' && line[(*i)] != '\n')
+		// {
+		// 	free(line);
+		// 	ft_error_handle(map, "Error\n", "Invalid map", 1);
+		// }
 		if (line[(*i)] == 'N' || line[(*i)] == 'S' || line[(*i)] == 'W'
 			|| line[(*i)] == 'E')
 			ft_player_direction(map, line, (*i));

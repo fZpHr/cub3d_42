@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_texture.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:35:02 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/15 19:29:32 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/17 07:47:03 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	ft_check_texture(t_map *map, char *line)
 		ft_select_color(map, line, &i, 2);
 	else if (line[i] == '\0')
 		return (0);
-	else
-		return (1);
+	// else
+	// 	return (1);
 	return (0);
 }

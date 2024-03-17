@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_checker.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:35:34 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/15 20:38:29 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/17 07:39:06 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,37 +60,37 @@ void	test_print_parsing(t_map *map, t_cub *cub)
 	printf("cub, ceiling color = %d\n", cub->ceiling_c);
 	printf("cub, player orientation PI = %f\n", cub->orientation);
 	printf("\n");
-	printf("no img = %p\n", cub->no.img);
-	printf("no addr = %p\n", cub->no.img);
-	printf("no bits_per_pixel = %d\n", cub->no.bits_per_pixel);
-	printf("line_size = %d\n", cub->no.line_size);
-	printf("no width = %d\n", cub->no.width);
-	printf("no height = %d\n", cub->no.height);
-	printf("endian = %d\n", cub->no.endian);
-	printf("\n");
-	printf("so img = %p\n", cub->so.img);
-	printf("so addr = %p\n", cub->so.img);
-	printf("so bits_per_pixel = %d\n", cub->so.bits_per_pixel);
-	printf("line_size = %d\n", cub->so.line_size);
-	printf("so width = %d\n", cub->so.width);
-	printf("so height = %d\n", cub->so.height);
-	printf("endian = %d\n", cub->so.endian);
-	printf("\n");
-	printf("we img = %p\n", cub->we.img);
-	printf("we addr = %p\n", cub->we.img);
-	printf("we bits_per_pixel = %d\n", cub->we.bits_per_pixel);
-	printf("line_size = %d\n", cub->we.line_size);
-	printf("we width = %d\n", cub->we.width);
-	printf("we height = %d\n", cub->we.height);
-	printf("endian = %d\n", cub->we.endian);
-	printf("\n");
-	printf("ea img = %p\n", cub->ea.img);
-	printf("ea addr = %p\n", cub->ea.img);
-	printf("ea bits_per_pixel = %d\n", cub->ea.bits_per_pixel);
-	printf("line_size = %d\n", cub->ea.line_size);
-	printf("ea width = %d\n", cub->ea.width);
-	printf("ea height = %d\n", cub->ea.height);
-	printf("endian = %d\n", cub->ea.endian);
+	// printf("no img = %p\n", cub->no.img);
+	// printf("no addr = %p\n", cub->no.img);
+	// printf("no bits_per_pixel = %d\n", cub->no.bits_per_pixel);
+	// printf("line_size = %d\n", cub->no.line_size);
+	// printf("no width = %d\n", cub->no.width);
+	// printf("no height = %d\n", cub->no.height);
+	// printf("endian = %d\n", cub->no.endian);
+	// printf("\n");
+	// printf("so img = %p\n", cub->so.img);
+	// printf("so addr = %p\n", cub->so.img);
+	// printf("so bits_per_pixel = %d\n", cub->so.bits_per_pixel);
+	// printf("line_size = %d\n", cub->so.line_size);
+	// printf("so width = %d\n", cub->so.width);
+	// printf("so height = %d\n", cub->so.height);
+	// printf("endian = %d\n", cub->so.endian);
+	// printf("\n");
+	// printf("we img = %p\n", cub->we.img);
+	// printf("we addr = %p\n", cub->we.img);
+	// printf("we bits_per_pixel = %d\n", cub->we.bits_per_pixel);
+	// printf("line_size = %d\n", cub->we.line_size);
+	// printf("we width = %d\n", cub->we.width);
+	// printf("we height = %d\n", cub->we.height);
+	// printf("endian = %d\n", cub->we.endian);
+	// printf("\n");
+	// printf("ea img = %p\n", cub->ea.img);
+	// printf("ea addr = %p\n", cub->ea.img);
+	// printf("ea bits_per_pixel = %d\n", cub->ea.bits_per_pixel);
+	// printf("line_size = %d\n", cub->ea.line_size);
+	// printf("ea width = %d\n", cub->ea.width);
+	// printf("ea height = %d\n", cub->ea.height);
+	// printf("endian = %d\n", cub->ea.endian);
 }
 
 /**

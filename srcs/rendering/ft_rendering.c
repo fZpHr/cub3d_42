@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 06:24:30 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 08:43:46 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  * @param y 		The y position of the pixel
  * @param color 	The color to set (in ARGB format)
 */
-void	ft_set_pixel(t_texture frame, int x, int y, int color)
+void	ft_set_pixel(t_frame frame, int x, int y, int color)
 {
 	char	*dst;
 
@@ -39,7 +39,7 @@ void	ft_set_pixel(t_texture frame, int x, int y, int color)
  * @param size 		The size of the rectangle (width, height, in px)
  * @param color 	The color to set (in ARGB format)
 */
-void	ft_put_rect(t_texture frame, t_ipos pos, t_ipos size, int color)
+void	ft_put_rect(t_frame frame, t_ipos pos, t_ipos size, int color)
 {
 	for (int i = 0; i < size.x; i++)
 	{
@@ -58,7 +58,7 @@ void	ft_put_rect(t_texture frame, t_ipos pos, t_ipos size, int color)
  * @param end 		The end position of the line (in px)
  * @param color 	The color to set (in ARGB format)
 */
-void	ft_put_line(t_texture frame, t_ipos start, t_ipos end, int color)
+void	ft_put_line(t_frame frame, t_ipos start, t_ipos end, int color)
 {
 	int		dx;
 	int		dy;
@@ -143,7 +143,7 @@ void	ft_hor_casting(t_cub *cub, t_casting *casting)
 
 	while (casting->hor_y - (casting->angle < PI ? 0 : 1) >= 0 && casting->hor_y < cub->map_size.y
 		&& casting->hor_x >= 0 && casting->hor_x < cub->map_size.x
-		&& cub->map_array[(int) casting->hor_y - (casting->angle < PI ? 0 : 1)][(int) casting->hor_x] != '1')
+		&& !cub->map_array[(int) casting->hor_y - (casting->angle < PI ? 0 : 1)][(int) casting->hor_x].is_solid)
 	{
 		casting->hor_x += casting->hor_step_x;
 		casting->hor_y += casting->hor_step_y;
@@ -151,7 +151,7 @@ void	ft_hor_casting(t_cub *cub, t_casting *casting)
 
 	if (casting->hor_y - (casting->angle < PI ? 0 : 1) < 0 || casting->hor_y >= cub->map_size.y
 		|| casting->hor_x < 0 || casting->hor_x >= cub->map_size.x
-		|| cub->map_array[(int) casting->hor_y - (casting->angle < PI ? 0 : 1)][(int) casting->hor_x] != '1')
+		|| !cub->map_array[(int) casting->hor_y - (casting->angle < PI ? 0 : 1)][(int) casting->hor_x].is_solid)
 		casting->hor_dist = -1;
 	else
 		casting->hor_dist = sqrt(pow(cub->position.x - casting->hor_x, 2)
@@ -190,7 +190,7 @@ void	ft_ver_casting(t_cub *cub, t_casting *casting)
 
 	while (casting->ver_y >= 0 && casting->ver_y < cub->map_size.y
 		&& casting->ver_x - (casting->angle < PI_2 || casting->angle > 3 * PI_2 ? 0 : 1) >= 0 && casting->ver_x < cub->map_size.x
-		&& cub->map_array[(int) casting->ver_y][(int) casting->ver_x - (casting->angle < PI_2 || casting->angle > 3 * PI_2 ? 0 : 1)] != '1')
+		&& !cub->map_array[(int) casting->ver_y][(int) casting->ver_x - (casting->angle < PI_2 || casting->angle > 3 * PI_2 ? 0 : 1)].is_solid)
 	{
 		casting->ver_x += casting->ver_step_x;
 		casting->ver_y += casting->ver_step_y;
@@ -198,7 +198,7 @@ void	ft_ver_casting(t_cub *cub, t_casting *casting)
 
 	if (casting->ver_y < 0 || casting->ver_y >= cub->map_size.y
 		|| casting->ver_x - (casting->angle < PI_2 || casting->angle > 3 * PI_2 ? 0 : 1) < 0 || casting->ver_x >= cub->map_size.x
-		|| cub->map_array[(int) casting->ver_y][(int) casting->ver_x - (casting->angle < PI_2 || casting->angle > 3 * PI_2 ? 0 : 1)] != '1')
+		|| !cub->map_array[(int) casting->ver_y][(int) casting->ver_x - (casting->angle < PI_2 || casting->angle > 3 * PI_2 ? 0 : 1)].is_solid)
 		casting->ver_dist = -1;
 	else
 		casting->ver_dist = sqrt(pow(cub->position.x - casting->ver_x, 2)
@@ -287,29 +287,41 @@ t_casting	ft_cast_ray(t_cub *cub, float angle)
 */
 void	ft_put_chunk(t_cub *cub, int x, t_ipos size, t_casting casting)
 {
-	t_texture	texture;
+	t_texture	texture_t;
+	t_frame		texture;
 	int			texture_x;
+	texture.img = NULL;
 	if (casting.facing == NORTH)
 	{
-		texture = cub->no;
+		texture_t = cub->textures[(int) cub->map_array[(int) casting.y][(int) casting.x].type];
+		if (texture_t.no)
+			texture = texture_t.no[(cub->frames / texture_t.anim_delay) % texture_t.anim_no];
 		texture_x = texture.width - 1 - (int) (casting.x * texture.width) % texture.width;
 	}
 	else if (casting.facing == SOUTH)
 	{
-		texture = cub->so;
+		texture_t = cub->textures[(int) cub->map_array[(int) casting.y - 1][(int) casting.x].type];
+		if (texture_t.so)
+			texture = texture_t.so[(cub->frames / texture_t.anim_delay) % texture_t.anim_so];
 		texture_x = (int) (casting.x * texture.width) % texture.width;
 		
 	}
 	else if (casting.facing == WEST)
 	{
-		texture = cub->we;
+		texture_t = cub->textures[(int) cub->map_array[(int) casting.y][(int) casting.x].type];
+		if (texture_t.we)
+			texture = texture_t.we[(cub->frames / texture_t.anim_delay) % texture_t.anim_we];
 		texture_x = (int) (casting.y * texture.width) % texture.width;
 	}
 	else if (casting.facing == EAST)
 	{
-		texture = cub->ea;
+		texture_t = cub->textures[(int) cub->map_array[(int) casting.y][(int) casting.x - 1].type];
+		if (texture_t.ea)
+			texture = texture_t.ea[(cub->frames / texture_t.anim_delay) % texture_t.anim_ea];
 		texture_x = texture.width - 1 - (int) (casting.y * texture.width) % texture.width;
 	}
+	if (!texture.img)
+		return ;
 
 	int	texture_y, color;
 	int win_y_offset = (HEIGHT - size.y) / 2;
@@ -357,15 +369,16 @@ void	ft_render_minimap(t_cub *cub, t_casting castings[RAYS])
 		j = 0;
 		while (j < cub->map_size.x)
 		{
-			if (cub->map_array[i][j] == '1' || cub->map_array[i][j] == '0')
+			t_texture	texture = cub->textures[(int) cub->map_array[i][j].type];
+			if (texture.map_color)
 			{
 				ft_put_rect(cub->frame,
 					(t_ipos){j * TILE_SIZE + TILE_SIZE, i * TILE_SIZE + TILE_SIZE},
-					(t_ipos){TILE_SIZE, TILE_SIZE}, 0x00CCCCCC);
-				ft_put_rect(cub->frame,
-					(t_ipos){j * TILE_SIZE + TILE_SIZE + 1, i * TILE_SIZE + TILE_SIZE + 1},
-					(t_ipos){TILE_SIZE - 2, TILE_SIZE - 2},
-					cub->map_array[i][j] == '1' ? 0x00EEEEEE : 0x00000000);
+					(t_ipos){TILE_SIZE, TILE_SIZE}, cub->border_c ? cub->border_c : texture.map_color);
+				if (cub->border_c)
+					ft_put_rect(cub->frame,
+						(t_ipos){j * TILE_SIZE + TILE_SIZE + 1, i * TILE_SIZE + TILE_SIZE + 1},
+						(t_ipos){TILE_SIZE - 2, TILE_SIZE - 2}, texture.map_color);
 			}
 			j++;
 		}
@@ -389,11 +402,11 @@ void	ft_render_minimap(t_cub *cub, t_casting castings[RAYS])
 			(t_ipos){c.x * TILE_SIZE + TILE_SIZE, c.y * TILE_SIZE + TILE_SIZE},
 			0x00FF00FF);
 
-	// ft_put_line(cub->frame,
-	// 	(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE, cub->position.y * TILE_SIZE + TILE_SIZE},
-	// 	(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE + cos(cub->orientation) * TILE_SIZE,
-	// 		cub->position.y * TILE_SIZE + TILE_SIZE + sin(cub->orientation) * TILE_SIZE},
-	// 	0x00FF0000);
+	ft_put_line(cub->frame,
+		(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE, cub->position.y * TILE_SIZE + TILE_SIZE},
+		(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE + cos(cub->orientation) * TILE_SIZE,
+			cub->position.y * TILE_SIZE + TILE_SIZE + sin(cub->orientation) * TILE_SIZE},
+		0x00FF0000);
 	ft_put_rect(cub->frame,
 		(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE - PLAYER_SIZE / 2,
 			cub->position.y * TILE_SIZE + TILE_SIZE - PLAYER_SIZE / 2},
@@ -453,7 +466,8 @@ void	ft_render(t_cub *cub)
 		ray++;
 	}
 
-	ft_render_minimap(cub, castings);
+	if (cub->minimap)
+		ft_render_minimap(cub, castings);
 
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->frame.img, 0, 0);
 
@@ -476,6 +490,28 @@ int	ft_game_quit(t_cub *cub)
 	return (0);
 }
 
+void	ft_handle_action(t_cub *cub)
+{
+	t_pos	pos = (t_pos){cub->position.x + cos(cub->orientation),
+							cub->position.y + sin(cub->orientation)};
+	if (pos.x >= 0 && pos.x < cub->map_size.x
+		&& pos.y >= 0 && pos.y < cub->map_size.y)
+	{
+		printf("|%c|\n", cub->map_array[(int) pos.y][(int) pos.x].type);
+		if (cub->map_array[(int) pos.y][(int) pos.x].type == 'X')
+		{
+			cub->map_array[(int) pos.y][(int) pos.x].type = 'O';
+			cub->map_array[(int) pos.y][(int) pos.x].is_solid = FALSE;
+		}
+		else if (cub->map_array[(int) pos.y][(int) pos.x].type == 'O'
+					&& cub->map_array[(int) cub->position.y][(int) cub->position.x].type != 'O')
+		{
+			cub->map_array[(int) pos.y][(int) pos.x].type = 'X';
+			cub->map_array[(int) pos.y][(int) pos.x].is_solid = TRUE;
+		}
+	}
+}
+
 /**
  * @brief Handle the keydown event.
  * 
@@ -494,6 +530,10 @@ int	ft_game_keydown(int keycode, t_cub *cub)
 	(void)cub;
 	if (keycode == XK_Escape)
 		ft_game_quit(cub);
+	if (keycode == XK_m || keycode == XK_Shift_L || keycode == XK_Tab)
+		cub->minimap = !cub->minimap;
+	if (keycode == XK_e || keycode == XK_Shift_R || keycode == XK_space)
+		ft_handle_action(cub);
 	if (keycode == XK_w || keycode == XK_Up)
 		cub->keys.forward = TRUE;
 	if (keycode == XK_s || keycode == XK_Down)
@@ -547,7 +587,7 @@ t_bool	ft_does_collide(t_cub *cub, t_pos position)
 				|| position.y < 0 || position.y >= cub->map_size.y);
 	return (position.x < 0 || position.x >= cub->map_size.x
 		|| position.y < 0 || position.y >= cub->map_size.y
-		|| cub->map_array[(int) position.y][(int) position.x] == '1');
+		|| cub->map_array[(int) position.y][(int) position.x].is_solid);
 }
 
 /**
@@ -654,11 +694,11 @@ int	ft_game_loop(t_cub *cub)
  * @param cub 		The game structure
  * @param free_old 	Should we free the old frame ? (in cub is not NULL)
  * 
- * @return t_texture 	The new frame
+ * @return t_frame 	The new frame
 */
-t_texture	ft_mlx_new_frame(t_cub *cub, t_bool free_old)
+t_frame	ft_mlx_new_frame(t_cub *cub, t_bool free_old)
 {
-	t_texture	frame;
+	t_frame	frame;
 
 	if (free_old && cub->frame.img)
 	{
@@ -707,6 +747,23 @@ void	ft_keys_init(t_keys *keys)
 	keys->rot_right = FALSE;
 }
 
+t_frame ft_load_texture(t_cub *cub, char *path)
+{
+	t_frame	frame;
+	int		width;
+	int		height;
+	int		bpp;
+	int		endian;
+
+	frame.img = mlx_xpm_file_to_image(cub->mlx, path, &width, &height);
+	frame.addr = mlx_get_data_addr(frame.img, &bpp, &frame.line_size, &endian);
+	frame.width = width;
+	frame.height = height;
+	frame.bits_per_pixel = bpp;
+	frame.endian = endian;
+	return (frame);
+}
+
 /**
  * @brief Initialize the MLX and start the rendering loop.
  * 
@@ -715,6 +772,110 @@ void	ft_keys_init(t_keys *keys)
 void	ft_rendering(t_cub *cub)
 {
 	(void)cub;
+
+	// cub->border_c = 0xFFCCCCCC;
+	cub->border_c = 0;
+
+	for (int i = 0; i < 128; i++)
+	{
+		cub->textures[i].no = NULL;
+		cub->textures[i].so = NULL;
+		cub->textures[i].we = NULL;
+		cub->textures[i].ea = NULL;
+		cub->textures[i].anim_no = 0;
+		cub->textures[i].anim_so = 0;
+		cub->textures[i].anim_we = 0;
+		cub->textures[i].anim_ea = 0;
+		cub->textures[i].anim_delay = 30;
+		cub->textures[i].map_color = 0x00000000;
+	}
+
+	cub->textures['0'].map_color = 0xFF000000;
+	
+	cub->textures['1'].no = ft_calloc(2, sizeof(t_frame));
+	cub->textures['1'].no[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
+	cub->textures['1'].so = ft_calloc(2, sizeof(t_frame));
+	cub->textures['1'].so[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
+	cub->textures['1'].we = ft_calloc(2, sizeof(t_frame));
+	cub->textures['1'].we[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
+	cub->textures['1'].ea = ft_calloc(2, sizeof(t_frame));
+	cub->textures['1'].ea[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
+	cub->textures['1'].anim_no = 1;
+	cub->textures['1'].anim_so = 1;
+	cub->textures['1'].anim_we = 1;
+	cub->textures['1'].anim_ea = 1;
+	cub->textures['1'].map_color = 0xFF0000FF;
+	
+	cub->textures['2'].no = ft_calloc(2, sizeof(t_frame));
+	cub->textures['2'].no[0] = ft_load_texture(cub, "textures/metal-gray-00.xpm");
+	cub->textures['2'].so = ft_calloc(2, sizeof(t_frame));
+	cub->textures['2'].so[0] = ft_load_texture(cub, "textures/metal-gray-00.xpm");
+	cub->textures['2'].we = ft_calloc(2, sizeof(t_frame));
+	cub->textures['2'].we[0] = ft_load_texture(cub, "textures/metal-gray-00.xpm");
+	cub->textures['2'].ea = ft_calloc(2, sizeof(t_frame));
+	cub->textures['2'].ea[0] = ft_load_texture(cub, "textures/metal-gray-00.xpm");
+	cub->textures['2'].anim_no = 1;
+	cub->textures['2'].anim_so = 1;
+	cub->textures['2'].anim_we = 1;
+	cub->textures['2'].anim_ea = 1;
+	cub->textures['2'].map_color = 0xFFC8C8C8;
+	
+	cub->textures['3'].no = ft_calloc(2, sizeof(t_frame));
+	cub->textures['3'].no[0] = ft_load_texture(cub, "textures/bricks-gray-00.xpm");
+	cub->textures['3'].so = ft_calloc(2, sizeof(t_frame));
+	cub->textures['3'].so[0] = ft_load_texture(cub, "textures/bricks-gray-00.xpm");
+	cub->textures['3'].we = ft_calloc(2, sizeof(t_frame));
+	cub->textures['3'].we[0] = ft_load_texture(cub, "textures/bricks-gray-00.xpm");
+	cub->textures['3'].ea = ft_calloc(2, sizeof(t_frame));
+	cub->textures['3'].ea[0] = ft_load_texture(cub, "textures/bricks-gray-00.xpm");
+	cub->textures['3'].anim_no = 1;
+	cub->textures['3'].anim_so = 1;
+	cub->textures['3'].anim_we = 1;
+	cub->textures['3'].anim_ea = 1;
+	cub->textures['3'].map_color = 0xFF808080;
+	
+	cub->textures['4'].no = ft_calloc(2, sizeof(t_frame));
+	cub->textures['4'].no[0] = ft_load_texture(cub, "textures/metal-green-00.xpm");
+	cub->textures['4'].so = ft_calloc(2, sizeof(t_frame));
+	cub->textures['4'].so[0] = ft_load_texture(cub, "textures/metal-green-00.xpm");
+	cub->textures['4'].we = ft_calloc(2, sizeof(t_frame));
+	cub->textures['4'].we[0] = ft_load_texture(cub, "textures/metal-green-00.xpm");
+	cub->textures['4'].ea = ft_calloc(2, sizeof(t_frame));
+	cub->textures['4'].ea[0] = ft_load_texture(cub, "textures/metal-green-00.xpm");
+	cub->textures['4'].anim_no = 1;
+	cub->textures['4'].anim_so = 1;
+	cub->textures['4'].anim_we = 1;
+	cub->textures['4'].anim_ea = 1;
+	cub->textures['4'].map_color = 0xFF00FF00;
+	
+	cub->textures['X'].no = ft_calloc(2, sizeof(t_frame));
+	cub->textures['X'].no[0] = ft_load_texture(cub, "textures/exit-00.xpm");
+	cub->textures['X'].so = ft_calloc(2, sizeof(t_frame));
+	cub->textures['X'].so[0] = ft_load_texture(cub, "textures/exit-00.xpm");
+	cub->textures['X'].we = ft_calloc(2, sizeof(t_frame));
+	cub->textures['X'].we[0] = ft_load_texture(cub, "textures/exit-00.xpm");
+	cub->textures['X'].ea = ft_calloc(2, sizeof(t_frame));
+	cub->textures['X'].ea[0] = ft_load_texture(cub, "textures/exit-00.xpm");
+	cub->textures['X'].anim_no = 1;
+	cub->textures['X'].anim_so = 1;
+	cub->textures['X'].anim_we = 1;
+	cub->textures['X'].anim_ea = 1;
+	cub->textures['X'].map_color = 0xFFFF00FF;
+
+	cub->textures['O'].map_color = 0xFF00FFFF;
+
+	for (int i = 0; i < cub->map_size.y; i++)
+	{
+		for (int j = 0; j < cub->map_size.x; j++)
+		{
+			if (cub->map_array[i][j].type == 'N'
+				|| cub->map_array[i][j].type == 'S'
+				|| cub->map_array[i][j].type == 'W'
+				|| cub->map_array[i][j].type == 'E')
+				cub->map_array[i][j].type = '0';
+			cub->map_array[i][j].is_solid = cub->textures[(int) cub->map_array[i][j].type].no != NULL;
+		}
+	}
 
 	cub->frames = 0;
 	ft_keys_init(&cub->keys);

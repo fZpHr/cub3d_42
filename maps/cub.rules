@@ -1,0 +1,44 @@
+NO [<id>] <path_to_the_xpm_file>  // Required for id 1
+SO [<id>] <path_to_the_xpm_file>  // There can be multiple definition:
+WE [<id>] <path_to_the_xpm_file>  //    the images will be the frames of the animation.
+EA [<id>] <path_to_the_xpm_file>  // Default id = 1
+                                  // Default texture = NULL (transparent)
+
+MP <id> (<R>,<G>,<B> | #<hex>)    // Default 1 = 238,238,238 ; 2 = 0,0,0 ; others = transparent
+BD (<R>,<G>,<B> | #<hex>)         // Default border = 204,204,204
+
+AN <id> <amim_delay_in_frames>    // Default delay = 30
+
+F (<R>,<G>,<B> | #<hex>)          // Required
+C (<R>,<G>,<B> | #<hex>)          // Required
+
+// Map rules:
+// 1. ' ' = void
+// 2. '1' = wall
+// 3. '0' = empty
+// 4. 'N', 'S', 'W', 'E' = player
+// 5. Void should not be accessible by the player
+        (it should be a wall preventing the player from going there)
+// 6. There should be at least one player
+// 7. Any char is accepted BUT the texture MUST BE DECLARED in the .cub file
+
+// Adds:
+// - 'X' = Closed Door >> Should be able to open
+// - 'O' = Opened Door >> Should be able to close
+
+        1111111111111111111111111
+        1000000000100000000000001
+        1011000001110000000000001
+        1001000000000000000000001
+111111111011000001110000000000001
+10000000000011000001110111111111111
+11110111111111011100000010001
+11110111111111011101010010001
+110000001101010111001 1010001
+1000000000000001100010010001
+1000E000000000001101010000001
+1100000111010101111101111000111
+11110111 1110101 10111101000011
+11111111 1111111 111111111111
+
+// After the map, there must be nothing (either empty lines, comments or EOF)

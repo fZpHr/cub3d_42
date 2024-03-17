@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_map_file.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:00:16 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/15 19:43:12 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/17 07:46:51 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	ft_loop_map(t_map *map, char *line, int fd, int full)
 			free(line);
 			ft_error_handle(map, "Error\n", "Invalid description content", 1);
 		}
-		if (map->no && map->so && map->we && map->ea
-			&& map->floor_c[0] != -1 && map->ceiling_c[0] != -1)
+		if (/*map->no && map->so && map->we && map->ea
+			&&*/ map->floor_c[0] != -1 && map->ceiling_c[0] != -1)
 		{
 			full = 1;
 			break ;
@@ -33,6 +33,7 @@ void	ft_loop_map(t_map *map, char *line, int fd, int full)
 		ft_cut_extra_char(line);
 	}
 	free(line);
+	(void)full;
 	if (full == 0)
 		ft_error_handle(map, "Error\n", "Invalid description content", 1);
 	ft_check_map_content(map, fd);

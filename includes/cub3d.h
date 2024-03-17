@@ -32,6 +32,12 @@
 # define PI_12		0.26179938779914943654
 
 # ifndef BONUS
+/**
+ * @brief Bonus mode (`0`: off, `1`: on)
+ * 
+ * @note	If `BONUS` is `0`, the program will be ignoring bonus adds
+ * 			(like collisions, or advanced maps).
+*/
 #  define BONUS		0
 # endif
 
@@ -67,11 +73,16 @@
 
 /**
  * @brief Rotation speed (in rad/frame)
+ * 
+ * @note	`0.02908882086641849395` is `PI_12 / 9`.
 */
-# define	ROT_SPEED		PI_12 / 9
+# define	ROT_SPEED		0.02908882086641849395
 
 typedef unsigned long long	t_ull;
 
+/**
+ * @brief Direction type (`NORTH`, `SOUTH`, `WEST`, `EAST`)
+*/
 typedef enum e_direction
 {
 	NORTH,
@@ -80,25 +91,45 @@ typedef enum e_direction
 	EAST
 }	t_direction;
 
+/**
+ * @brief Boolean type (`FALSE`: 0, `TRUE`: 1)
+*/
 typedef enum e_bool
 {
 	FALSE,
 	TRUE
 }	t_bool;
 
+/**
+ * @brief Position type (float, float)
+*/
 typedef struct s_pos
 {
 	float	x;
 	float	y;
 }	t_pos;
 
+/**
+ * @brief Integer position type (int, int)
+*/
 typedef struct s_ipos
 {
 	int	x;
 	int	y;
 }	t_ipos;
 
-typedef struct s_texture {
+/**
+ * @brief Frame type
+ * 
+ * @param img 				Pointer to the image
+ * @param addr 				Pointer to the address of the content of the image
+ * @param bits_per_pixel 	Number of bits per pixel
+ * @param line_size 		Number of bytes per line
+ * @param width 			Width of the image (in px)
+ * @param height 			Height of the image (in px)
+ * @param endian 			Endian of the image (0: little, 1: big)
+*/
+typedef struct s_frame {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -106,8 +137,51 @@ typedef struct s_texture {
 	int		width;
 	int		height;
 	int		endian;
+}	t_frame;
+
+/**
+ * @brief Structure for the texture
+ * 
+ * @param no 			Array of the north texture animation (NULL: transparent)
+ * @param so 			Array of the south texture animation (NULL: transparent)
+ * @param we 			Array of the west texture animation (NULL: transparent)
+ * @param ea 			Array of the east texture animation (NULL: transparent)
+ * 
+ * @param anim_no 		Number of frames of the north texture animation
+ * @param anim_so 		Number of frames of the south texture animation
+ * @param anim_we 		Number of frames of the west texture animation
+ * @param anim_ea 		Number of frames of the east texture animation
+ * 
+ * @param anim_delay 	Delay between each frame (in frame) (0: no animation)
+ * 
+ * @param map_color 	Color of the texture on the map (in ARGB format)
+ * 						(`0`: transparent)
+*/
+typedef struct s_texture
+{
+	t_frame	*no;
+	t_frame	*so;
+	t_frame	*we;
+	t_frame	*ea;
+
+	t_ull	anim_no;
+	t_ull	anim_so;
+	t_ull	anim_we;
+	t_ull	anim_ea;
+
+	t_ull	anim_delay;
+
+	int		map_color;
 }	t_texture;
 
+/**
+ * @brief Structure for the keys
+ * 
+ * @param forward 		Is the player pressing a forward key ?
+ * @param backward 		Is the player pressing a backward key ?
+ * @param rot_left 		Is the player pressing a left rotation key ?
+ * @param rot_right 	Is the player pressing a right rotation key ?
+*/
 typedef struct s_keys
 {
 	t_bool	forward;
@@ -116,6 +190,12 @@ typedef struct s_keys
 	t_bool	rot_right;
 }	t_keys;
 
+typedef struct s_tile
+{
+	char	type;
+	t_bool	is_solid;
+}	t_tile;
+
 /**
  * @brief Structure for the game
  * 
@@ -123,16 +203,14 @@ typedef struct s_keys
  * @param mlx_win 		Pointer to the mlx window
  * @param frame 		Canvas of the game (for optimization purpose)
  * 
- * @param map_array 	2D array of the map:
- * 						1 = wall, 0 = empty space
+ * @param map_array 	2D array of the map (see t_tile)
  * @param map_size 		Size of the map (int, int)
  * 
+ * @param border_c 		Color of the border of the minimap (in ARGB format)
+ * 						(`0` for no border)
  * @param floor_c 		Color of the floor (in ARGB format)
  * @param ceiling_c 	Color of the ceiling (in ARGB format)
- * @param no 			north texture (see t_texture)
- * @param so 			south texture (see t_texture)
- * @param we 			west texture (see t_texture)
- * @param ea 			east texture (see t_texture)
+ * @param textures 		All the textures of the game (sorted by char)
  * 
  * @param orientation 	Orientation of the player (in rad)
  * @param position 		Position of the player (float, float)
@@ -144,21 +222,20 @@ typedef struct s_cub
 {
 	void		*mlx;
 	void		*mlx_win;
-	t_texture	frame;
+	t_frame		frame;
 
-	char		**map_array;
+	t_tile		**map_array;
 	t_ipos		map_size;
 
+	int			border_c;
 	int			floor_c;
 	int			ceiling_c;
-	t_texture	no;
-	t_texture	so;
-	t_texture	we;
-	t_texture	ea;
+	t_texture	textures[128];
 
 	float		orientation;
 	t_pos		position;
 	t_keys		keys;
+	t_bool		minimap;
 
 	t_ull		frames;
 }	t_cub;
