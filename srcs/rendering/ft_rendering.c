@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 08:43:46 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 09:02:18 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -483,6 +483,8 @@ void	ft_render(t_cub *cub)
 */
 int	ft_game_quit(t_cub *cub)
 {
+	mlx_do_key_autorepeaton(cub->mlx);
+	mlx_mouse_show(cub->mlx, cub->mlx_win);
 	mlx_destroy_window(cub->mlx, cub->mlx_win);
 	mlx_destroy_display(cub->mlx);
 	free(cub->mlx);
@@ -490,6 +492,29 @@ int	ft_game_quit(t_cub *cub)
 	return (0);
 }
 
+/**
+ * @brief Handle the mouse event.
+*/
+int	ft_game_mouse(int x, int y, t_cub *cub)
+{
+	(void)y;
+	mlx_mouse_move(cub->mlx, cub->mlx_win, WIDTH / 2, HEIGHT / 2);
+	x -= WIDTH / 2;
+	cub->orientation += x * ROT_SPEED_MOUSE;
+	return (0);
+}
+
+/**
+ * @brief Handle the action of the player.
+ * 			(When he tries to open or close a door)
+ * 
+ * @brief	- If the foreward tile is a closed door: open it !
+ * 
+ * @brief	- If the foreward tile is an opened door
+ * 				AND the player is not inside the door: close it !
+ * 
+ * @param cub 	The game structure
+*/
 void	ft_handle_action(t_cub *cub)
 {
 	t_pos	pos = (t_pos){cub->position.x + cos(cub->orientation),
@@ -725,11 +750,14 @@ void	ft_mlx_init(t_cub *cub)
 	cub->mlx_win = mlx_new_window(cub->mlx, WIDTH, HEIGHT, NAME);
 	cub->frame.img = NULL;
 	cub->frame = ft_mlx_new_frame(cub, TRUE);
-	mlx_do_key_autorepeaton(cub->mlx);
+	mlx_do_key_autorepeatoff(cub->mlx);
+	mlx_mouse_hide(cub->mlx, cub->mlx_win);
+	mlx_mouse_move(cub->mlx, cub->mlx_win, WIDTH / 2, HEIGHT / 2);
 	mlx_loop_hook(cub->mlx, &ft_game_loop, cub);
 	mlx_hook(cub->mlx_win, ON_DESTROY, 0L, &ft_game_quit, cub);
 	mlx_hook(cub->mlx_win, ON_KEYDOWN, MASK_KEY_PRESS, &ft_game_keydown, cub);
 	mlx_hook(cub->mlx_win, ON_KEYUP, MASK_KEY_RELEASE, &ft_game_keyup, cub);
+	mlx_hook(cub->mlx_win, ON_MOUSEMOVE, MASK_MOUSE_MOVE, &ft_game_mouse, cub);
 }
 
 /**

@@ -74,9 +74,20 @@
 /**
  * @brief Rotation speed (in rad/frame)
  * 
- * @note	`0.02908882086641849395` is `PI_12 / 9`.
+ * @brief	- Using KEYS
+ * 
+ * @note	`PI_12 / 9` is `0.02908882086641849395`.
 */
 # define	ROT_SPEED		0.02908882086641849395
+
+/**
+ * @brief Rotation speed (in rad/frame)
+ * 
+ * @brief	- Using MOUSE
+ * 
+ * @note	`PI_12 / 32` is `0.00818123086`
+*/
+# define	ROT_SPEED_MOUSE	0.00818123086
 
 typedef unsigned long long	t_ull;
 
