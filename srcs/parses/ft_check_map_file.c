@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:00:16 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/17 07:46:51 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 09:36:44 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ void	ft_check_map_file(t_map *map, char *map_file)
 		ft_error_handle(map, "Invalid file format : ", map_file, 1);
 	fd = open(map_file, O_RDONLY);
 	if (fd < 0)
+	{
 		ft_error_handle(map, "Invalid file : ", map_file, 1);
+		return ;
+	}
 	line = get_next_line(fd);
 	ft_cut_extra_char(line);
 	if (!line)

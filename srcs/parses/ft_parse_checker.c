@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:35:34 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/17 07:39:06 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 10:01:11 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ void	ft_parse_checker(t_cub *cube, int ac, char **av)
 	ft_check_wall(&map, map.player_position[0], map.player_position[1]);
 	ft_assign_to_cube(cube, &map);
 	test_print_parsing(&map, cube);
+	ft_free_array(map.map_array);
 	ft_free_array(map.map_array_copy);
-	ft_assign_to_cube(cube, &map);
 	free(map.no);
 	free(map.so);
 	free(map.we);

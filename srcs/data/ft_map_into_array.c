@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_into_array.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:56:58 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/15 19:36:01 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/17 09:36:04 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ void	fill_array(t_map *map, char *map_file)
 	i = 0;
 	j = 0;
 	fd = open(map_file, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_error_handle(map, "Error\n", "Invalid map file", 1);
+		return ;
+	}
 	while (i < map->map_position)
 	{
 		line = get_next_line(fd);

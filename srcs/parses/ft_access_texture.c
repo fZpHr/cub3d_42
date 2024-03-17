@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_access_texture.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:24:32 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/14 16:52:31 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/17 09:38:27 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ void	ft_acces_texture(t_map *map, char *line, int i)
 	}
 	else
 	{
-		close(fd);
 		ft_check_extension(map, line);
 		fd = open(line + i, O_RDONLY);
 		if (fd < 0)
 		{
 			free(line);
 			ft_error_handle(map, "Error\n", "Invalid texture path", 1);
+			return ;
 		}
 		close(fd);
 	}

@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:51:37 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/17 08:24:56 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 09:53:29 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,6 @@ int	ft_handle_addr(t_cub *cub)
  */
 void	ft_assign_to_cube(t_cub *cub, t_map *map)
 {
-	cub->mlx = mlx_init();
-	cub->mlx_win = mlx_new_window(cub->mlx, map->map_size_x, map->map_size_y,
-			"cub3d");
 	cub->map_array = ft_calloc(map->map_size_y, sizeof(t_tile *));
 	if (!cub->map_array)
 		ft_error_handle(map, "Error\n", "Can't allocate memory", 1);
@@ -90,10 +87,6 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 		+ map->floor_c[2];
 	cub->ceiling_c = (map->ceiling_c[0] << 16) + (map->ceiling_c[1] << 8)
 		+ map->ceiling_c[2];
-	if (ft_handle_img(cub, map) != 0)
-		ft_error_handle(map, "Error\n", "Can't create img", 1);
-	if (ft_handle_addr(cub) != 0)
-		ft_error_handle(map, "Error\n", "Can't get data addr", 1);
 	if (map->player_direction[0] == 1)
 		cub->orientation = 0;
 	else if (map->player_direction[1] == 1)

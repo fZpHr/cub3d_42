@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 09:19:34 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 09:57:29 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -484,10 +484,30 @@ void	ft_render(t_cub *cub)
 int	ft_game_quit(t_cub *cub)
 {
 	mlx_do_key_autorepeaton(cub->mlx);
-	mlx_mouse_show(cub->mlx, cub->mlx_win);
+	// mlx_mouse_show(cub->mlx, cub->mlx_win);
+	for (int i = 0; i < 128; i++)
+	{
+		for (t_ull j = 0; j < cub->textures[i].anim_no; j++)
+			mlx_destroy_image(cub->mlx, cub->textures[i].no[j].img);
+		free(cub->textures[i].no);
+		for (t_ull j = 0; j < cub->textures[i].anim_so; j++)
+			mlx_destroy_image(cub->mlx, cub->textures[i].so[j].img);
+		free(cub->textures[i].so);
+		for (t_ull j = 0; j < cub->textures[i].anim_we; j++)
+			mlx_destroy_image(cub->mlx, cub->textures[i].we[j].img);
+		free(cub->textures[i].we);
+		for (t_ull j = 0; j < cub->textures[i].anim_ea; j++)
+			mlx_destroy_image(cub->mlx, cub->textures[i].ea[j].img);
+		free(cub->textures[i].ea);
+	}
+	for (int i = 0; i < cub->map_size.y; i++)
+		free(cub->map_array[i]);
+	free(cub->map_array);
+	mlx_destroy_image(cub->mlx, cub->frame.img);
 	mlx_destroy_window(cub->mlx, cub->mlx_win);
 	mlx_destroy_display(cub->mlx);
 	free(cub->mlx);
+	printf("Goodbye !\n");
 	exit(0);
 	return (0);
 }
@@ -754,8 +774,8 @@ void	ft_mlx_init(t_cub *cub)
 	cub->frame.img = NULL;
 	cub->frame = ft_mlx_new_frame(cub, TRUE);
 	mlx_do_key_autorepeatoff(cub->mlx);
-	if (BONUS)
-		mlx_mouse_hide(cub->mlx, cub->mlx_win);
+	// if (BONUS)
+	// 	mlx_mouse_hide(cub->mlx, cub->mlx_win);
 	mlx_mouse_move(cub->mlx, cub->mlx_win, WIDTH / 2, HEIGHT / 2);
 	mlx_loop_hook(cub->mlx, &ft_game_loop, cub);
 	mlx_hook(cub->mlx_win, ON_DESTROY, 0L, &ft_game_quit, cub);
@@ -804,6 +824,10 @@ t_frame ft_load_texture(t_cub *cub, char *path)
 void	ft_rendering(t_cub *cub)
 {
 	(void)cub;
+
+	cub->frames = 0;
+	ft_keys_init(&cub->keys);
+	ft_mlx_init(cub);
 
 	cub->minimap = BONUS;
 
@@ -911,8 +935,5 @@ void	ft_rendering(t_cub *cub)
 		}
 	}
 
-	cub->frames = 0;
-	ft_keys_init(&cub->keys);
-	ft_mlx_init(cub);
 	mlx_loop(cub->mlx);
 }
