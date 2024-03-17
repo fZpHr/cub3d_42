@@ -84,10 +84,8 @@
  * @brief Rotation speed (in rad/frame)
  * 
  * @brief	- Using MOUSE
- * 
- * @note	`PI_12 / 32` is `0.00818123086`
 */
-# define	ROT_SPEED_MOUSE	0.00818123086
+# define	ROT_SPEED_MOUSE	0.00175
 
 typedef unsigned long long	t_ull;
 

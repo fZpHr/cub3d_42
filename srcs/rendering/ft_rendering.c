@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 09:02:18 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 09:19:34 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -498,9 +498,12 @@ int	ft_game_quit(t_cub *cub)
 int	ft_game_mouse(int x, int y, t_cub *cub)
 {
 	(void)y;
+	if (!BONUS)
+		return (0);
 	mlx_mouse_move(cub->mlx, cub->mlx_win, WIDTH / 2, HEIGHT / 2);
 	x -= WIDTH / 2;
-	cub->orientation += x * ROT_SPEED_MOUSE;
+	if (x >= -100 && x <= 100)
+		cub->orientation += x * ROT_SPEED_MOUSE;
 	return (0);
 }
 
@@ -555,9 +558,9 @@ int	ft_game_keydown(int keycode, t_cub *cub)
 	(void)cub;
 	if (keycode == XK_Escape)
 		ft_game_quit(cub);
-	if (keycode == XK_m || keycode == XK_Shift_L || keycode == XK_Tab)
+	if (BONUS && (keycode == XK_m || keycode == XK_Shift_L || keycode == XK_Tab))
 		cub->minimap = !cub->minimap;
-	if (keycode == XK_e || keycode == XK_Shift_R || keycode == XK_space)
+	if (BONUS && (keycode == XK_e || keycode == XK_Shift_R || keycode == XK_space))
 		ft_handle_action(cub);
 	if (keycode == XK_w || keycode == XK_Up)
 		cub->keys.forward = TRUE;
@@ -751,7 +754,8 @@ void	ft_mlx_init(t_cub *cub)
 	cub->frame.img = NULL;
 	cub->frame = ft_mlx_new_frame(cub, TRUE);
 	mlx_do_key_autorepeatoff(cub->mlx);
-	mlx_mouse_hide(cub->mlx, cub->mlx_win);
+	if (BONUS)
+		mlx_mouse_hide(cub->mlx, cub->mlx_win);
 	mlx_mouse_move(cub->mlx, cub->mlx_win, WIDTH / 2, HEIGHT / 2);
 	mlx_loop_hook(cub->mlx, &ft_game_loop, cub);
 	mlx_hook(cub->mlx_win, ON_DESTROY, 0L, &ft_game_quit, cub);
@@ -800,6 +804,8 @@ t_frame ft_load_texture(t_cub *cub, char *path)
 void	ft_rendering(t_cub *cub)
 {
 	(void)cub;
+
+	cub->minimap = BONUS;
 
 	// cub->border_c = 0xFFCCCCCC;
 	cub->border_c = 0;
