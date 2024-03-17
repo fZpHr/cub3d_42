@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:39 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 11:29:58 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 11:54:18 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ void	ft_ver_casting(t_cub *cub, t_casting *casting);
 void	ft_render_ceiling(t_cub *cub);
 void	ft_render_chunk(t_cub *cub, int x, t_ipos size, t_casting casting);
 void	ft_render_floor(t_cub *cub);
+void	ft_render_info(t_cub *cub);
 void	ft_render_minimap(t_cub *cub, t_casting castings[RAYS]);
 void	ft_render(t_cub *cub);
 

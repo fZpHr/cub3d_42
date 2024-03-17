@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:22:24 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 11:24:48 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 12:14:36 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ void	ft_render(t_cub *cub)
 		ft_render_minimap(cub, castings);
 
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->frame.img, 0, 0);
+
+	if (cub->info)
+		ft_render_info(cub);
 
 	cub->frames++;
 }

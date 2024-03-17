@@ -146,6 +146,27 @@ typedef struct s_ipos
 }	t_ipos;
 
 /**
+ * @brief Integer vector3 type (int, int, int)
+*/
+typedef struct s_ivec3
+{
+	int	x;
+	int	y;
+	int	z;
+}	t_ivec3;
+
+/**
+ * @brief Integer vector4 type (int, int, int, int)
+*/
+typedef struct s_ivec4
+{
+	int	x;
+	int	y;
+	int	a;
+	int	b;
+}	t_ivec4;
+
+/**
  * @brief Frame type
  * 
  * @param img 				Pointer to the image
@@ -263,6 +284,7 @@ typedef struct s_cub
 	t_pos		position;
 	t_keys		keys;
 	t_bool		minimap;
+	t_bool		info;
 
 	t_ull		frames;
 }	t_cub;
@@ -281,6 +303,9 @@ void	ft_skip_spaces(char *line, int *i, int *count);
 void	ft_cut_extra_char(char *str);
 void	ft_fill_line(char *line, int size);
 int		ft_error(char *str);
+char	*ft_lli_to_str(long long n, int lenght);
+int		ft_numlen(int n);
+char	*ft_ftoa(float n, int length);
 
 // DATA
 

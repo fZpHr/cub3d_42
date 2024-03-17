@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 11:31:28 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/17 11:51:51 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	ft_rendering(t_cub *cub)
 	}
 
 	cub->minimap = BONUS;
+	cub->info = FALSE;
 
 	// cub->border_c = 0xFFCCCCCC;
 	cub->border_c = 0;

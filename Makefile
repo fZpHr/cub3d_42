@@ -6,7 +6,7 @@
 #    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/03/17 11:36:12 by ysabik           ###   ########.fr        #
+#    Updated: 2024/03/17 12:55:27 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,12 +46,16 @@ SRC_FILES			= \
 						srcs/rendering/ft_render_ceiling.c \
 						srcs/rendering/ft_render_chunk.c \
 						srcs/rendering/ft_render_floor.c \
+						srcs/rendering/ft_render_info.c \
 						srcs/rendering/ft_rendering.c \
 						srcs/rendering/ft_render_minimap.c \
 						srcs/utils/ft_function.c \
 						srcs/utils/ft_init.c \
 						srcs/utils/ft_error_handle.c \
-						srcs/utils/ft_error.c
+						srcs/utils/ft_error.c \
+						srcs/utils/ft_lli_to_str.c \
+						srcs/utils/ft_numlen.c \
+						srcs/utils/ft_ftoa.c
 
 BUILD_FOLDER		= ./build
 
