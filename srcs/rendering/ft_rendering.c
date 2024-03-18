@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/18 16:40:12 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/18 17:10:50 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,18 @@ void	ft_rendering(t_cub *cub)
 	cub->textures['0'].map_color = 0xFF000000;
 	
 	cub->textures['1'].empty = FALSE;
-	cub->textures['1'].no = ft_calloc(2, sizeof(t_frame));
-	cub->textures['1'].no[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
-	cub->textures['1'].so = ft_calloc(2, sizeof(t_frame));
-	cub->textures['1'].so[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
-	cub->textures['1'].we = ft_calloc(2, sizeof(t_frame));
-	cub->textures['1'].we[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
-	cub->textures['1'].ea = ft_calloc(2, sizeof(t_frame));
-	cub->textures['1'].ea[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
-	cub->textures['1'].no_anim_count = 1;
-	cub->textures['1'].so_anim_count = 1;
-	cub->textures['1'].we_anim_count = 1;
-	cub->textures['1'].ea_anim_count = 1;
+	// cub->textures['1'].no = ft_calloc(2, sizeof(t_frame));
+	// cub->textures['1'].no[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
+	// cub->textures['1'].so = ft_calloc(2, sizeof(t_frame));
+	// cub->textures['1'].so[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
+	// cub->textures['1'].we = ft_calloc(2, sizeof(t_frame));
+	// cub->textures['1'].we[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
+	// cub->textures['1'].ea = ft_calloc(2, sizeof(t_frame));
+	// cub->textures['1'].ea[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
+	// cub->textures['1'].no_anim_count = 1;
+	// cub->textures['1'].so_anim_count = 1;
+	// cub->textures['1'].we_anim_count = 1;
+	// cub->textures['1'].ea_anim_count = 1;
 	cub->textures['1'].map_color = 0xFF0000FF;
 	
 	cub->textures['2'].empty = FALSE;

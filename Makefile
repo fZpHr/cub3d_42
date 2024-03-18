@@ -6,7 +6,7 @@
 #    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/03/18 16:09:34 by ysabik           ###   ########.fr        #
+#    Updated: 2024/03/18 17:20:17 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRC_FILES			= \
 						srcs/rendering/raycasting/ft_hor_casting.c \
 						srcs/rendering/raycasting/ft_ver_casting.c \
 						srcs/rendering/ft_anim.c \
+						srcs/rendering/ft_anim_door.c \
 						srcs/rendering/ft_render.c \
 						srcs/rendering/ft_render_ceiling.c \
 						srcs/rendering/ft_render_chunk.c \
