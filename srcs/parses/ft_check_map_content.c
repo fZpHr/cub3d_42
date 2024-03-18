@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:53:42 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/17 09:10:24 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/18 13:24:47 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ void	ft_check_wall(t_map *map, int x, int y)
 	else if (map->map_array_copy[y][x] == '1'
 		|| map->map_array_copy[y][x] == 'V')
 		return ;
-	if (y < 0 || y >= map->map_size_y || x < 0 || x >= map->map_size_x)
-		ft_error_handle(map, "Error\n", "Map not close with wall", 1);
 	else if (map->map_array_copy[y][x] == 'A')
 		ft_error_handle(map, "Error\n", "Map not close with wall", 1);
 	map->map_array_copy[y][x] = 'V';
@@ -100,7 +98,7 @@ void	else_map_content(t_map *map, char *line, int *i, int *count_tmp_x)
 			free(line);
 			ft_error_handle(map, "Error\n", "Invalid map", 1);
 		}
-		else if (!BONUS && line[(*i)] != '0' && line[(*i)] != '1' && line[(*i)] != '2'
+		else if (!BONUS && line[(*i)] != '0' && line[(*i)] != '1'
 			&& line[(*i)] != 'N' && line[(*i)] != 'S' && line[(*i)] != 'W'
 			&& line[(*i)] != 'E' && line[(*i)] != ' ' && line[(*i)] != '\n')
 		{

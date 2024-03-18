@@ -67,22 +67,22 @@
 /**
  * @brief Height of the window (in px)
 */
-# define HEIGHT			720
+# define HEIGHT			900
 
 /**
  * @brief Width of the window (in px)
 */
-# define WIDTH			1080
+# define WIDTH			1200
 
 /**
  * @brief Field of view (in rad)
 */
-# define FOV				PI_3
+# define FOV			PI_3
 
 /**
  * @brief Number of rays
 */
-# define RAYS			200
+# define RAYS			600
 
 /**
  * @brief Walking speed (in px/frame)

@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:24:59 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 11:25:16 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/18 13:49:28 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_render_chunk(t_cub *cub, int x, t_ipos size, t_casting casting)
 			texture_y = texture.height * (float) win_y / size.y;
 			color = *(int *)(char *)(texture.addr
 				+ (texture_y * texture.line_size + texture_x * 4));
-			if (win_x + x >= 0 && win_y + win_y_offset < HEIGHT)
+			if (color != 0 && win_x + x >= 0 && win_y + win_y_offset < HEIGHT)
 				ft_put_pixel(cub->frame, win_x + x, win_y + win_y_offset, color);
 		}
 	}

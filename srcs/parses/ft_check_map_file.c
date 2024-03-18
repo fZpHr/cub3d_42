@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:00:16 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/17 09:36:44 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/18 13:28:49 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_check_map_file(t_map *map, char *map_file)
 	full = 0;
 	if (ft_strcmp(map_file + (ft_strlen(map_file) - 4), ".cub") != 0)
 		ft_error_handle(map, "Invalid file format : ", map_file, 1);
-	fd = open(map_file, O_RDONLY);
+	fd = open(map_file, O_RDWR);
 	if (fd < 0)
 	{
 		ft_error_handle(map, "Invalid file : ", map_file, 1);

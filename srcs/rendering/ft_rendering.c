@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 14:08:27 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/18 13:55:29 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ t_frame ft_load_texture(t_cub *cub, char *path)
 */
 void	ft_rendering(t_cub *cub)
 {
-	(void)cub;
-
 	cub->frames = 0;
 	ft_keys_init(&cub->keys);
 	if (ft_mlx_init(cub))

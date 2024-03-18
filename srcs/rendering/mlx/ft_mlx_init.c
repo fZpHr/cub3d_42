@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:15:43 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 11:16:16 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/18 13:35:26 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	ft_mlx_init(t_cub *cub)
 	mlx_do_key_autorepeatoff(cub->mlx);
 	if (BONUS && HIDE_MOUSE)
 		mlx_mouse_hide(cub->mlx, cub->mlx_win);
-	mlx_mouse_move(cub->mlx, cub->mlx_win, WIDTH / 2, HEIGHT / 2);
+	if (BONUS && HIDE_MOUSE)
+		mlx_mouse_move(cub->mlx, cub->mlx_win, WIDTH / 2, HEIGHT / 2);
 	mlx_loop_hook(cub->mlx, &ft_game_loop, cub);
 	mlx_hook(cub->mlx_win, ON_DESTROY, 0L, &ft_game_quit, cub);
 	mlx_hook(cub->mlx_win, ON_KEYDOWN, MASK_KEY_PRESS, &ft_game_keydown, cub);
