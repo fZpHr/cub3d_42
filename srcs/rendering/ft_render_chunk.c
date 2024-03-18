@@ -6,11 +6,17 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:24:59 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/18 17:20:54 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/18 17:47:56 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rendering.h"
+
+static void	ft_get_texture_no_so(t_cub *cub, t_casting casting,
+				t_frame *texture, int *texture_x);
+static void	ft_get_texture_we_ea(t_cub *cub, t_casting casting,
+				t_frame *texture, int *texture_x);
+static void	ft_draw(t_cub *cub, int x, t_ivec3 info, t_frame texture);
 
 /**
  * @brief Put a chunk of the texture on the frame at the given position.
@@ -35,55 +41,90 @@
 */
 void	ft_render_chunk(t_cub *cub, int x, t_ipos size, t_casting casting)
 {
-	t_texture	texture_t;
 	t_frame		texture;
 	int			texture_x;
+
 	texture.img = NULL;
+	ft_get_texture_no_so(cub, casting, &texture, &texture_x);
+	ft_get_texture_we_ea(cub, casting, &texture, &texture_x);
+	if (!texture.img)
+		return ;
+	ft_draw(cub, x, (t_ivec3){size.x, size.y, texture_x}, texture);
+}
+
+static void	ft_get_texture_no_so(t_cub *cub, t_casting casting,
+	t_frame *texture, int *texture_x)
+{
+	t_texture	texture_t;
+
 	if (casting.facing == NORTH)
 	{
-		texture_t = cub->textures[(int) cub->map_array[(int) casting.y][(int) casting.x].type];
+		texture_t = cub->textures[(int) cub->map_array[(int) casting.y] \
+				[(int) casting.x].type];
 		if (texture_t.no)
-			texture = texture_t.no[texture_t.no_anim_num];
-		texture_x = texture.width - 1 - (int) (casting.x * texture.width) % texture.width;
+			*texture = texture_t.no[texture_t.no_anim_num];
+		*texture_x = texture->width - 1
+			- (int)(casting.x * texture->width) % texture->width;
 	}
 	else if (casting.facing == SOUTH)
 	{
-		texture_t = cub->textures[(int) cub->map_array[(int) casting.y - 1][(int) casting.x].type];
+		texture_t = cub->textures[(int) cub->map_array[(int) casting.y - 1] \
+				[(int) casting.x].type];
 		if (texture_t.so)
-			texture = texture_t.so[texture_t.so_anim_num];
-		texture_x = (int) (casting.x * texture.width) % texture.width;
-		
+			*texture = texture_t.so[texture_t.so_anim_num];
+		*texture_x = (int)(casting.x * texture->width) % texture->width;
 	}
-	else if (casting.facing == WEST)
+}
+
+static void	ft_get_texture_we_ea(t_cub *cub, t_casting casting,
+	t_frame *texture, int *texture_x)
+{
+	t_texture	texture_t;
+
+	if (casting.facing == WEST)
 	{
-		texture_t = cub->textures[(int) cub->map_array[(int) casting.y][(int) casting.x].type];
+		texture_t = cub->textures[(int) cub->map_array[(int) casting.y] \
+				[(int) casting.x].type];
 		if (texture_t.we)
-			texture = texture_t.we[texture_t.we_anim_num];
-		texture_x = (int) (casting.y * texture.width) % texture.width;
+			*texture = texture_t.we[texture_t.we_anim_num];
+		*texture_x = (int)(casting.y * texture->width) % texture->width;
 	}
 	else if (casting.facing == EAST)
 	{
-		texture_t = cub->textures[(int) cub->map_array[(int) casting.y][(int) casting.x - 1].type];
+		texture_t = cub->textures[(int) cub->map_array[(int) casting.y] \
+				[(int) casting.x - 1].type];
 		if (texture_t.ea)
-			texture = texture_t.ea[texture_t.ea_anim_num];
-		texture_x = texture.width - 1 - (int) (casting.y * texture.width) % texture.width;
+			*texture = texture_t.ea[texture_t.ea_anim_num];
+		*texture_x = texture->width - 1
+			- (int)(casting.y * texture->width) % texture->width;
 	}
-	if (!texture.img)
-		return ;
+}
 
-	int	texture_y, color;
-	int win_y_offset = (HEIGHT - size.y) / 2;
-	for (int win_y = 0; win_y < size.y && win_y + win_y_offset < HEIGHT; win_y++)
+static void	ft_draw(t_cub *cub, int x, t_ivec3 info, t_frame texture)
+{
+	t_ipos	size;
+	t_ipos	texture_pos;
+	int		color;
+	int		win_y_offset;
+	t_ipos	win;
+
+	size = (t_ipos){info.x, info.y};
+	texture_pos.x = info.z;
+	win_y_offset = (HEIGHT - size.y) / 2;
+	win.y = -1;
+	while (++win.y < size.y && win.y + win_y_offset < HEIGHT)
 	{
-		if (win_y + win_y_offset < 0)
-			continue;
-		for (int win_x = 0; win_x < size.x && win_x + x < WIDTH; win_x++)
+		if (win.y + win_y_offset < 0)
+			continue ;
+		win.x = -1;
+		while (++win.x < size.x && win.x + x < WIDTH)
 		{
-			texture_y = texture.height * (float) win_y / size.y;
+			texture_pos.y = texture.height * (float) win.y / size.y;
 			color = *(int *)(char *)(texture.addr
-				+ (texture_y * texture.line_size + texture_x * 4));
-			if (color != 0 && win_x + x >= 0 && win_y + win_y_offset < HEIGHT)
-				ft_put_pixel(cub->frame, win_x + x, win_y + win_y_offset, color);
+					+ (texture_pos.y * texture.line_size + texture_pos.x * 4));
+			if (color != 0 && win.x + x >= 0 && win.y + win_y_offset < HEIGHT)
+				ft_put_pixel(cub->frame,
+					win.x + x, win.y + win_y_offset, color);
 		}
 	}
 }
