@@ -184,10 +184,10 @@ typedef struct s_frame {
  * @param we 			Array of the west texture animation (NULL: transparent)
  * @param ea 			Array of the east texture animation (NULL: transparent)
  * 
- * @param anim_no 		Number of frames of the north texture animation
- * @param anim_so 		Number of frames of the south texture animation
- * @param anim_we 		Number of frames of the west texture animation
- * @param anim_ea 		Number of frames of the east texture animation
+ * @param no_anim_count 		Number of frames of the north texture animation
+ * @param so_anim_count 		Number of frames of the south texture animation
+ * @param we_anim_count 		Number of frames of the west texture animation
+ * @param ea_anim_count 		Number of frames of the east texture animation
  * 
  * @param anim_delay 	Delay between each frame (in frame) (0: no animation)
  * 
@@ -196,17 +196,30 @@ typedef struct s_frame {
 */
 typedef struct s_texture
 {
-	t_frame	*no;
-	t_frame	*so;
-	t_frame	*we;
-	t_frame	*ea;
+	t_bool	empty;
 
-	t_ull	anim_no;
-	t_ull	anim_so;
-	t_ull	anim_we;
-	t_ull	anim_ea;
+	t_frame	*no;
+	t_ull	no_anim_count;
+	t_ull	no_anim_num;
+	t_bool	no_anim;
+
+	t_frame	*so;
+	t_ull	so_anim_count;
+	t_ull	so_anim_num;
+	t_bool	so_anim;
+
+	t_frame	*we;
+	t_ull	we_anim_count;
+	t_ull	we_anim_num;
+	t_bool	we_anim;
+
+	t_frame	*ea;
+	t_ull	ea_anim_count;
+	t_ull	ea_anim_num;
+	t_bool	ea_anim;
 
 	t_ull	anim_delay;
+	t_ull	anim_counter;
 
 	int		map_color;
 }	t_texture;

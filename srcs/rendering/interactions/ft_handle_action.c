@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:21:11 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 13:13:26 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:53:30 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,18 @@ void	ft_handle_action(t_cub *cub)
 	{
 		if (cub->map_array[(int) pos.y][(int) pos.x].type == 'X')
 		{
-			cub->map_array[(int) pos.y][(int) pos.x].type = 'O';
-			cub->map_array[(int) pos.y][(int) pos.x].is_solid = FALSE;
+			cub->map_array[(int) pos.y][(int) pos.x].type = '-';
+			cub->map_array[(int) pos.y][(int) pos.x].is_solid = TRUE;
+			cub->textures['-'].empty = FALSE;
+			cub->textures['-'].no_anim = TRUE;
+			cub->textures['-'].so_anim = TRUE;
+			cub->textures['-'].we_anim = TRUE;
+			cub->textures['-'].ea_anim = TRUE;
+			cub->textures['-'].no_anim_num = 0;
+			cub->textures['-'].so_anim_num = 0;
+			cub->textures['-'].we_anim_num = 0;
+			cub->textures['-'].ea_anim_num = 0;
+			cub->textures['-'].anim_counter = 0;
 		}
 		else if (cub->map_array[(int) pos.y][(int) pos.x].type == 'O'
 			&& cub->map_array[(int) cub->position.y] \

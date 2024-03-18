@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:24:59 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/18 13:49:28 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:57:42 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,16 @@ void	ft_render_chunk(t_cub *cub, int x, t_ipos size, t_casting casting)
 	{
 		texture_t = cub->textures[(int) cub->map_array[(int) casting.y][(int) casting.x].type];
 		if (texture_t.no)
-			texture = texture_t.no[(cub->frames / texture_t.anim_delay) % texture_t.anim_no];
+			texture = texture_t.no[texture_t.no_anim_num];
 		texture_x = texture.width - 1 - (int) (casting.x * texture.width) % texture.width;
 	}
 	else if (casting.facing == SOUTH)
 	{
 		texture_t = cub->textures[(int) cub->map_array[(int) casting.y - 1][(int) casting.x].type];
 		if (texture_t.so)
-			texture = texture_t.so[(cub->frames / texture_t.anim_delay) % texture_t.anim_so];
+			texture = texture_t.so[texture_t.so_anim_num];
+		printf("type = %d\n", (int) cub->map_array[(int) casting.y - 1][(int) casting.x].type);
+		printf("texture.width = %d\n", texture.width);
 		texture_x = (int) (casting.x * texture.width) % texture.width;
 		
 	}
@@ -58,14 +60,14 @@ void	ft_render_chunk(t_cub *cub, int x, t_ipos size, t_casting casting)
 	{
 		texture_t = cub->textures[(int) cub->map_array[(int) casting.y][(int) casting.x].type];
 		if (texture_t.we)
-			texture = texture_t.we[(cub->frames / texture_t.anim_delay) % texture_t.anim_we];
+			texture = texture_t.we[texture_t.we_anim_num];
 		texture_x = (int) (casting.y * texture.width) % texture.width;
 	}
 	else if (casting.facing == EAST)
 	{
 		texture_t = cub->textures[(int) cub->map_array[(int) casting.y][(int) casting.x - 1].type];
 		if (texture_t.ea)
-			texture = texture_t.ea[(cub->frames / texture_t.anim_delay) % texture_t.anim_ea];
+			texture = texture_t.ea[texture_t.ea_anim_num];
 		texture_x = texture.width - 1 - (int) (casting.y * texture.width) % texture.width;
 	}
 	if (!texture.img)

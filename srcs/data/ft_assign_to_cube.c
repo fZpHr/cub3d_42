@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:51:37 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/18 13:31:37 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:03:37 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 	}
 	cub->map_size.x = map->map_size_x;
 	cub->map_size.y = map->map_size_y;
-	cub->position.x = map->player_position[0];
-	cub->position.y = map->player_position[1];
+	cub->position.x = map->player_position[0] + 0.5;
+	cub->position.y = map->player_position[1] + 0.5;
 	cub->floor_c = (map->floor_c[0] << 16) + (map->floor_c[1] << 8)
 		+ map->floor_c[2];
 	cub->ceiling_c = (map->ceiling_c[0] << 16) + (map->ceiling_c[1] << 8)

@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:39 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 13:05:40 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/18 15:59:33 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ enum e_mlx_masks {
 
 t_bool		ft_does_collide(t_cub *cub, t_pos position);
 void		ft_handle_action(t_cub *cub);
+void		ft_handle_doors(t_cub *cub);
 void		ft_handle_keys(t_cub *cub);
 void		ft_move_backward(t_cub *cub);
 void		ft_move_forward(t_cub *cub);
@@ -120,6 +121,7 @@ t_casting	ft_cast_ray(t_cub *cub, float angle);
 void		ft_hor_casting(t_cub *cub, t_casting *casting);
 void		ft_ver_casting(t_cub *cub, t_casting *casting);
 
+void		ft_anim(t_cub *cub);
 void		ft_render_ceiling(t_cub *cub);
 void		ft_render_chunk(t_cub *cub, int x, t_ipos size, t_casting casting);
 void		ft_render_floor(t_cub *cub);

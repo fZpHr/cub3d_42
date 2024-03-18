@@ -6,7 +6,7 @@
 #    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/03/17 12:55:27 by ysabik           ###   ########.fr        #
+#    Updated: 2024/03/18 16:09:34 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC_FILES			= \
 						srcs/parses/ft_parse_checker.c \
 						srcs/rendering/interactions/ft_does_collide.c \
 						srcs/rendering/interactions/ft_handle_action.c \
+						srcs/rendering/interactions/ft_handle_doors.c \
 						srcs/rendering/interactions/ft_handle_keys.c \
 						srcs/rendering/interactions/ft_move_backward.c \
 						srcs/rendering/interactions/ft_move_forward.c \
@@ -42,6 +43,7 @@ SRC_FILES			= \
 						srcs/rendering/raycasting/ft_cast_ray.c \
 						srcs/rendering/raycasting/ft_hor_casting.c \
 						srcs/rendering/raycasting/ft_ver_casting.c \
+						srcs/rendering/ft_anim.c \
 						srcs/rendering/ft_render.c \
 						srcs/rendering/ft_render_ceiling.c \
 						srcs/rendering/ft_render_chunk.c \
@@ -104,7 +106,7 @@ m_line_break :
 
 b_flags :
 	@$(eval CFLAGS += -D BONUS=1)
-	@$(eval CFLAGS += -D HIDE_MOUSE=1)
+	@$(eval CFLAGS += -D HIDE_MOUSE=0)
 
 bonus : b_flags all
 
