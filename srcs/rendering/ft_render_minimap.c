@@ -6,11 +6,18 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:23:03 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 11:23:27 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/18 18:25:27 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rendering.h"
+
+#define TILE	15
+#define PLAYER	8
+
+static void	ft_render_map(t_cub *cub);
+static void	ft_render_rays(t_cub *cub, t_casting castings[RAYS]);
+static void	ft_render_player(t_cub *cub);
 
 /**
  * @brief Render the minimap.
@@ -30,57 +37,71 @@
 */
 void	ft_render_minimap(t_cub *cub, t_casting castings[RAYS])
 {
-	int		TILE_SIZE = 15;
-	int		PLAYER_SIZE = 8;
-	int		i;
-	int		j;
+	ft_render_map(cub);
+	ft_render_rays(cub, castings);
+	ft_render_player(cub);
+}
 
-	i = 0;
-	while (i < cub->map_size.y)
+static void	ft_render_map(t_cub *cub)
+{
+	t_ipos		p;
+	int			c;
+	t_texture	texture;
+
+	p.y = -1;
+	while (++p.y < cub->map_size.y)
 	{
-		j = 0;
-		while (j < cub->map_size.x)
+		p.x = -1;
+		while (++p.x < cub->map_size.x)
 		{
-			t_texture	texture = cub->textures[(int) cub->map_array[i][j].type];
+			texture = cub->textures[(int) cub->map_array[p.y][p.x].type];
 			if (texture.map_color)
 			{
-				ft_put_rect(cub->frame,
-					(t_ipos){j * TILE_SIZE + TILE_SIZE, i * TILE_SIZE + TILE_SIZE},
-					(t_ipos){TILE_SIZE, TILE_SIZE}, cub->border_c ? cub->border_c : texture.map_color);
+				c = texture.map_color;
 				if (cub->border_c)
-					ft_put_rect(cub->frame,
-						(t_ipos){j * TILE_SIZE + TILE_SIZE + 1, i * TILE_SIZE + TILE_SIZE + 1},
-						(t_ipos){TILE_SIZE - 2, TILE_SIZE - 2}, texture.map_color);
+					c = cub->border_c;
+				ft_put_rect(cub->frame, (t_ipos){p.x * TILE + TILE,
+					p.y * TILE + TILE}, (t_ipos){TILE, TILE}, c);
+				if (cub->border_c)
+					ft_put_rect(cub->frame, (t_ipos){p.x * TILE + TILE + 1,
+						p.y * TILE + TILE + 1}, (t_ipos){TILE - 2, TILE - 2},
+						texture.map_color);
 			}
-			j++;
 		}
-		i++;
 	}
+}
 
-	for (int rc = 0; rc < RAYS; rc += 20)
+static void	ft_render_rays(t_cub *cub, t_casting castings[RAYS])
+{
+	int			rc;
+	t_casting	c;
+
+	rc = 0;
+	while (rc < RAYS)
 	{
-		t_casting c = castings[rc];
+		c = castings[rc];
 		if (c.distance != -1)
-			ft_put_line(cub->frame,
-				(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE, cub->position.y * TILE_SIZE + TILE_SIZE},
-				(t_ipos){c.x * TILE_SIZE + TILE_SIZE, c.y * TILE_SIZE + TILE_SIZE},
-				0x0000FFFF);
+			ft_put_line(cub->frame, (t_ipos){cub->position.x * TILE + TILE,
+				cub->position.y * TILE + TILE},
+				(t_ipos){c.x * TILE + TILE, c.y * TILE + TILE}, 0x0000FFFF);
+		rc += 20;
 	}
-	
-	t_casting c = ft_cast_ray(cub, cub->orientation);
+	c = ft_cast_ray(cub, cub->orientation);
 	if (c.distance != -1)
-		ft_put_line(cub->frame,
-			(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE, cub->position.y * TILE_SIZE + TILE_SIZE},
-			(t_ipos){c.x * TILE_SIZE + TILE_SIZE, c.y * TILE_SIZE + TILE_SIZE},
-			0x00FF00FF);
+		ft_put_line(cub->frame, (t_ipos){cub->position.x * TILE + TILE,
+			cub->position.y * TILE + TILE},
+			(t_ipos){c.x * TILE + TILE, c.y * TILE + TILE}, 0x00FF00FF);
+}
 
+static void	ft_render_player(t_cub *cub)
+{
 	ft_put_line(cub->frame,
-		(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE, cub->position.y * TILE_SIZE + TILE_SIZE},
-		(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE + cos(cub->orientation) * TILE_SIZE,
-			cub->position.y * TILE_SIZE + TILE_SIZE + sin(cub->orientation) * TILE_SIZE},
+		(t_ipos){cub->position.x * TILE + TILE, cub->position.y * TILE + TILE},
+		(t_ipos){cub->position.x * TILE + TILE + cos(cub->orientation) * TILE,
+		cub->position.y * TILE + TILE + sin(cub->orientation) * TILE},
 		0x00FF0000);
 	ft_put_rect(cub->frame,
-		(t_ipos){cub->position.x * TILE_SIZE + TILE_SIZE - PLAYER_SIZE / 2,
-			cub->position.y * TILE_SIZE + TILE_SIZE - PLAYER_SIZE / 2},
-		(t_ipos){PLAYER_SIZE, PLAYER_SIZE}, 0x0000FF00);
+		(t_ipos){cub->position.x * TILE + TILE - PLAYER / 2,
+		cub->position.y * TILE + TILE - PLAYER / 2},
+		(t_ipos){PLAYER, PLAYER}, 0x0000FF00);
 }
