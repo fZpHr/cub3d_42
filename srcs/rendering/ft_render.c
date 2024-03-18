@@ -6,11 +6,13 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:22:24 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 12:14:36 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/18 18:04:57 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rendering.h"
+
+static void	ft_ray_casting(t_cub *cub, t_casting castings[RAYS]);
 
 /**
  * @brief Render a frame.
@@ -35,44 +37,44 @@
 */
 void	ft_render(t_cub *cub)
 {
-	ft_render_floor(cub);
-	ft_render_ceiling(cub);
-
 	t_casting	castings[RAYS];
 
-	float	angle = cub->orientation - FOV / 2;
+	ft_render_floor(cub);
+	ft_render_ceiling(cub);
+	ft_ray_casting(cub, castings);
+	if (cub->minimap)
+		ft_render_minimap(cub, castings);
+	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->frame.img, 0, 0);
+	if (cub->info)
+		ft_render_info(cub);
+	cub->frames++;
+}
+
+void	ft_ray_casting(t_cub *cub, t_casting castings[RAYS])
+{
+	float		angle;
+	float		width;
+	int			ray;
+	t_casting	casting;
+	int			height;
+
+	angle = cub->orientation - FOV / 2;
 	if (angle < 0)
 		angle += 2 * PI;
-	float	step = (float) FOV / RAYS;
-	float	width = (float) WIDTH / RAYS;
-	int		ray = 0;
-	while (ray < RAYS)
+	width = (float) WIDTH / RAYS;
+	ray = -1;
+	while (++ray < RAYS)
 	{
-		float		a = angle + step * ray;
-		if (a >= 2 * PI)
-			a -= 2 * PI;
-		t_casting	casting = ft_cast_ray(cub, a);
+		casting = ft_cast_ray(cub, angle + ((float) FOV / RAYS) * ray);
 		if (casting.distance != -1)
 		{
 			casting.distance *= cos(cub->orientation - casting.angle);
 			if (casting.distance < 0.2)
 				casting.distance = 0.2;
-			int			height = ((HEIGHT / casting.distance) * 1.5);
-			int			x = ray * width;
-			ft_render_chunk(cub, x, (t_ipos){width + 1, height}, casting);
+			height = ((HEIGHT / casting.distance) * 1.5);
+			ft_render_chunk(cub, ray * width,
+				(t_ipos){width + 1, height}, casting);
 		}
 		castings[ray] = casting;
-		ray++;
 	}
-
-	if (cub->minimap)
-		ft_render_minimap(cub, castings);
-
-	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->frame.img, 0, 0);
-
-	if (cub->info)
-		ft_render_info(cub);
-
-	cub->frames++;
 }
-

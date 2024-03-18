@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:09:02 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 13:18:14 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/18 18:01:19 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ t_casting	ft_cast_ray(t_cub *cub, float angle)
 {
 	t_casting	casting;
 
+	while (angle >= 2 * PI)
+		angle -= 2 * PI;
 	casting.angle = angle;
 	casting.hor_dist = -1;
 	casting.ver_dist = -1;
