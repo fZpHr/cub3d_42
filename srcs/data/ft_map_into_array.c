@@ -3,15 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_into_array.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:56:58 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/18 13:23:26 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/19 16:48:08 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/**
+ * @brief Handle the line of the map, replace spaces and newlines by 'A'
+ *
+ * @param map struct of the map
+ * @param line line to handle
+ * @param j position of the line in the map
+ * @param i position of the character in the line
+ * @return void
+ 
+*/
 void	handle_line(t_map *map, char *line, int *j, int *i)
 {
 	if (line[(*i)] == ' ' || line[(*i)] == '\n')

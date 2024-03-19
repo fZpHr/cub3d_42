@@ -292,7 +292,6 @@ typedef struct s_cub
 }	t_cub;
 
 void	ft_assign_to_cube(t_cub *cub, t_map *map);
-void    ft_check_map_file_bonus(t_map *map, t_cub *cube, char *file);
 void	ft_parse_checker(t_cub *cub, int ac, char **av);
 void	ft_rendering(t_cub *cub);
 

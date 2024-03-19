@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_map_content.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:53:42 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/18 13:24:47 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/19 17:42:13 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	ft_handle_bonus(t_map *map, char *line, int *i)
+{
+	if (BONUS)
+	{
+		if (line[(*i)] != '2' && line[(*i)] != '3' && line[(*i)] != '4'
+			&& line[(*i)] != 'X')
+		{
+			free(line);
+			ft_error_handle(map, "Error\n", "Invalid map", 1);
+		}
+	}
+	else
+	{
+		free(line);
+		ft_error_handle(map, "Error\n", "Invalid map", 1);
+	}
+}
 
 /**
  * @brief Find the player position in the map, and store it in the struct
@@ -45,7 +63,6 @@ void	ft_find_player_position(t_map *map)
 		ft_error_handle(map, "Error\n", "No player position", 1);
 }
 
-
 void	ft_player_direction(t_map *map, char *line, int i)
 {
 	if (map->player_direction[0] == 1 || map->player_direction[1] == 1
@@ -75,13 +92,10 @@ void	else_map_content(t_map *map, char *line, int *i, int *count_tmp_x)
 			free(line);
 			ft_error_handle(map, "Error\n", "Invalid map", 1);
 		}
-		else if (!BONUS && line[(*i)] != '0' && line[(*i)] != '1'
+		else if (line[(*i)] != '0' && line[(*i)] != '1'
 			&& line[(*i)] != 'N' && line[(*i)] != 'S' && line[(*i)] != 'W'
 			&& line[(*i)] != 'E' && line[(*i)] != ' ' && line[(*i)] != '\n')
-		{
-			free(line);
-			ft_error_handle(map, "Error\n", "Invalid map", 1);
-		}
+			ft_handle_bonus(map, line, i);
 		if (line[(*i)] == 'N' || line[(*i)] == 'S' || line[(*i)] == 'W'
 			|| line[(*i)] == 'E')
 			ft_player_direction(map, line, (*i));

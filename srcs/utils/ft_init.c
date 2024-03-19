@@ -6,14 +6,31 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:22:23 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/14 16:12:06 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/19 17:46:34 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	ft_init_bonus(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i < 128)
+	{
+		map->text[i] = (t_text){NULL, NULL, NULL, NULL, 0};
+		i++;
+	}
+	map->mp_c[0] = -1;
+	map->mp_c[1] = -1;
+	map->mp_c[2] = -1;
+}
+
 void	ft_init(t_map *map)
 {
+	if (BONUS)
+		ft_init_bonus(map);
 	map->map_array = NULL;
 	map->map_array_copy = NULL;
 	map->no = NULL;

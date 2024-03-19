@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_map_file.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:00:16 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/18 13:28:49 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/19 16:07:12 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	ft_loop_map(t_map *map, char *line, int fd, int full)
 			free(line);
 			ft_error_handle(map, "Error\n", "Invalid description content", 1);
 		}
-		if (/*map->no && map->so && map->we && map->ea
-			&&*/ map->floor_c[0] != -1 && map->ceiling_c[0] != -1)
+		if (map->no && map->so && map->we && map->ea
+			&& map->floor_c[0] != -1 && map->ceiling_c[0] != -1)
 		{
 			full = 1;
 			break ;
@@ -33,7 +33,6 @@ void	ft_loop_map(t_map *map, char *line, int fd, int full)
 		ft_cut_extra_char(line);
 	}
 	free(line);
-	(void)full;
 	if (full == 0)
 		ft_error_handle(map, "Error\n", "Invalid description content", 1);
 	ft_check_map_content(map, fd);
@@ -58,10 +57,7 @@ void	ft_check_map_file(t_map *map, char *map_file)
 		ft_error_handle(map, "Invalid file format : ", map_file, 1);
 	fd = open(map_file, O_RDWR);
 	if (fd < 0)
-	{
 		ft_error_handle(map, "Invalid file : ", map_file, 1);
-		return ;
-	}
 	line = get_next_line(fd);
 	ft_cut_extra_char(line);
 	if (!line)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
+#    By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/03/18 17:20:17 by ysabik           ###   ########.fr        #
+#    Updated: 2024/03/19 16:39:59 by hbelle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,8 @@ SRC_FILES			= \
 						srcs/utils/ft_numlen.c \
 						srcs/utils/ft_ftoa.c \
 						srcs/parses/ft_check_wall.c \
-						srcs/parses/ft_check_map_file_bonus.c
+						srcs/parses/ft_check_map_file_bonus.c \
+						srcs/parses/ft_handle_id.c
 
 BUILD_FOLDER		= ./build
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_texture.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:35:02 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/17 07:47:03 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/19 15:50:14 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,13 @@ void	ft_handle_texture(t_map *map, char *line, int i)
 		ft_error_handle(map, "Error\n", "Invalid map texture name", 1);
 	}
 	else
-		ft_acces_texture(map, line, i);
+	{
+		if (ft_acces_texture(line, i) == 1)
+		{
+			free(line);
+			ft_error_handle(map, "Error\n", "Invalid texture path", 1);
+		}
+	}
 }
 
 void	ft_check_color(t_map *map, char *line, int *i, int *color)

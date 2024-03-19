@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_assign_to_cube.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:51:37 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/18 16:03:37 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/19 17:45:56 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,27 @@ int	ft_handle_addr(t_cub *cub)
 	return (0);
 }
 
+void	ft_init_cub_array(t_cub *cub, t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < map->map_size_y)
+	{
+		cub->map_array[i] = ft_calloc(map->map_size_x, sizeof(t_tile));
+		if (!cub->map_array[i])
+			ft_error_handle(map, "Error\n", "Can't allocate memory", 1);
+		j = 0;
+		while (j < map->map_size_x)
+		{
+			cub->map_array[i][j].type = map->map_array[i][j];
+			j++;
+		}
+		i++;
+	}
+}
+
 /**
  * @brief Assigns the map data to the cub structure
  *
@@ -69,16 +90,7 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 	cub->map_array = ft_calloc(map->map_size_y, sizeof(t_tile *));
 	if (!cub->map_array)
 		ft_error_handle(map, "Error\n", "Can't allocate memory", 1);
-	for (int i = 0; i < map->map_size_y; i++)
-	{
-		cub->map_array[i] = ft_calloc(map->map_size_x, sizeof(t_tile));
-		if (!cub->map_array[i])
-			ft_error_handle(map, "Error\n", "Can't allocate memory", 1);
-		for (int j = 0; j < map->map_size_x; j++)
-		{
-			cub->map_array[i][j].type = map->map_array[i][j];
-		}
-	}
+	ft_init_cub_array(cub, map);
 	cub->map_size.x = map->map_size_x;
 	cub->map_size.y = map->map_size_y;
 	cub->position.x = map->player_position[0] + 0.5;
