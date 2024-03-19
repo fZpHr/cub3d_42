@@ -109,14 +109,14 @@ void	ft_parse_checker(t_cub *cube, int ac, char **av)
 
 	ft_init(&map);
 	ft_check_args(ac);
-	ft_check_map_file(&map, av[1]);
+	if (!BONUS)
+		ft_check_map_file(&map, av[1]);
+	else
+		ft_check_map_file_bonus(&map, cube, av[1]);
 	ft_map_into_array(&map, av[1]);
 	ft_find_player_position(&map);
 	ft_cp_array(&map);
-	for (int i = 0; i < map.map_size_y; i++)
-		for (int j = 0; j < map.map_size_x; j++)
-			if (map.map_array[i][j] == '0')
-				ft_check_wall(&map, j, i);
+	ft_check_wall(&map);
 	ft_assign_to_cube(cube, &map);
 	// test_print_parsing(&map, cube);
 	ft_free_array(map.map_array);

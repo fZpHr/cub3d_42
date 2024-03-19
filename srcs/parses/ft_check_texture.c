@@ -123,7 +123,7 @@ int	ft_check_texture(t_map *map, char *line)
 		ft_select_color(map, line, &i, 2);
 	else if (line[i] == '\0')
 		return (0);
-	// else
-	// 	return (1);
+	else
+		return (1);
 	return (0);
 }

@@ -15,6 +15,15 @@
 
 # include "cub3d.h"
 
+typedef	struct s_text
+{
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	int		mp;
+}	t_text ;
+
 /**
  * @brief Structure for the map
  *
@@ -39,6 +48,7 @@ typedef struct s_map
 	int		map_size_y;
 	int		map_size_x;
 	int		map_position;
+	int		count;
 	char	*no;
 	char	*so;
 	char	*we;
@@ -47,14 +57,16 @@ typedef struct s_map
 	int		ceiling_c[3];
 	int		player_direction[4];
 	int		player_position[2];
+	t_text	text[128];
 }	t_map;
 
 void	ft_acces_texture(t_map *map, char *line, int i);
-void	ft_check_wall(t_map *map, int x, int y);
+void	ft_check_wall(t_map *map);
 void	ft_find_player_position(t_map *map);
 void	ft_check_args(int ac);
 void	ft_check_map_file(t_map *map, char *map_file);
 int		ft_check_texture(t_map *map, char *line);
 void	ft_check_map_content(t_map *map, int fd);
+
 
 #endif

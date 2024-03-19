@@ -21,10 +21,11 @@
 */
 void	ft_check_extension(t_map *map, char *line)
 {
-	if (ft_strncmp(line + (ft_strlen(line) - 4), ".xpm", 4) == 0)
+	if (ft_strncmp(line + (ft_strlen(line) - 4), ".xpm", 6) == 0)
 		return ;
 	else
 	{
+		printf("line = %s\n", line);
 		free(line);
 		ft_error_handle(map, "Error\n", "Invalid texture extension", 1);
 	}

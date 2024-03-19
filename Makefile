@@ -58,7 +58,9 @@ SRC_FILES			= \
 						srcs/utils/ft_error.c \
 						srcs/utils/ft_lli_to_str.c \
 						srcs/utils/ft_numlen.c \
-						srcs/utils/ft_ftoa.c
+						srcs/utils/ft_ftoa.c \
+						srcs/parses/ft_check_wall.c \
+						srcs/parses/ft_check_map_file_bonus.c
 
 BUILD_FOLDER		= ./build
 
