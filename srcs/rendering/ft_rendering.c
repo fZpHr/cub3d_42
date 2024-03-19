@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/19 18:01:09 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/19 19:24:48 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@ void	ft_rendering(t_cub *cub)
 	
 	cub->textures['2'].empty = FALSE;
 	cub->textures['2'].no = ft_calloc(2, sizeof(t_frame));
-	cub->textures['2'].no[0] = ft_load_texture(cub, "textures/metal-gray-00.xpm");
+	cub->textures['2'].no[0] = ft_load_texture(cub, "textures/torch/7.xpm");
 	cub->textures['2'].so = ft_calloc(2, sizeof(t_frame));
-	cub->textures['2'].so[0] = ft_load_texture(cub, "textures/metal-gray-00.xpm");
+	cub->textures['2'].so[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
 	cub->textures['2'].we = ft_calloc(2, sizeof(t_frame));
-	cub->textures['2'].we[0] = ft_load_texture(cub, "textures/metal-gray-00.xpm");
+	cub->textures['2'].we[0] = ft_load_texture(cub, "textures/torch/7.xpm");
 	cub->textures['2'].ea = ft_calloc(2, sizeof(t_frame));
-	cub->textures['2'].ea[0] = ft_load_texture(cub, "textures/metal-gray-00.xpm");
+	cub->textures['2'].ea[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
 	cub->textures['2'].no_anim_count = 1;
 	cub->textures['2'].so_anim_count = 1;
 	cub->textures['2'].we_anim_count = 1;
@@ -94,13 +94,13 @@ void	ft_rendering(t_cub *cub)
 	
 	cub->textures['3'].empty = FALSE;
 	cub->textures['3'].no = ft_calloc(2, sizeof(t_frame));
-	cub->textures['3'].no[0] = ft_load_texture(cub, "textures/bricks-gray-00.xpm");
+	cub->textures['3'].no[0] = ft_load_texture(cub, "textures/torch/6.xpm");
 	cub->textures['3'].so = ft_calloc(2, sizeof(t_frame));
-	cub->textures['3'].so[0] = ft_load_texture(cub, "textures/bricks-gray-00.xpm");
+	cub->textures['3'].so[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
 	cub->textures['3'].we = ft_calloc(2, sizeof(t_frame));
-	cub->textures['3'].we[0] = ft_load_texture(cub, "textures/bricks-gray-00.xpm");
+	cub->textures['3'].we[0] = ft_load_texture(cub, "textures/torch/6.xpm");
 	cub->textures['3'].ea = ft_calloc(2, sizeof(t_frame));
-	cub->textures['3'].ea[0] = ft_load_texture(cub, "textures/bricks-gray-00.xpm");
+	cub->textures['3'].ea[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
 	cub->textures['3'].no_anim_count = 1;
 	cub->textures['3'].so_anim_count = 1;
 	cub->textures['3'].we_anim_count = 1;
@@ -109,13 +109,13 @@ void	ft_rendering(t_cub *cub)
 	
 	cub->textures['4'].empty = FALSE;
 	cub->textures['4'].no = ft_calloc(2, sizeof(t_frame));
-	cub->textures['4'].no[0] = ft_load_texture(cub, "textures/metal-green-00.xpm");
+	cub->textures['4'].no[0] = ft_load_texture(cub, "textures/torch/5.xpm");
 	cub->textures['4'].so = ft_calloc(2, sizeof(t_frame));
-	cub->textures['4'].so[0] = ft_load_texture(cub, "textures/metal-green-00.xpm");
+	cub->textures['4'].so[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
 	cub->textures['4'].we = ft_calloc(2, sizeof(t_frame));
-	cub->textures['4'].we[0] = ft_load_texture(cub, "textures/metal-green-00.xpm");
+	cub->textures['4'].we[0] = ft_load_texture(cub, "textures/torch/5.xpm");
 	cub->textures['4'].ea = ft_calloc(2, sizeof(t_frame));
-	cub->textures['4'].ea[0] = ft_load_texture(cub, "textures/metal-green-00.xpm");
+	cub->textures['4'].ea[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
 	cub->textures['4'].no_anim_count = 1;
 	cub->textures['4'].so_anim_count = 1;
 	cub->textures['4'].we_anim_count = 1;
@@ -139,25 +139,25 @@ void	ft_rendering(t_cub *cub)
 
 	
 	cub->textures['1'].no = ft_calloc(5, sizeof(t_frame));
-	cub->textures['1'].no[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
-	cub->textures['1'].no[1] = ft_load_texture(cub, "textures/door/2.xpm");
-	cub->textures['1'].no[2] = ft_load_texture(cub, "textures/metal-gray-00.xpm");
-	cub->textures['1'].no[3] = ft_load_texture(cub, "textures/metal-green-00.xpm");
+	cub->textures['1'].no[0] = ft_load_texture(cub, "textures/torch/1.xpm");
+	cub->textures['1'].no[1] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
+	cub->textures['1'].no[2] = ft_load_texture(cub, "textures/torch/1.xpm");
+	cub->textures['1'].no[3] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
 	cub->textures['1'].so = ft_calloc(5, sizeof(t_frame));
-	cub->textures['1'].so[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
-	cub->textures['1'].so[1] = ft_load_texture(cub, "textures/door/3.xpm");
-	cub->textures['1'].so[2] = ft_load_texture(cub, "textures/metal-gray-00.xpm");
-	cub->textures['1'].so[3] = ft_load_texture(cub, "textures/metal-green-00.xpm");
+	cub->textures['1'].so[0] = ft_load_texture(cub, "textures/torch/2.xpm");
+	cub->textures['1'].so[1] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
+	cub->textures['1'].so[2] = ft_load_texture(cub, "textures/torch/2.xpm");
+	cub->textures['1'].so[3] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
 	cub->textures['1'].we = ft_calloc(5, sizeof(t_frame));
-	cub->textures['1'].we[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
-	cub->textures['1'].we[1] = ft_load_texture(cub, "textures/door/4.xpm");
-	cub->textures['1'].we[2] = ft_load_texture(cub, "textures/metal-gray-00.xpm");
+	cub->textures['1'].we[0] = ft_load_texture(cub, "textures/torch/3.xpm");
+	cub->textures['1'].we[1] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
+	cub->textures['1'].we[2] = ft_load_texture(cub, "textures/torch/3.xpm");
 	cub->textures['1'].we[3] = ft_load_texture(cub, "textures/metal-green-00.xpm");
 	cub->textures['1'].ea = ft_calloc(5, sizeof(t_frame));
-	cub->textures['1'].ea[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
-	cub->textures['1'].ea[1] = ft_load_texture(cub, "textures/door/5.xpm");
-	cub->textures['1'].ea[2] = ft_load_texture(cub, "textures/metal-gray-00.xpm");
-	cub->textures['1'].ea[3] = ft_load_texture(cub, "textures/metal-green-00.xpm");
+	cub->textures['1'].ea[0] = ft_load_texture(cub, "textures/torch/4.xpm");
+	cub->textures['1'].ea[1] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
+	cub->textures['1'].ea[2] = ft_load_texture(cub, "textures/torch/4.xpm");
+	cub->textures['1'].ea[3] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
 	cub->textures['1'].no_anim_count = 4;
 	cub->textures['1'].so_anim_count = 4;
 	cub->textures['1'].we_anim_count = 4;
@@ -165,25 +165,25 @@ void	ft_rendering(t_cub *cub)
 	
 	cub->textures['-'].empty = FALSE;
 	cub->textures['-'].no = ft_calloc(5, sizeof(t_frame));
-	cub->textures['-'].no[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
-	cub->textures['-'].no[1] = ft_load_texture(cub, "textures/bricks-gray-00.xpm");
-	cub->textures['-'].no[2] = ft_load_texture(cub, "textures/metal-gray-00.xpm");
-	cub->textures['-'].no[3] = ft_load_texture(cub, "textures/metal-green-00.xpm");
+	cub->textures['-'].no[0] = ft_load_texture(cub, "textures/torch/8.xpm");
+	cub->textures['-'].no[1] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
+	cub->textures['-'].no[2] = ft_load_texture(cub, "textures/torch/8.xpm");
+	cub->textures['-'].no[3] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
 	cub->textures['-'].so = ft_calloc(5, sizeof(t_frame));
-	cub->textures['-'].so[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
-	cub->textures['-'].so[1] = ft_load_texture(cub, "textures/bricks-gray-00.xpm");
-	cub->textures['-'].so[2] = ft_load_texture(cub, "textures/metal-gray-00.xpm");
-	cub->textures['-'].so[3] = ft_load_texture(cub, "textures/metal-green-00.xpm");
+	cub->textures['-'].so[0] = ft_load_texture(cub, "textures/torch/1.xpm");
+	cub->textures['-'].so[1] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
+	cub->textures['-'].so[2] = ft_load_texture(cub, "textures/torch/1.xpm");
+	cub->textures['-'].so[3] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
 	cub->textures['-'].we = ft_calloc(5, sizeof(t_frame));
-	cub->textures['-'].we[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
-	cub->textures['-'].we[1] = ft_load_texture(cub, "textures/bricks-gray-00.xpm");
-	cub->textures['-'].we[2] = ft_load_texture(cub, "textures/metal-gray-00.xpm");
-	cub->textures['-'].we[3] = ft_load_texture(cub, "textures/metal-green-00.xpm");
+	cub->textures['-'].we[0] = ft_load_texture(cub, "textures/torch/2.xpm");
+	cub->textures['-'].we[1] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
+	cub->textures['-'].we[2] = ft_load_texture(cub, "textures/torch/2.xpm");
+	cub->textures['-'].we[3] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
 	cub->textures['-'].ea = ft_calloc(5, sizeof(t_frame));
-	cub->textures['-'].ea[0] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
-	cub->textures['-'].ea[1] = ft_load_texture(cub, "textures/bricks-gray-00.xpm");
-	cub->textures['-'].ea[2] = ft_load_texture(cub, "textures/metal-gray-00.xpm");
-	cub->textures['-'].ea[3] = ft_load_texture(cub, "textures/metal-green-00.xpm");
+	cub->textures['-'].ea[0] = ft_load_texture(cub, "textures/torch/3.xpm");
+	cub->textures['-'].ea[1] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
+	cub->textures['-'].ea[2] = ft_load_texture(cub, "textures/torch/3.xpm");
+	cub->textures['-'].ea[3] = ft_load_texture(cub, "textures/bricks-blue-00.xpm");
 	cub->textures['-'].no_anim_count = 4;
 	cub->textures['-'].so_anim_count = 4;
 	cub->textures['-'].we_anim_count = 4;
