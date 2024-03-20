@@ -6,7 +6,6 @@ NO 1 ./textures/bricks-blue-00.xpm
 SO 1 ./textures/bricks-blue-00.xpm
 WE 1 ./textures/bricks-blue-00.xpm
 EA 1 ./textures/bricks-blue-00.xpm
-SP 1 50
 MP 1 0,0,255
 
 NO 2 ./textures/metal-gray-00.xpm
