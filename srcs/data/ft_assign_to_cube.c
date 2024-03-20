@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:51:37 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/20 16:26:57 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/20 16:34:02 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,6 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 		cub->textures[i].anim_counter = 0;
 		cub->textures[i].map_color = 0x00000000;
 	}
-
 	printf("map->text[49].no[0]: %s\n", map->text[49].no[0]);
 	printf("map->text[49].no[1]: %s\n", map->text[49].no[1]);
 	printf("map->text[49].no[2]: %s\n", map->text[49].no[2]);
