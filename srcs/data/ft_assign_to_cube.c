@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_assign_to_cube.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:51:37 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/20 05:31:12 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/20 16:26:57 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,15 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 		cub->textures[i].map_color = 0x00000000;
 	}
 
-	
+	printf("map->text[49].no[0]: %s\n", map->text[49].no[0]);
+	printf("map->text[49].no[1]: %s\n", map->text[49].no[1]);
+	printf("map->text[49].no[2]: %s\n", map->text[49].no[2]);
+	printf("map->text[49].no[3]: %s\n", map->text[49].no[3]);
+	printf("map->text[49].no[4]: %s\n", map->text[49].no[4]);
+	printf("map->text[49].no[5]: %s\n", map->text[49].no[5]);
+	printf("map->text[49].so[0]: %s\n", map->text[49].so[0]);
+	printf("map->text[49].we[0]: %s\n", map->text[49].we[0]);
+	printf("map->text[49].ea[0]: %s\n", map->text[49].ea[0]);
 	for (int i = 0; i < 128; i++)
 	{
 		if (map->text[i].no)
@@ -160,7 +168,7 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 			cub->textures[i].empty = FALSE;
 			cub->textures[i].no = ft_calloc(2, sizeof(t_frame));
 			cub->textures[i].no_anim_count = 1;
-			cub->textures[i].no[0] = ft_load_texture(cub, map->text[i].no);
+			cub->textures[i].no[0] = ft_load_texture(cub, map->text[49].no[0]);
 			if (cub->textures[i].no[0].img == NULL)
 			{
 				// Precedents are not freed ==>> Memory leaks possible
@@ -172,7 +180,7 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 			cub->textures[i].empty = FALSE;
 			cub->textures[i].so = ft_calloc(2, sizeof(t_frame));
 			cub->textures[i].so_anim_count = 1;
-			cub->textures[i].so[0] = ft_load_texture(cub, map->text[i].so);
+			cub->textures[i].so[0] = ft_load_texture(cub, map->text[49].so[0]);
 			if (cub->textures[i].so[0].img == NULL)
 			{
 				// Precedents are not freed ==>> Memory leaks possible
@@ -184,7 +192,7 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 			cub->textures[i].empty = FALSE;
 			cub->textures[i].we = ft_calloc(2, sizeof(t_frame));
 			cub->textures[i].we_anim_count = 1;
-			cub->textures[i].we[0] = ft_load_texture(cub, map->text[i].we);
+			cub->textures[i].we[0] = ft_load_texture(cub, map->text[49].we[0]);
 			if (cub->textures[i].we[0].img == NULL)
 			{
 				// Precedents are not freed ==>> Memory leaks possible
@@ -196,7 +204,7 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 			cub->textures[i].empty = FALSE;
 			cub->textures[i].ea = ft_calloc(2, sizeof(t_frame));
 			cub->textures[i].ea_anim_count = 1;
-			cub->textures[i].ea[0] = ft_load_texture(cub, map->text[i].ea);
+			cub->textures[i].ea[0] = ft_load_texture(cub, map->text[49].ea[0]);
 			if (cub->textures[i].ea[0].img == NULL)
 			{
 				// Precedents are not freed ==>> Memory leaks possible

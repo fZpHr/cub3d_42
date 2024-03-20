@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:00:56 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/20 04:55:32 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/20 15:04:46 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,22 @@
 
 # include "cub3d.h"
 
+# define MAX_FRAME 200
+
 typedef	struct s_text
 {
-	char	*no;
+/* 	char	*no;
 	char	*so;
 	char	*we;
-	char	*ea;
+	char	*ea; */
+    int    no_idx;
+    int    so_idx;
+    int    we_idx;
+    int    ea_idx;
+	char   *no[MAX_FRAME];
+    char   *so[MAX_FRAME];
+    char   *we[MAX_FRAME];
+    char   *ea[MAX_FRAME];
 	int		mp;
 }	t_text ;
 

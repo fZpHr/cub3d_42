@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_handle_id.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 16:39:14 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/20 05:25:10 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/20 16:12:38 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,35 @@ int	ft_check_id(t_map *map, char **array_line)
 	return (array_line[1][0]);
 }
 
+
+/**
+ * @brief add frame to the arrayls
+ * @param frame frame to handle
+ * @param array_line splitted line
+ * @return void
+ */
+void	ft_handle_frame(char **frame, char **array_line)
+{
+	int i;
+
+	i = 0;
+	while (i < MAX_FRAME)
+	{
+		if (frame[i] != NULL)
+			i++;
+		else
+		{
+			frame[i] = ft_strdup(array_line[2]);
+			break ;
+		}
+	}
+}
+
+
 /**
  * @brief Handle the id
  * @param map struct of the map
- * @param array_line split of the line
+ * @param array_line splitted line
  * @param i parameter to know which texture to handle
  * @return void
  */
@@ -89,6 +114,7 @@ void	ft_handle_id(t_map *map, char **array_line, int i)
 	int	id;
 
 	id = ft_check_id(map, array_line);
+	map->text[id].no_idx = id;
 	if (i != 4)
 	{
 		ft_cut_extra_char(array_line[2]);
@@ -99,13 +125,13 @@ void	ft_handle_id(t_map *map, char **array_line, int i)
 		}
 	}
 	if (i == 0)
-		map->text[id].no = ft_strdup(array_line[2]);
+		ft_handle_frame(map->text[id].no, array_line);
 	else if (i == 1)
-		map->text[id].so = ft_strdup(array_line[2]);
+		ft_handle_frame(map->text[id].so, array_line);
 	else if (i == 2)
-		map->text[id].we = ft_strdup(array_line[2]);
+		ft_handle_frame(map->text[id].we, array_line);
 	else if (i == 3)
-		map->text[id].ea = ft_strdup(array_line[2]);
+		ft_handle_frame(map->text[id].ea, array_line);
 	else if (i == 4)
 		ft_handle_color_id(map, array_line, id);
 }

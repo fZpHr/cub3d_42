@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:03:58 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/19 17:46:28 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/20 15:56:46 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,24 @@
 void	ft_free_end(t_map *map, int status)
 {
 	int	i;
-
+	int j;
+	
+	j = 0;
 	i = 0;
 	if (BONUS)
 	{
 		while (i < 128)
 		{
-			free(map->text[i].no);
-			free(map->text[i].so);
-			free(map->text[i].we);
-			free(map->text[i].ea);
+			while (j < MAX_FRAME)
+			{
+				free(map->text[i].no[j]);
+				free(map->text[i].so[j]);
+				free(map->text[i].we[j]);
+				free(map->text[i].ea[j]);
+				j++;
+			}
 			i++;
+			j = 0;
 		}
 	}
 	free(map->ea);
