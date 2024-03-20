@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:51:37 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/20 16:34:02 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/20 18:55:39 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 		cub->textures[i].ea_anim_count = 0;
 		cub->textures[i].ea_anim_num = 0;
 		cub->textures[i].ea_anim = TRUE;
-		cub->textures[i].anim_delay = 30;
+		cub->textures[i].anim_delay = 10;
 		cub->textures[i].anim_counter = 0;
 		cub->textures[i].map_color = 0x00000000;
 	}
@@ -162,54 +162,78 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 	printf("map->text[49].ea[0]: %s\n", map->text[49].ea[0]);
 	for (int i = 0; i < 128; i++)
 	{
-		if (map->text[i].no)
+		cub->textures[i].no = ft_calloc(MAX_FRAME + 1, sizeof(t_frame));
+		cub->textures[i].no_anim_count = 0;
+		for (int j = 0; j < MAX_FRAME; j++)
 		{
-			cub->textures[i].empty = FALSE;
-			cub->textures[i].no = ft_calloc(2, sizeof(t_frame));
-			cub->textures[i].no_anim_count = 1;
-			cub->textures[i].no[0] = ft_load_texture(cub, map->text[49].no[0]);
-			if (cub->textures[i].no[0].img == NULL)
+			if (!map->text[i].no[j])
+				continue ;
+			cub->textures[i].no[j] = ft_load_texture(cub, map->text[i].no[j]);
+			if (cub->textures[i].no[j].img == NULL)
 			{
 				// Precedents are not freed ==>> Memory leaks possible
 				ft_error_handle(map, "Error\n", "Can't load texture", 1);
 			}
+			cub->textures[i].no_anim_count++;
 		}
-		if (map->text[i].so)
+		
+		cub->textures[i].so = ft_calloc(MAX_FRAME + 1, sizeof(t_frame));
+		cub->textures[i].so_anim_count = 0;
+		for (int j = 0; j < MAX_FRAME; j++)
 		{
-			cub->textures[i].empty = FALSE;
-			cub->textures[i].so = ft_calloc(2, sizeof(t_frame));
-			cub->textures[i].so_anim_count = 1;
-			cub->textures[i].so[0] = ft_load_texture(cub, map->text[49].so[0]);
-			if (cub->textures[i].so[0].img == NULL)
+			if (!map->text[i].so[j])
+				continue ;
+			cub->textures[i].so[j] = ft_load_texture(cub, map->text[i].so[j]);
+			if (cub->textures[i].so[j].img == NULL)
 			{
 				// Precedents are not freed ==>> Memory leaks possible
 				ft_error_handle(map, "Error\n", "Can't load texture", 1);
 			}
+			cub->textures[i].so_anim_count++;
 		}
-		if (map->text[i].we)
+
+		cub->textures[i].we = ft_calloc(MAX_FRAME + 1, sizeof(t_frame));
+		cub->textures[i].we_anim_count = 0;
+		for (int j = 0; j < MAX_FRAME; j++)
 		{
-			cub->textures[i].empty = FALSE;
-			cub->textures[i].we = ft_calloc(2, sizeof(t_frame));
-			cub->textures[i].we_anim_count = 1;
-			cub->textures[i].we[0] = ft_load_texture(cub, map->text[49].we[0]);
-			if (cub->textures[i].we[0].img == NULL)
+			if (!map->text[i].we[j])
+				continue ;
+			cub->textures[i].we[j] = ft_load_texture(cub, map->text[i].we[j]);
+			if (cub->textures[i].we[j].img == NULL)
 			{
 				// Precedents are not freed ==>> Memory leaks possible
 				ft_error_handle(map, "Error\n", "Can't load texture", 1);
 			}
+			cub->textures[i].we_anim_count++;
 		}
-		if (map->text[i].ea)
+
+		cub->textures[i].ea = ft_calloc(MAX_FRAME + 1, sizeof(t_frame));
+		cub->textures[i].ea_anim_count = 0;
+		for (int j = 0; j < MAX_FRAME; j++)
 		{
-			cub->textures[i].empty = FALSE;
-			cub->textures[i].ea = ft_calloc(2, sizeof(t_frame));
-			cub->textures[i].ea_anim_count = 1;
-			cub->textures[i].ea[0] = ft_load_texture(cub, map->text[49].ea[0]);
-			if (cub->textures[i].ea[0].img == NULL)
+			if (!map->text[i].ea[j])
+				continue ;
+			cub->textures[i].ea[j] = ft_load_texture(cub, map->text[i].ea[j]);
+			if (cub->textures[i].ea[j].img == NULL)
 			{
 				// Precedents are not freed ==>> Memory leaks possible
 				ft_error_handle(map, "Error\n", "Can't load texture", 1);
 			}
+			cub->textures[i].ea_anim_count++;
 		}
+
+		if (i >= 32 && i <= 126)
+		{
+			printf("cub->textures[%c].no_anim_count: %lld\n", i, cub->textures[i].no_anim_count);
+			printf("cub->textures[%c].so_anim_count: %lld\n", i, cub->textures[i].so_anim_count);
+			printf("cub->textures[%c].we_anim_count: %lld\n", i, cub->textures[i].we_anim_count);
+			printf("cub->textures[%c].ea_anim_count: %lld\n", i, cub->textures[i].ea_anim_count);
+		}
+
+		cub->textures[i].empty = cub->textures[i].no_anim_count == 0
+			&& cub->textures[i].so_anim_count == 0
+			&& cub->textures[i].we_anim_count == 0
+			&& cub->textures[i].ea_anim_count == 0;
 		cub->textures[i].map_color = map->text[i].mp;
 	}
 }

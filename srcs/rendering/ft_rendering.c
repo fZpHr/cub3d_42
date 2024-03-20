@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_rendering.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/20 05:04:25 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/20 18:38:52 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_rendering(t_cub *cub)
 				|| cub->map_array[i][j].type == 'W'
 				|| cub->map_array[i][j].type == 'E')
 				cub->map_array[i][j].type = '0';
-			cub->map_array[i][j].is_solid = cub->textures[(int) cub->map_array[i][j].type].no != NULL;
+			cub->map_array[i][j].is_solid = cub->textures[(int) cub->map_array[i][j].type].no[0].img != NULL;
 		}
 	}
 

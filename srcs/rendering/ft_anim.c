@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_anim.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:07:00 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/18 17:19:11 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/20 18:53:27 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_anim(t_cub *cub)
 	int			i;
 	t_texture	*t;
 
+	printf("Updating....\n");
 	i = -1;
 	while (i < 127)
 	{
@@ -42,6 +43,10 @@ void	ft_anim(t_cub *cub)
 		{
 			t->anim_counter++;
 			continue ;
+		}
+		if (i == (int) '1')
+		{
+			printf("Updating: %c\n", i);
 		}
 		t->anim_counter = 0;
 		ft_update_no(t);

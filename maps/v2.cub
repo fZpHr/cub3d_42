@@ -1,11 +1,30 @@
-NO 1 ./textures/bricks-blue-00.xpm
-NO 1 ./textures/bricks-blue-00.xpm
-NO 1 ./textures/bricks-blue-00.xpm
-NO 1 ./textures/bricks-blue-00.xpm
-NO 1 ./textures/bricks-blue-00.xpm
-SO 1 ./textures/bricks-blue-00.xpm
-WE 1 ./textures/bricks-blue-00.xpm
-EA 1 ./textures/bricks-blue-00.xpm
+NO  ./textures/torch/v3/V3.1.xpm
+NO  ./textures/torch/v3/V3.2.xpm
+NO  ./textures/torch/v3/V3.3.xpm
+NO 1 ./textures/torch/v3/V3.4.xpm
+NO 1 ./textures/torch/v3/V3.5.xpm
+NO 1 ./textures/torch/v3/V3.6.xpm
+
+SO 1 ./textures/torch/v3/V3.1.xpm
+SO 1 ./textures/torch/v3/V3.2.xpm
+SO 1 ./textures/torch/v3/V3.3.xpm
+SO 1 ./textures/torch/v3/V3.4.xpm
+SO 1 ./textures/torch/v3/V3.5.xpm
+SO 1 ./textures/torch/v3/V3.6.xpm
+
+EA 1 ./textures/torch/v3/V3.1.xpm
+EA 1 ./textures/torch/v3/V3.2.xpm
+EA 1 ./textures/torch/v3/V3.3.xpm
+EA 1 ./textures/torch/v3/V3.4.xpm
+EA 1 ./textures/torch/v3/V3.5.xpm
+EA 1 ./textures/torch/v3/V3.6.xpm
+
+WE 1 ./textures/torch/v3/V3.1.xpm
+WE 1 ./textures/torch/v3/V3.2.xpm
+WE 1 ./textures/torch/v3/V3.3.xpm
+WE 1 ./textures/torch/v3/V3.4.xpm
+WE 1 ./textures/torch/v3/V3.5.xpm
+WE 1 ./textures/torch/v3/V3.6.xpm
 MP 1 0,0,255
 
 NO 2 ./textures/metal-gray-00.xpm

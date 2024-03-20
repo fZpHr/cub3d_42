@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_render_chunk.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:24:59 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/18 17:47:56 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/20 18:36:16 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	ft_get_texture_no_so(t_cub *cub, t_casting casting,
 	{
 		texture_t = cub->textures[(int) cub->map_array[(int) casting.y] \
 				[(int) casting.x].type];
-		if (texture_t.no)
+		if (texture_t.no[texture_t.no_anim_num].img)
 			*texture = texture_t.no[texture_t.no_anim_num];
 		*texture_x = texture->width - 1
 			- (int)(casting.x * texture->width) % texture->width;
@@ -70,7 +70,7 @@ static void	ft_get_texture_no_so(t_cub *cub, t_casting casting,
 	{
 		texture_t = cub->textures[(int) cub->map_array[(int) casting.y - 1] \
 				[(int) casting.x].type];
-		if (texture_t.so)
+		if (texture_t.so[texture_t.no_anim_num].img)
 			*texture = texture_t.so[texture_t.so_anim_num];
 		*texture_x = (int)(casting.x * texture->width) % texture->width;
 	}
@@ -85,7 +85,7 @@ static void	ft_get_texture_we_ea(t_cub *cub, t_casting casting,
 	{
 		texture_t = cub->textures[(int) cub->map_array[(int) casting.y] \
 				[(int) casting.x].type];
-		if (texture_t.we)
+		if (texture_t.we[texture_t.no_anim_num].img)
 			*texture = texture_t.we[texture_t.we_anim_num];
 		*texture_x = (int)(casting.y * texture->width) % texture->width;
 	}
@@ -93,7 +93,7 @@ static void	ft_get_texture_we_ea(t_cub *cub, t_casting casting,
 	{
 		texture_t = cub->textures[(int) cub->map_array[(int) casting.y] \
 				[(int) casting.x - 1].type];
-		if (texture_t.ea)
+		if (texture_t.ea[texture_t.no_anim_num].img)
 			*texture = texture_t.ea[texture_t.ea_anim_num];
 		*texture_x = texture->width - 1
 			- (int)(casting.y * texture->width) % texture->width;
