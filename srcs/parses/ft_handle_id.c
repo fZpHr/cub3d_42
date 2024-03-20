@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 16:39:14 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/20 16:12:38 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/20 19:42:39 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,30 @@ void	ft_handle_frame(char **frame, char **array_line)
 	}
 }
 
+void	ft_handle_option(t_map *map, char **array_line, int id)
+{
+	if (ft_handle_strncmp(array_line, "MP", 2) == 1)
+		ft_handle_color_id(map, array_line, id);
+	else if (ft_handle_strncmp(array_line, "SP", 2) == 1)
+	{
+		map->text[id].sp = ft_atoi(array_line[2]);
+		if (map->text[id].sp < 0 || map->text[id].sp > 1000)
+		{
+			ft_free_array(array_line);
+			ft_error_handle(map, "Error\n", "Invalid speed", 1);
+		}
+	}
+	else if (ft_handle_strncmp(array_line, "TY", 1) == 1)
+	{
+		map->text[id].ty = ft_atoi(array_line[2]);
+		if (map->text[id].ty < 0 || map->text[id].ty > 1)
+		{
+			ft_free_array(array_line);
+			printf("map->text[id].ty: %d\n", map->text[id].ty);
+			ft_error_handle(map, "Error\n", "Invalid type", 1);
+		}
+	}
+}
 
 /**
  * @brief Handle the id
@@ -133,5 +157,5 @@ void	ft_handle_id(t_map *map, char **array_line, int i)
 	else if (i == 3)
 		ft_handle_frame(map->text[id].ea, array_line);
 	else if (i == 4)
-		ft_handle_color_id(map, array_line, id);
+		ft_handle_option(map, array_line, id);
 }

@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:51:37 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/20 18:55:39 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/20 19:44:43 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,8 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 	printf("map->text[49].so[0]: %s\n", map->text[49].so[0]);
 	printf("map->text[49].we[0]: %s\n", map->text[49].we[0]);
 	printf("map->text[49].ea[0]: %s\n", map->text[49].ea[0]);
+	printf("map->text[49].ty: %d\n", map->text[49].ty);
+	printf("map->text[49].sp: %d\n", map->text[49].sp);
 	for (int i = 0; i < 128; i++)
 	{
 		cub->textures[i].no = ft_calloc(MAX_FRAME + 1, sizeof(t_frame));

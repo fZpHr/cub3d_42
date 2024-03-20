@@ -4,6 +4,8 @@ NO 1 ./textures/torch/v3/V3.3.xpm
 NO 1 ./textures/torch/v3/V3.4.xpm
 NO 1 ./textures/torch/v3/V3.5.xpm
 NO 1 ./textures/torch/v3/V3.6.xpm
+SP 1 30
+TY 1 1
 
 SO 1 ./textures/torch/v3/V3.1.xpm
 SO 1 ./textures/torch/v3/V3.2.xpm

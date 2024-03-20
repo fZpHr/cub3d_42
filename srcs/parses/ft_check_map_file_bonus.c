@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 22:34:42 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/20 19:05:26 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/20 19:33:37 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ int	ft_check_texture_bonus(t_map *map, char **array_line)
 		ft_handle_id(map, array_line, 2);
 	else if (ft_handle_strncmp(array_line, "EA", 2) == 1)
 		ft_handle_id(map, array_line, 3);
-	else if (ft_handle_strncmp(array_line, "MP", 2) == 1)
+	else if (ft_handle_strncmp(array_line, "MP", 2) == 1 
+			|| ft_handle_strncmp(array_line, "SP", 2) == 1 
+			|| ft_handle_strncmp(array_line, "TY", 1) == 1)
 		ft_handle_id(map, array_line, 4);
 	else if (ft_strncmp(array_line[0], "F", 1) == 0 && array_line[1] != NULL)
 	{

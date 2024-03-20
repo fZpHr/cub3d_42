@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:00:56 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/20 15:04:46 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/20 19:37:25 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef	struct s_text
     char   *so[MAX_FRAME];
     char   *we[MAX_FRAME];
     char   *ea[MAX_FRAME];
+	int   	sp;
+	int		ty;
 	int		mp;
 }	t_text ;
 
@@ -71,6 +73,7 @@ typedef struct s_map
 	t_text	text[128];
 }	t_map;
 
+int		ft_handle_strncmp(char **line, char *str, int i);
 void    ft_handle_id(t_map *map, char **array_line, int i);
 void    ft_check_map_file_bonus(t_map *map, char *file);
 int		ft_check_color_bonus(char *line, int *color);
