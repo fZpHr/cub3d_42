@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_assign_to_cube.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:51:37 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/19 17:45:56 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/20 05:31:12 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "rendering.h"
+
+static void		ft_keys_init(t_keys *keys);
 
 int	ft_handle_img(t_cub *cub, t_map *map)
 {
@@ -107,4 +110,114 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 		cub->orientation = PI;
 	else if (map->player_direction[3] == 1)
 		cub->orientation = 3 * PI_2;
+
+	
+	cub->frames = 0;
+	ft_keys_init(&cub->keys);
+	if (ft_mlx_init(cub))
+	{
+		// Precedents are not freed ==>> Memory leaks possible
+		ft_game_quit(cub);
+		return ;
+	}
+
+	cub->minimap = BONUS;
+	cub->info = FALSE;
+
+	// cub->border_c = 0xFFCCCCCC;
+	cub->border_c = 0;
+
+
+	for (int i = 0; i < 128; i++)
+	{
+		cub->textures[i].empty = TRUE;
+		cub->textures[i].no = NULL;
+		cub->textures[i].no_anim_count = 0;
+		cub->textures[i].no_anim_num = 0;
+		cub->textures[i].no_anim = TRUE;
+		cub->textures[i].so = NULL;
+		cub->textures[i].so_anim_count = 0;
+		cub->textures[i].so_anim_num = 0;
+		cub->textures[i].so_anim = TRUE;
+		cub->textures[i].we = NULL;
+		cub->textures[i].we_anim_count = 0;
+		cub->textures[i].we_anim_num = 0;
+		cub->textures[i].we_anim = TRUE;
+		cub->textures[i].ea = NULL;
+		cub->textures[i].ea_anim_count = 0;
+		cub->textures[i].ea_anim_num = 0;
+		cub->textures[i].ea_anim = TRUE;
+		cub->textures[i].anim_delay = 30;
+		cub->textures[i].anim_counter = 0;
+		cub->textures[i].map_color = 0x00000000;
+	}
+
+	
+	for (int i = 0; i < 128; i++)
+	{
+		if (map->text[i].no)
+		{
+			cub->textures[i].empty = FALSE;
+			cub->textures[i].no = ft_calloc(2, sizeof(t_frame));
+			cub->textures[i].no_anim_count = 1;
+			cub->textures[i].no[0] = ft_load_texture(cub, map->text[i].no);
+			if (cub->textures[i].no[0].img == NULL)
+			{
+				// Precedents are not freed ==>> Memory leaks possible
+				ft_error_handle(map, "Error\n", "Can't load texture", 1);
+			}
+		}
+		if (map->text[i].so)
+		{
+			cub->textures[i].empty = FALSE;
+			cub->textures[i].so = ft_calloc(2, sizeof(t_frame));
+			cub->textures[i].so_anim_count = 1;
+			cub->textures[i].so[0] = ft_load_texture(cub, map->text[i].so);
+			if (cub->textures[i].so[0].img == NULL)
+			{
+				// Precedents are not freed ==>> Memory leaks possible
+				ft_error_handle(map, "Error\n", "Can't load texture", 1);
+			}
+		}
+		if (map->text[i].we)
+		{
+			cub->textures[i].empty = FALSE;
+			cub->textures[i].we = ft_calloc(2, sizeof(t_frame));
+			cub->textures[i].we_anim_count = 1;
+			cub->textures[i].we[0] = ft_load_texture(cub, map->text[i].we);
+			if (cub->textures[i].we[0].img == NULL)
+			{
+				// Precedents are not freed ==>> Memory leaks possible
+				ft_error_handle(map, "Error\n", "Can't load texture", 1);
+			}
+		}
+		if (map->text[i].ea)
+		{
+			cub->textures[i].empty = FALSE;
+			cub->textures[i].ea = ft_calloc(2, sizeof(t_frame));
+			cub->textures[i].ea_anim_count = 1;
+			cub->textures[i].ea[0] = ft_load_texture(cub, map->text[i].ea);
+			if (cub->textures[i].ea[0].img == NULL)
+			{
+				// Precedents are not freed ==>> Memory leaks possible
+				ft_error_handle(map, "Error\n", "Can't load texture", 1);
+			}
+		}
+		cub->textures[i].map_color = map->text[i].mp;
+	}
+}
+
+/**
+ * @brief Initialize the keys structure.
+ * 
+ * @note	Point: avoid `uninitialized values` errors.
+ * 
+ * @param keys 	The keys structure
+*/
+static void	ft_keys_init(t_keys *keys)
+{
+	keys->forward = FALSE;
+	keys->backward = FALSE;
+	keys->rot_left = FALSE;
+	keys->rot_right = FALSE;
 }

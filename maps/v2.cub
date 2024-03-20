@@ -22,10 +22,10 @@ WE 4 ./textures/metal-green-00.xpm
 EA 4 ./textures/metal-green-00.xpm
 MP 4 0,255,0
 
-NO X ./textures/exit-00.xpm
-SO X ./textures/exit-00.xpm
-WE X ./textures/exit-00.xpm
-EA X ./textures/exit-00.xpm
+NO X ./textures/door/4.xpm
+SO X ./textures/door/4.xpm
+WE X ./textures/door/4.xpm
+EA X ./textures/door/4.xpm
 MP X 255,0,255
 
 MP O 0,255,255

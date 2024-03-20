@@ -307,6 +307,7 @@ int		ft_error(char *str);
 char	*ft_lli_to_str(long long n, int lenght);
 int		ft_numlen(int n);
 char	*ft_ftoa(float n, int length);
+t_frame	ft_load_texture(t_cub *cub, char *path);
 
 // DATA
 

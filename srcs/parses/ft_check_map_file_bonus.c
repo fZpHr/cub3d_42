@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_map_file_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 22:34:42 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/19 17:43:35 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/20 05:16:01 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	ft_handle_strncmp(char **line, char *str, int i)
  */
 int	ft_check_if_full(t_map *map)
 {
-	if (map->text[1].no && map->text[1].so && map->text[1].we && map->text[1].ea
-		&& map->text[1].mp && map->floor_c[0] != -1 && map->ceiling_c[0] != -1)
+	if (map->text['1'].no && map->text['1'].so && map->text['1'].we && map->text['1'].ea
+		&& map->text['1'].mp && map->floor_c[0] != -1 && map->ceiling_c[0] != -1)
 		return (1);
 	else if (map->floor_c[0] != -1 && map->ceiling_c[0] != -1)
 		ft_error_handle(map, "Error\n", "Invalid description content", 1);

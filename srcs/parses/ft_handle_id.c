@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_handle_id.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 16:39:14 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/19 17:41:55 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/20 05:25:10 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,31 +61,20 @@ void	ft_handle_color_id(t_map *map, char **array_line, int id)
 
 /**
  * @brief Check if the id is valid
- * @param map struct of the map
- * @param array_line split of the line
- * @return int 1 if the texture/color is invalid, 0 otherwise
+ * 
+ * @param map 			struct of the map
+ * @param array_line 	splitted line
+ * 
+ * @return The id (otherwise it exits)
  */
 int	ft_check_id(t_map *map, char **array_line)
 {
-	int	tmp;
-
-	tmp = ft_atoi(array_line[1]);
-	if (array_line[1] == NULL)
+	if (array_line[1] == NULL || array_line[1][1] != '\0')
 	{
 		ft_free_array(array_line);
 		ft_error_handle(map, "Error\n", "Invalid id", 1);
 	}
-	if (array_line[1][1] != '\0')
-	{
-		ft_free_array(array_line);
-		ft_error_handle(map, "Error\n", "Invalid id", 1);
-	}
-	if (tmp < 0 || tmp > 128)
-	{
-		ft_free_array(array_line);
-		ft_error_handle(map, "Error\n", "Invalid id", 1);
-	}
-	return (tmp);
+	return (array_line[1][0]);
 }
 
 /**
