@@ -1,6 +1,6 @@
-NO  ./textures/torch/v3/V3.1.xpm
-NO  ./textures/torch/v3/V3.2.xpm
-NO  ./textures/torch/v3/V3.3.xpm
+NO 1 ./textures/torch/v3/V3.1.xpm
+NO 1 ./textures/torch/v3/V3.2.xpm
+NO 1 ./textures/torch/v3/V3.3.xpm
 NO 1 ./textures/torch/v3/V3.4.xpm
 NO 1 ./textures/torch/v3/V3.5.xpm
 NO 1 ./textures/torch/v3/V3.6.xpm
