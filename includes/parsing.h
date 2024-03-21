@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:00:56 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/21 07:33:32 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/21 13:50:47 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_map
 	char	*so;
 	char	*we;
 	char	*ea;
+	int 	def_text;
 	int		floor_c[3];
 	int		ceiling_c[3];
 	int		mp_c[3];
@@ -69,7 +70,7 @@ typedef struct s_map
 	t_text	text[128];
 }	t_map;
 
-int		ft_handle_strncmp(char **line, char *str, int i);
+int		ft_handle_strncmp(t_map *map, char **line, char *str, int i);
 void	ft_handle_id(t_map *map, char **array_line, int i);
 void	ft_check_map_file_bonus(t_map *map, char *file);
 int		ft_check_color_bonus(char *line, int *color);

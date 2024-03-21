@@ -51,7 +51,7 @@
  * 
  * @note	---
  * 
- * @note	- By default, the mouse is not hidden. (Valgrind is happy !)
+ * @note	- By def_text, the mouse is not hidden. (Valgrind is happy !)
  * 
  * @note	- And when `HIDE_MOUSE` is `1`, the mouse IS hidden.
  * 			(But valgrind is not happy...)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_handle_id.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 16:39:14 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/21 07:49:25 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/21 16:31:40 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,28 +83,39 @@ int	ft_check_id(t_map *map, char **array_line)
  * @param array_line splitted line
  * @return void
  */
-void	ft_handle_frame(char **frame, char **array_line)
+void	ft_handle_frame(t_map *map, char **frame, char **array_line)
 {
 	int	i;
+	int j;
 
+	j = 0;
+	(void)map;
+	while (array_line[j] != NULL)
+		j++;
 	i = 0;
 	while (i < MAX_FRAME)
 	{
 		if (frame[i] != NULL)
 			i++;
-		else
+		else if (j == 2)
+		{
+			frame[i] = ft_strdup(array_line[1]);
+			break ;
+		}
+		else if (j == 3)
 		{
 			frame[i] = ft_strdup(array_line[2]);
 			break ;
 		}
+
 	}
 }
 
 void	ft_handle_option(t_map *map, char **array_line, int id)
 {
-	if (ft_handle_strncmp(array_line, "MP", 2) == 1)
+	if (ft_handle_strncmp(map, array_line, "MP", 2) == 1)
 		ft_handle_color_id(map, array_line, id);
-	else if (ft_handle_strncmp(array_line, "SP", 2) == 1)
+	else if (ft_handle_strncmp(map, array_line, "SP", 2) == 1)
 	{
 		map->text[id].sp = ft_atoi(array_line[2]);
 		if (map->text[id].sp < 0 || map->text[id].sp > 1000)
@@ -113,7 +124,7 @@ void	ft_handle_option(t_map *map, char **array_line, int id)
 			ft_error_handle(map, "Error\n", "Invalid speed", 1);
 		}
 	}
-	else if (ft_handle_strncmp(array_line, "TY", 1) == 1)
+	else if (ft_handle_strncmp(map, array_line, "TY", 1) == 1)
 	{
 		map->text[id].ty = ft_atoi(array_line[2]);
 		if (map->text[id].ty < 0 || map->text[id].ty > 1)
@@ -122,6 +133,43 @@ void	ft_handle_option(t_map *map, char **array_line, int id)
 			ft_error_handle(map, "Error\n", "Invalid type", 1);
 		}
 	}
+}
+
+
+
+int	ft_nb_arg(t_map *map, char **array_line, int i)
+{
+	int	j;
+
+	j = 0;
+	while (array_line[j] != NULL)
+		j++;
+	if (j < 2)
+	{
+		ft_free_array(array_line);
+		ft_error_handle(map, "Error\n", "Invalid desc content", 1);
+	}
+	else if (j == 2)
+	{
+		ft_cut_extra_char(array_line[1]);
+		if (ft_acces_texture(array_line[1], 0) == 1)
+		{
+			ft_free_array(array_line);
+			ft_error_handle(map, "Error\n", "Invalid texture path", 1);
+		}
+		if (i == 0)
+			ft_handle_frame(map, map->text['1'].no, array_line);
+		else if (i == 1)
+			ft_handle_frame(map, map->text['1'].so, array_line);
+		else if (i == 2)
+			ft_handle_frame(map, map->text['1'].we, array_line);
+		else if (i == 3)
+			ft_handle_frame(map, map->text['1'].ea, array_line);
+		else if (i == 4)
+			ft_handle_option(map, array_line, '1');
+		return (1);
+	}
+	return (0);
 }
 
 /**
@@ -135,6 +183,9 @@ void	ft_handle_id(t_map *map, char **array_line, int i)
 {
 	int	id;
 
+	if (map->def_text == 0)
+		if (ft_nb_arg(map, array_line, i) == 1)
+			return;
 	id = ft_check_id(map, array_line);
 	map->text[id].no_idx = id;
 	if (i != 4)
@@ -147,13 +198,13 @@ void	ft_handle_id(t_map *map, char **array_line, int i)
 		}
 	}
 	if (i == 0)
-		ft_handle_frame(map->text[id].no, array_line);
+		ft_handle_frame(map, map->text[id].no, array_line);
 	else if (i == 1)
-		ft_handle_frame(map->text[id].so, array_line);
+		ft_handle_frame(map, map->text[id].so, array_line);
 	else if (i == 2)
-		ft_handle_frame(map->text[id].we, array_line);
+		ft_handle_frame(map, map->text[id].we, array_line);
 	else if (i == 3)
-		ft_handle_frame(map->text[id].ea, array_line);
+		ft_handle_frame(map, map->text[id].ea, array_line);
 	else if (i == 4)
 		ft_handle_option(map, array_line, id);
 }

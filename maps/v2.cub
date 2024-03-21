@@ -1,4 +1,4 @@
-NO 1 ./textures/torch/v3/V3.1.xpm
+NO ./textures/torch/v3/V3.1.xpm
 NO 1 ./textures/torch/v3/V3.2.xpm
 NO 1 ./textures/torch/v3/V3.3.xpm
 NO 1 ./textures/torch/v3/V3.4.xpm
@@ -7,21 +7,21 @@ NO 1 ./textures/torch/v3/V3.6.xpm
 SP 1 30
 TY 1 1
 
-SO 1 ./textures/torch/v3/V3.1.xpm
+SO ./textures/torch/v3/V3.1.xpm
 SO 1 ./textures/torch/v3/V3.2.xpm
 SO 1 ./textures/torch/v3/V3.3.xpm
 SO 1 ./textures/torch/v3/V3.4.xpm
 SO 1 ./textures/torch/v3/V3.5.xpm
 SO 1 ./textures/torch/v3/V3.6.xpm
 
-EA 1 ./textures/torch/v3/V3.1.xpm
+EA ./textures/torch/v3/V3.1.xpm
 EA 1 ./textures/torch/v3/V3.2.xpm
 EA 1 ./textures/torch/v3/V3.3.xpm
 EA 1 ./textures/torch/v3/V3.4.xpm
 EA 1 ./textures/torch/v3/V3.5.xpm
 EA 1 ./textures/torch/v3/V3.6.xpm
 
-WE 1 ./textures/torch/v3/V3.1.xpm
+WE ./textures/torch/v3/V3.1.xpm
 WE 1 ./textures/torch/v3/V3.2.xpm
 WE 1 ./textures/torch/v3/V3.3.xpm
 WE 1 ./textures/torch/v3/V3.4.xpm
@@ -41,10 +41,10 @@ WE 3 ./textures/bricks-gray-00.xpm
 EA 3 ./textures/bricks-gray-00.xpm
 MP 3 128,128,128
 
-NO 4 ./textures/metal-green-00.xpm
-SO 4 ./textures/metal-green-00.xpm
-WE 4 ./textures/metal-green-00.xpm
-EA 4 ./textures/metal-green-00.xpm
+NO 4 ./textures/ore.xpm
+SO 4 ./textures/ore.2.xpm
+WE 4 ./textures/ore.xpm
+EA 4 ./textures/ore.xpm
 MP 4 0,255,0
 
 NO X ./textures/door/4.xpm
@@ -56,8 +56,8 @@ MP X 255,0,255
 MP O 0,255,255
 
 
-F 159,115,85
-C 201,173,142
+F 10,10,10
+C 10,10,10
 
 
 111111111111111111111111111111

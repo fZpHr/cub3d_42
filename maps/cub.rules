@@ -1,13 +1,13 @@
 NO [<id>] <path_to_the_xpm_file>  // Required for id 1
 SO [<id>] <path_to_the_xpm_file>  // There can be multiple definition:
 WE [<id>] <path_to_the_xpm_file>  //    the images will be the frames of the animation.
-EA [<id>] <path_to_the_xpm_file>  // Default id = 1
-                                  // Default texture = NULL (transparent)
+EA [<id>] <path_to_the_xpm_file>  // def_text id = 1
+                                  // def_text texture = NULL (transparent)
 
-MP <id> (<R>,<G>,<B> | #<hex>)    // Default 1 = 238,238,238 ; 2 = 0,0,0 ; others = transparent
-BD (<R>,<G>,<B> | #<hex>)         // Default border = 204,204,204
+MP <id> (<R>,<G>,<B> | #<hex>)    // def_text 1 = 238,238,238 ; 2 = 0,0,0 ; others = transparent
+BD (<R>,<G>,<B> | #<hex>)         // def_text border = 204,204,204
 
-AN <id> <amim_delay_in_frames>    // Default delay = 30
+AN <id> <amim_delay_in_frames>    // def_text delay = 30
 
 F (<R>,<G>,<B> | #<hex>)          // Required
 C (<R>,<G>,<B> | #<hex>)          // Required
