@@ -1,39 +1,35 @@
-NO ./textures/torch/v3/V3.1.xpm
-NO 1 ./textures/torch/v3/V3.2.xpm
-NO 1 ./textures/torch/v3/V3.3.xpm
-NO 1 ./textures/torch/v3/V3.4.xpm
-NO 1 ./textures/torch/v3/V3.5.xpm
-NO 1 ./textures/torch/v3/V3.6.xpm
-SP 1 30
-TY 1 1
+NO ./textures/bricks-darkblue.xpm
+WE ./textures/bricks-darkblue.xpm
+EA ./textures/bricks-darkblue.xpm
+SO ./textures/bricks-darkblue.xpm
+MP 1 50,50,50
 
-SO ./textures/torch/v3/V3.1.xpm
-SO 1 ./textures/torch/v3/V3.2.xpm
-SO 1 ./textures/torch/v3/V3.3.xpm
-SO 1 ./textures/torch/v3/V3.4.xpm
-SO 1 ./textures/torch/v3/V3.5.xpm
-SO 1 ./textures/torch/v3/V3.6.xpm
+NO 2 ./textures/torch/v3/V3.2.xpm
+NO 2 ./textures/torch/v3/V3.3.xpm
+NO 2 ./textures/torch/v3/V3.4.xpm
+NO 2 ./textures/torch/v3/V3.5.xpm
+NO 2 ./textures/torch/v3/V3.6.xpm
 
-EA ./textures/torch/v3/V3.1.xpm
-EA 1 ./textures/torch/v3/V3.2.xpm
-EA 1 ./textures/torch/v3/V3.3.xpm
-EA 1 ./textures/torch/v3/V3.4.xpm
-EA 1 ./textures/torch/v3/V3.5.xpm
-EA 1 ./textures/torch/v3/V3.6.xpm
+SO 2 ./textures/torch/v3/V3.2.xpm
+SO 2 ./textures/torch/v3/V3.3.xpm
+SO 2 ./textures/torch/v3/V3.4.xpm
+SO 2 ./textures/torch/v3/V3.5.xpm
+SO 2 ./textures/torch/v3/V3.6.xpm
 
-WE ./textures/torch/v3/V3.1.xpm
-WE 1 ./textures/torch/v3/V3.2.xpm
-WE 1 ./textures/torch/v3/V3.3.xpm
-WE 1 ./textures/torch/v3/V3.4.xpm
-WE 1 ./textures/torch/v3/V3.5.xpm
-WE 1 ./textures/torch/v3/V3.6.xpm
-MP 1 0,0,255
+EA 2 ./textures/torch/v3/V3.2.xpm
+EA 2 ./textures/torch/v3/V3.3.xpm
+EA 2 ./textures/torch/v3/V3.4.xpm
+EA 2 ./textures/torch/v3/V3.5.xpm
+EA 2 ./textures/torch/v3/V3.6.xpm
 
-NO 2 ./textures/metal-gray-00.xpm
-SO 2 ./textures/metal-gray-00.xpm
-WE 2 ./textures/metal-gray-00.xpm
-EA 2 ./textures/metal-gray-00.xpm
-MP 2 200,200,200
+WE 2 ./textures/torch/v3/V3.2.xpm
+WE 2 ./textures/torch/v3/V3.3.xpm
+WE 2 ./textures/torch/v3/V3.4.xpm
+WE 2 ./textures/torch/v3/V3.5.xpm
+WE 2 ./textures/torch/v3/V3.6.xpm
+MP 2 30,30,30
+SP 2 30
+TY 2 1
 
 NO 3 ./textures/bricks-gray-00.xpm
 SO 3 ./textures/bricks-gray-00.xpm
@@ -42,23 +38,48 @@ EA 3 ./textures/bricks-gray-00.xpm
 MP 3 128,128,128
 
 NO 4 ./textures/ore.xpm
-SO 4 ./textures/ore.2.xpm
+SO 4 ./textures/ore.xpm
 WE 4 ./textures/ore.xpm
 EA 4 ./textures/ore.xpm
+
+NO 4 ./textures/ore.2.xpm
+SO 4 ./textures/ore.2.xpm
+WE 4 ./textures/ore.2.xpm
+EA 4 ./textures/ore.2.xpm
 MP 4 0,255,0
 
 NO X ./textures/door/4.xpm
 SO X ./textures/door/4.xpm
 WE X ./textures/door/4.xpm
 EA X ./textures/door/4.xpm
+
+NO X ./textures/door/1.xpm
+SO X ./textures/door/1.xpm
+WE X ./textures/door/1.xpm
+EA X ./textures/door/1.xpm
+
+NO X ./textures/door/2.xpm
+SO X ./textures/door/2.xpm
+WE X ./textures/door/2.xpm
+EA X ./textures/door/2.xpm
+
+NO X ./textures/door/3.xpm
+SO X ./textures/door/3.xpm
+WE X ./textures/door/3.xpm
+EA X ./textures/door/3.xpm
+
+NO X ./textures/door/5.xpm
+SO X ./textures/door/5.xpm
+WE X ./textures/door/5.xpm
+EA X ./textures/door/5.xpm
+
 MP X 255,0,255
 
-MP O 0,255,255
+MP O 20,10,10
 
 
 F 10,10,10
 C 10,10,10
-
 
 111111111111111111111111111111
 10000000000X000001100000000001
@@ -75,8 +96,8 @@ C 10,10,10
 111111100003300001111111111111
 100001100003300000000000000001
 104401100003300000000000000001
-100001100003300002222222200001
-11XX11100003300002222222200001
-100N00000000000000000000000001
+100001100003300001112111100001
+11XX12100003300001112111100001
 100000000000000000000000000001
-111111111111111111111111111111
+200N00000000000000000000000001
+111112111112111111112111111111

@@ -4,13 +4,9 @@ WE [<id>] <path_to_the_xpm_file>  //    the images will be the frames of the ani
 EA [<id>] <path_to_the_xpm_file>  // def_text id = 1
                                   // def_text texture = NULL (transparent)
 
-MP <id> (<R>,<G>,<B> | #<hex>)    // def_text 1 = 238,238,238 ; 2 = 0,0,0 ; others = transparent
-BD (<R>,<G>,<B> | #<hex>)         // def_text border = 204,204,204
-
-AN <id> <amim_delay_in_frames>    // def_text delay = 30
-
-F (<R>,<G>,<B> | #<hex>)          // Required
-C (<R>,<G>,<B> | #<hex>)          // Required
+MP <id> (<R>,<G>,<B>)    // def_text 1 = 238,238,238 ; 2 = 0,0,0 ; others = transparent
+TY <id> (1, 0)  // type def of bloc (1 collision, 0 pass)
+SP <id> <amim_delay_in_frames>    // def_text delay = 30
 
 // Map rules:
 // 1. ' ' = void
@@ -25,6 +21,9 @@ C (<R>,<G>,<B> | #<hex>)          // Required
 // Adds:
 // - 'X' = Closed Door >> Should be able to open
 // - 'O' = Opened Door >> Should be able to close
+
+F (<R>,<G>,<B>)          // Required & Always end by C or F
+C (<R>,<G>,<B>)          // Required & Always end by C or F
 
         1111111111111111111111111
         1000000000100000000000001

@@ -6,14 +6,14 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 22:34:42 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/21 16:26:19 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/21 18:46:29 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /**
- * @brief Check if the strncmp is valid
+ * @brief Check if the strncmp is valid, and if the default texture is full
  *
  * @param line line to check
  * @param str string to compare
