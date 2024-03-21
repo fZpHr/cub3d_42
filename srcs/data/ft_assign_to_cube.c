@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_assign_to_cube.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:51:37 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/20 19:44:43 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/21 07:49:47 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,17 +151,6 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 		cub->textures[i].anim_counter = 0;
 		cub->textures[i].map_color = 0x00000000;
 	}
-	printf("map->text[49].no[0]: %s\n", map->text[49].no[0]);
-	printf("map->text[49].no[1]: %s\n", map->text[49].no[1]);
-	printf("map->text[49].no[2]: %s\n", map->text[49].no[2]);
-	printf("map->text[49].no[3]: %s\n", map->text[49].no[3]);
-	printf("map->text[49].no[4]: %s\n", map->text[49].no[4]);
-	printf("map->text[49].no[5]: %s\n", map->text[49].no[5]);
-	printf("map->text[49].so[0]: %s\n", map->text[49].so[0]);
-	printf("map->text[49].we[0]: %s\n", map->text[49].we[0]);
-	printf("map->text[49].ea[0]: %s\n", map->text[49].ea[0]);
-	printf("map->text[49].ty: %d\n", map->text[49].ty);
-	printf("map->text[49].sp: %d\n", map->text[49].sp);
 	for (int i = 0; i < 128; i++)
 	{
 		cub->textures[i].no = ft_calloc(MAX_FRAME + 1, sizeof(t_frame));
@@ -222,14 +211,6 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 				ft_error_handle(map, "Error\n", "Can't load texture", 1);
 			}
 			cub->textures[i].ea_anim_count++;
-		}
-
-		if (i >= 32 && i <= 126)
-		{
-			printf("cub->textures[%c].no_anim_count: %lld\n", i, cub->textures[i].no_anim_count);
-			printf("cub->textures[%c].so_anim_count: %lld\n", i, cub->textures[i].so_anim_count);
-			printf("cub->textures[%c].we_anim_count: %lld\n", i, cub->textures[i].we_anim_count);
-			printf("cub->textures[%c].ea_anim_count: %lld\n", i, cub->textures[i].ea_anim_count);
 		}
 
 		cub->textures[i].empty = cub->textures[i].no_anim_count == 0

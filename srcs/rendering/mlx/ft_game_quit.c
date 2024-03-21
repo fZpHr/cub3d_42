@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:10:09 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/20 04:12:55 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/21 07:32:48 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_game_quit(t_cub *cub)
 		mlx_destroy_display(cub->mlx);
 		free(cub->mlx);
 	}
-	printf("Bye !\n");
+	write(1, "Bye !\n", 6);
 	exit(0);
 	return (0);
 }

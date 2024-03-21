@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_map_file_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 22:34:42 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/20 19:33:37 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/21 07:36:51 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ int	ft_handle_strncmp(char **line, char *str, int i)
  */
 int	ft_check_if_full(t_map *map)
 {
-	if (map->text['1'].no[0] && map->text['1'].so[0] && map->text['1'].we[0] && map->text['1'].ea[0]
-		&& map->text['1'].mp && map->floor_c[0] != -1 && map->ceiling_c[0] != -1)
+	if (map->text['1'].no[0] && map->text['1'].so[0] && map->text['1'].we[0]
+		&& map->text['1'].ea[0] && map->text['1'].mp && map->floor_c[0] != -1
+		&& map->ceiling_c[0] != -1)
 		return (1);
 	else if (map->floor_c[0] != -1 && map->ceiling_c[0] != -1)
 		ft_error_handle(map, "Error\n", "Invalid description content", 1);
@@ -61,9 +62,9 @@ int	ft_check_texture_bonus(t_map *map, char **array_line)
 		ft_handle_id(map, array_line, 2);
 	else if (ft_handle_strncmp(array_line, "EA", 2) == 1)
 		ft_handle_id(map, array_line, 3);
-	else if (ft_handle_strncmp(array_line, "MP", 2) == 1 
-			|| ft_handle_strncmp(array_line, "SP", 2) == 1 
-			|| ft_handle_strncmp(array_line, "TY", 1) == 1)
+	else if (ft_handle_strncmp(array_line, "MP", 2) == 1
+		|| ft_handle_strncmp(array_line, "SP", 2) == 1
+		|| ft_handle_strncmp(array_line, "TY", 2) == 1)
 		ft_handle_id(map, array_line, 4);
 	else if (ft_strncmp(array_line[0], "F", 1) == 0 && array_line[1] != NULL)
 	{

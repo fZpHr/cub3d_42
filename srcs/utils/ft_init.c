@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:22:23 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/20 19:39:36 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/21 07:14:24 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,25 @@
 void	ft_init_bonus(t_map *map)
 {
 	int	i;
-	int j;
+	int	j;
 
-	j = 0;
-	i = 0;
-	while (i < 128)
+	i = -1;
+	while (++i < 128)
 	{
-		while (j < MAX_FRAME)
+		j = -1;
+		while (++j < MAX_FRAME)
 		{
 			map->text[i].no[j] = NULL;
 			map->text[i].so[j] = NULL;
 			map->text[i].we[j] = NULL;
 			map->text[i].ea[j] = NULL;
-			j++;
 		}
-		j = 0;
 		map->text[i].no_idx = -1;
 		map->text[i].so_idx = -1;
 		map->text[i].we_idx = -1;
 		map->text[i].ea_idx = -1;
 		map->text[i].mp = -1;
-		i++;
-	}
-	i = 0;
-	while (i < 128)
-	{
 		map->text[i] = (t_text){0};
-		i++;
 	}
 	map->mp_c[0] = -1;
 	map->mp_c[1] = -1;

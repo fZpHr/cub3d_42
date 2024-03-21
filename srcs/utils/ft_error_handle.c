@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error_handle.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:03:58 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/20 19:49:59 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/21 07:54:55 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,18 @@
 void	ft_free_end(t_map *map, int status)
 {
 	int	i;
-	int j;
-	
-	j = 0;
-	i = 0;
-	if (BONUS)
+	int	j;
+
+	i = -1;
+	while (BONUS && ++i < 128)
 	{
-		while (i < 128)
+		j = MAX_FRAME;
+		while (map->text[i].no[0] && --j >= 0)
 		{
-			if (map->text[i].no[0])
-			{
-				while (j < MAX_FRAME)
-				{
-					free(map->text[i].no[j]);
-					free(map->text[i].so[j]);
-					free(map->text[i].we[j]);
-					free(map->text[i].ea[j]);
-					j++;
-				}
-				j = 0;
-			}
-			i++;
+			free(map->text[i].no[j]);
+			free(map->text[i].so[j]);
+			free(map->text[i].we[j]);
+			free(map->text[i].ea[j]);
 		}
 	}
 	free(map->ea);
@@ -46,8 +37,6 @@ void	ft_free_end(t_map *map, int status)
 		ft_free_array(map->map_array);
 	if (map->map_array_copy)
 		ft_free_array(map->map_array_copy);
-	while (i <= 1023)
-		close(i++);
 	exit(status);
 }
 

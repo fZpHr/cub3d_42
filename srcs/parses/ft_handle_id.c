@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_handle_id.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 16:39:14 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/20 19:42:39 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/21 07:49:25 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int	ft_check_id(t_map *map, char **array_line)
 	return (array_line[1][0]);
 }
 
-
 /**
  * @brief add frame to the arrayls
  * @param frame frame to handle
@@ -86,7 +85,7 @@ int	ft_check_id(t_map *map, char **array_line)
  */
 void	ft_handle_frame(char **frame, char **array_line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < MAX_FRAME)
@@ -120,7 +119,6 @@ void	ft_handle_option(t_map *map, char **array_line, int id)
 		if (map->text[id].ty < 0 || map->text[id].ty > 1)
 		{
 			ft_free_array(array_line);
-			printf("map->text[id].ty: %d\n", map->text[id].ty);
 			ft_error_handle(map, "Error\n", "Invalid type", 1);
 		}
 	}

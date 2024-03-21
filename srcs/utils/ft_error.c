@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:31:08 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 11:31:54 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/21 07:30:49 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 */
 int	ft_error(char *str)
 {
-	printf("Error: %s\n", str);
+	write(1, "Error: ", 7);
+	write(1, str, ft_strlen(str));
+	write(1, "\n", 1);
 	return (1);
 }

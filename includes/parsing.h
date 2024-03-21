@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:00:56 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/20 19:37:25 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/21 07:33:32 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,20 @@
 
 # define MAX_FRAME 200
 
-typedef	struct s_text
+typedef struct s_text
 {
-/* 	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea; */
-    int    no_idx;
-    int    so_idx;
-    int    we_idx;
-    int    ea_idx;
-	char   *no[MAX_FRAME];
-    char   *so[MAX_FRAME];
-    char   *we[MAX_FRAME];
-    char   *ea[MAX_FRAME];
-	int   	sp;
+	int		no_idx;
+	int		so_idx;
+	int		we_idx;
+	int		ea_idx;
+	char	*no[MAX_FRAME];
+	char	*so[MAX_FRAME];
+	char	*we[MAX_FRAME];
+	char	*ea[MAX_FRAME];
+	int		sp;
 	int		ty;
 	int		mp;
-}	t_text ;
+}	t_text;
 
 /**
  * @brief Structure for the map
@@ -74,8 +70,8 @@ typedef struct s_map
 }	t_map;
 
 int		ft_handle_strncmp(char **line, char *str, int i);
-void    ft_handle_id(t_map *map, char **array_line, int i);
-void    ft_check_map_file_bonus(t_map *map, char *file);
+void	ft_handle_id(t_map *map, char **array_line, int i);
+void	ft_check_map_file_bonus(t_map *map, char *file);
 int		ft_check_color_bonus(char *line, int *color);
 int		ft_acces_texture(char *line, int i);
 void	ft_check_wall(t_map *map);
@@ -84,6 +80,5 @@ void	ft_check_args(int ac);
 void	ft_check_map_file(t_map *map, char *map_file);
 int		ft_check_texture(t_map *map, char *line);
 void	ft_check_map_content(t_map *map, int fd);
-
 
 #endif
