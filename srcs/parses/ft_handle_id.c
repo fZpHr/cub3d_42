@@ -6,46 +6,46 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 16:39:14 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/21 18:44:25 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/22 16:29:05 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /**
- * @brief Check if the color is valid
- *
- * @param line line to check
- * @param color array of the color
- * @return int 1 if the color is invalid, 0 otherwise
+ * @brief Handle space between color
+ * 
+ * @param array_line 	splitted line
+ * @param i 			current i
+ * @param opt 			number of arguments
+ * @return char** of the new array
  */
-int	ft_check_color_bonus(char *line, int *color)
+char	**ft_handle_space(char **array_line, int i, int opt)
 {
-	int	i;
+	char	**tmp;
+	int		j;
 
+	j = 0;
 	i = 0;
-	color[0] = ft_atoi(line + i);
-	while (line[i] >= '0' && line[i] <= '9')
+	while (array_line[i])
 		i++;
-	if (line[i] != ',')
-		return (1);
-	i++;
-	color[1] = ft_atoi(line + i);
-	while (line[i] >= '0' && line[i] <= '9')
-		i++;
-	if (line[i] != ',')
-		return (1);
-	i++;
-	color[2] = ft_atoi(line + i);
-	while (line[i] >= '0' && line[i] <= '9')
-		i++;
-	if ((line[i] != '\n' && line[i] != '\0') || line[i] != '\0'
-		|| line[i] == ' ')
-		return (1);
-	if (color[0] < 0 || color[0] > 255 || color[1] < 0 || color[1] > 255
-		|| color[2] < 0 || color[2] > 255)
-		return (1);
-	return (0);
+	if (i >= opt)
+	{
+		tmp = malloc(sizeof(char *) * (opt + 1));
+		while (j < opt)
+		{
+			tmp[j] = ft_strdup(array_line[j]);
+			j++;
+		}
+		tmp[j] = NULL;
+		i = opt;
+		while (array_line[i])
+		{
+			tmp[1] = ft_strjoin(tmp[1], array_line[i]);
+			i++;
+		}
+	}
+	return (tmp);
 }
 
 /**
@@ -59,9 +59,9 @@ int	ft_check_color_bonus(char *line, int *color)
 */
 void	ft_handle_color_id(t_map *map, char **array_line, int id)
 {
-	if (ft_check_color_bonus(array_line[2], map->mp_c) == 1)
+	if (ft_check_color_bonus_options(array_line, map->mp_c) == 1)
 	{
-		ft_free_array(array_line);
+		ft_free_array(&array_line);
 		ft_error_handle(map, "Error\n", "Invalid color", 1);
 	}
 	map->text[id].mp = (map->mp_c[0] << 16) + (map->mp_c[1] << 8)
@@ -80,7 +80,7 @@ int	ft_check_id(t_map *map, char **array_line)
 {
 	if (array_line[1] == NULL || array_line[1][1] != '\0')
 	{
-		ft_free_array(array_line);
+		ft_free_array(&array_line);
 		ft_error_handle(map, "Error\n", "Invalid id", 1);
 	}
 	return (array_line[1][0]);
@@ -125,7 +125,7 @@ void	ft_handle_id(t_map *map, char **array_line, int i)
 		ft_cut_extra_char(array_line[2]);
 		if (ft_acces_texture(array_line[2], 0) == 1)
 		{
-			ft_free_array(array_line);
+			ft_free_array(&array_line);
 			ft_error_handle(map, "Error\n", "Invalid texture path", 1);
 		}
 	}

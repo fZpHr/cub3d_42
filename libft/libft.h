@@ -27,7 +27,7 @@
 # include <unistd.h>
 
 void					*ft_malloc(size_t size);
-void					ft_free_array(char **cmd);
+void					ft_free_array(char ***cmd);
 int						ft_strcmp(char *s1, char *s2);
 char					*ft_strstr(char *str, char *to_find);
 void					ft_swap(int *a, int *b);

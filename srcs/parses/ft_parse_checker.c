@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_checker.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:35:34 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/21 07:54:37 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/22 15:39:31 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	ft_free_after_check(t_map *map)
 			free(map->text[i].ea[j]);
 		}
 	}
-	ft_free_array(map->map_array);
-	ft_free_array(map->map_array_copy);
+	ft_free_array(&map->map_array);
+	ft_free_array(&map->map_array_copy);
 	free(map->no);
 	free(map->so);
 	free(map->we);

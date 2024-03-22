@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:00:56 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/21 18:15:30 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/22 15:57:13 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ typedef struct s_map
 	t_text	text[128];
 }	t_map;
 
+char	**ft_handle_space(char **array_line, int i, int opt);
+int		ft_check_color_bonus_options(char **line, int *color);
+void	ft_loop_color_bonus(char *line, int *i);
 void	ft_handle_color_id(t_map *map, char **array_line, int id);
 void	ft_handle_option(t_map *map, char **array_line, int id);
 void	ft_handle_frame(char **frame, char **array_line);
@@ -77,7 +80,7 @@ int		ft_nb_arg(t_map *map, char **array_line, int i);
 int		ft_handle_strncmp(t_map *map, char **line, char *str, int i);
 void	ft_handle_id(t_map *map, char **array_line, int i);
 void	ft_check_map_file_bonus(t_map *map, char *file);
-int		ft_check_color_bonus(char *line, int *color);
+int		ft_check_color_bonus(char **line, int *color);
 int		ft_acces_texture(char *line, int i);
 void	ft_check_wall(t_map *map);
 void	ft_find_player_position(t_map *map);

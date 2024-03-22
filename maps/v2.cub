@@ -72,6 +72,7 @@ NO X ./textures/door/5.xpm
 SO X ./textures/door/5.xpm
 WE X ./textures/door/5.xpm
 EA X ./textures/door/5.xpm
+SP X 5
 
 MP X 255,0,255
 

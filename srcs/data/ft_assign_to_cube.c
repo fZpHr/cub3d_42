@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:51:37 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/21 17:15:09 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/22 16:07:51 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 		cub->textures[i].ea_anim_count = 0;
 		cub->textures[i].ea_anim_num = 0;
 		cub->textures[i].ea_anim = TRUE;
-		cub->textures[i].anim_delay = 10;
+		cub->textures[i].anim_delay = 16;
 		cub->textures[i].anim_counter = 0;
 		cub->textures[i].map_color = 0x00000000;
 	}

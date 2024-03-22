@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:35:02 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/19 15:50:14 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/22 16:31:22 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,31 @@
 
 void	ft_handle_texture(t_map *map, char *line, int i)
 {
-	if (line[i] != '.')
+	if (ft_acces_texture(line, i) == 1)
 	{
 		free(line);
-		ft_error_handle(map, "Error\n", "Invalid map texture name", 1);
-	}
-	else
-	{
-		if (ft_acces_texture(line, i) == 1)
-		{
-			free(line);
-			ft_error_handle(map, "Error\n", "Invalid texture path", 1);
-		}
+		ft_error_handle(map, "Error\n", "Invalid texture path", 1);
 	}
 }
 
 void	ft_check_color(t_map *map, char *line, int *i, int *color)
 {
 	color[0] = ft_atoi(line + (*i));
-	while (line[(*i)] >= '0' && line[(*i)] <= '9')
+	while ((line[(*i)] >= '0' && line[(*i)] <= '9') || line[(*i)] == ' ')
 		(*i)++;
 	if (line[(*i)] != ',')
 		ft_error_handle_color(map, line);
 	(*i)++;
 	color[1] = ft_atoi(line + (*i));
-	while (line[(*i)] >= '0' && line[(*i)] <= '9')
+	while ((line[(*i)] >= '0' && line[(*i)] <= '9') || line[(*i)] == ' ')
 		(*i)++;
 	if (line[(*i)] != ',')
 		ft_error_handle_color(map, line);
 	(*i)++;
+	if (line[(*i)] == '\n' || line[(*i)] == '\0')
+		ft_error_handle_color(map, line);
 	color[2] = ft_atoi(line + (*i));
-	while (line[(*i)] >= '0' && line[(*i)] <= '9')
+	while ((line[(*i)] >= '0' && line[(*i)] <= '9') || line[(*i)] == ' ')
 		(*i)++;
 	if ((line[(*i)] != '\n' && line[(*i + 1)] != '\0') || line[(*i)] != '\0'
 		|| line[(*i)] == ' ')

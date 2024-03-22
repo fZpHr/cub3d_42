@@ -6,7 +6,7 @@
 #    By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/03/21 18:13:06 by hbelle           ###   ########.fr        #
+#    Updated: 2024/03/22 15:54:16 by hbelle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,8 @@ SRC_FILES			= \
 						srcs/parses/ft_check_wall.c \
 						srcs/parses/ft_check_map_file_bonus.c \
 						srcs/parses/ft_handle_id.c \
-						srcs/parses/ft_handle_id_utils.c
+						srcs/parses/ft_handle_id_utils.c \
+						srcs/parses/ft_color_parse.c
 
 BUILD_FOLDER		= ./build
 
