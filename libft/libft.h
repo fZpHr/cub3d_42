@@ -25,6 +25,7 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
 
 void					*ft_malloc(size_t size);
 void					ft_free_array(char ***cmd);
