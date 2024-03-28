@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error_handle.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:03:58 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/22 15:39:31 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/28 18:17:39 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	ft_free_end(t_map *map, int status)
 		ft_free_array(&map->map_array);
 	if (map->map_array_copy)
 		ft_free_array(&map->map_array_copy);
-	exit(status);
+	if (status != -42)
+		exit(status);
 }
 
 void	ft_error_handle(t_map *map, char *error, char *str, int status)

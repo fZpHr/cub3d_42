@@ -6,80 +6,15 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:51:37 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/28 17:29:41 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 18:20:53 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "rendering.h"
 
-static void		ft_keys_init(t_keys *keys);
-
-int	ft_handle_img(t_cub *cub, t_map *map)
-{
-	(void)cub;
-	(void)map;
-	// cub->no.img = mlx_xpm_file_to_image(cub->mlx, map->no, &cub->no.width,
-	// 		&cub->no.height);
-	// if (!cub->no.img)
-	// 	return (1);
-	// cub->so.img = mlx_xpm_file_to_image(cub->mlx, map->so, &cub->so.width,
-	// 		&cub->so.height);
-	// if (!cub->so.img)
-	// 	return (1);
-	// cub->we.img = mlx_xpm_file_to_image(cub->mlx, map->we, &cub->we.width,
-	// 		&cub->we.height);
-	// if (!cub->we.img)
-	// 	return (1);
-	// cub->ea.img = mlx_xpm_file_to_image(cub->mlx, map->ea, &cub->ea.width,
-	// 		&cub->ea.height);
-	// if (!cub->ea.img)
-	// 	return (1);
-	return (0);
-}
-
-int	ft_handle_addr(t_cub *cub)
-{
-	(void)cub;
-	// cub->no.addr = mlx_get_data_addr(cub->no.img, &cub->no.bits_per_pixel,
-	// 		&cub->no.line_size, &cub->no.endian);
-	// if (!cub->no.addr)
-	// 	return (1);
-	// cub->so.addr = mlx_get_data_addr(cub->so.img, &cub->so.bits_per_pixel,
-	// 		&cub->so.line_size, &cub->so.endian);
-	// if (!cub->so.addr)
-	// 	return (1);
-	// cub->we.addr = mlx_get_data_addr(cub->we.img, &cub->we.bits_per_pixel,
-	// 		&cub->we.line_size, &cub->we.endian);
-	// if (!cub->we.addr)
-	// 	return (1);
-	// cub->ea.addr = mlx_get_data_addr(cub->ea.img, &cub->ea.bits_per_pixel,
-	// 		&cub->ea.line_size, &cub->ea.endian);
-	// if (!cub->ea.addr)
-	// 	return (1);
-	return (0);
-}
-
-void	ft_init_cub_array(t_cub *cub, t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < map->map_size_y)
-	{
-		cub->map_array[i] = ft_calloc(map->map_size_x, sizeof(t_tile));
-		if (!cub->map_array[i])
-			ft_error_handle(map, "Error\n", "Can't allocate memory", 1);
-		j = 0;
-		while (j < map->map_size_x)
-		{
-			cub->map_array[i][j].type = map->map_array[i][j];
-			j++;
-		}
-		i++;
-	}
-}
+static void	ft_keys_init(t_keys *keys);
+static void	ft_init_cub_array(t_cub *cub, t_map *map);
 
 /**
  * @brief Assigns the map data to the cub structure
@@ -117,7 +52,7 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 	if (ft_mlx_init(cub))
 	{
 		// Precedents are not freed ==>> Memory leaks possible
-		ft_game_quit(cub);
+		ft_game_quit(cub, 1);
 		return ;
 	}
 
@@ -162,7 +97,8 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 			if (cub->textures[i].no[0].img == NULL)
 			{
 				// Precedents are not freed ==>> Memory leaks possible
-				ft_error_handle(map, "Error\n", "Can't load texture", 1);
+				ft_error_handle(map, "Error\n", "Can't load texture", -42);
+				ft_game_quit(cub, 1);
 			}
 
 			cub->textures[i].so = ft_calloc(MAX_FRAME + 1, sizeof(t_frame));
@@ -171,7 +107,8 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 			if (cub->textures[i].so[0].img == NULL)
 			{
 				// Precedents are not freed ==>> Memory leaks possible
-				ft_error_handle(map, "Error\n", "Can't load texture", 1);
+				ft_error_handle(map, "Error\n", "Can't load texture", -42);
+				ft_game_quit(cub, 1);
 			}
 			
 			cub->textures[i].we = ft_calloc(MAX_FRAME + 1, sizeof(t_frame));
@@ -180,7 +117,8 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 			if (cub->textures[i].we[0].img == NULL)
 			{
 				// Precedents are not freed ==>> Memory leaks possible
-				ft_error_handle(map, "Error\n", "Can't load texture", 1);
+				ft_error_handle(map, "Error\n", "Can't load texture", -42);
+				ft_game_quit(cub, 1);
 			}
 			
 			cub->textures[i].ea = ft_calloc(MAX_FRAME + 1, sizeof(t_frame));
@@ -189,7 +127,8 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 			if (cub->textures[i].ea[0].img == NULL)
 			{
 				// Precedents are not freed ==>> Memory leaks possible
-				ft_error_handle(map, "Error\n", "Can't load texture", 1);
+				ft_error_handle(map, "Error\n", "Can't load texture", -42);
+				ft_game_quit(cub, 1);
 			}
 
 			cub->textures[i].empty = FALSE;
@@ -211,7 +150,8 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 				if (cub->textures[i].no[j].img == NULL)
 				{
 					// Precedents are not freed ==>> Memory leaks possible
-					ft_error_handle(map, "Error\n", "Can't load texture", 1);
+					ft_error_handle(map, "Error\n", "Can't load texture", -42);
+					ft_game_quit(cub, 1);
 				}
 				cub->textures[i].no_anim_count++;
 			}
@@ -226,7 +166,8 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 				if (cub->textures[i].so[j].img == NULL)
 				{
 					// Precedents are not freed ==>> Memory leaks possible
-					ft_error_handle(map, "Error\n", "Can't load texture", 1);
+					ft_error_handle(map, "Error\n", "Can't load texture", -42);
+					ft_game_quit(cub, 1);
 				}
 				cub->textures[i].so_anim_count++;
 			}
@@ -241,7 +182,8 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 				if (cub->textures[i].we[j].img == NULL)
 				{
 					// Precedents are not freed ==>> Memory leaks possible
-					ft_error_handle(map, "Error\n", "Can't load texture", 1);
+					ft_error_handle(map, "Error\n", "Can't load texture", -42);
+					ft_game_quit(cub, 1);
 				}
 				cub->textures[i].we_anim_count++;
 			}
@@ -256,7 +198,8 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
 				if (cub->textures[i].ea[j].img == NULL)
 				{
 					// Precedents are not freed ==>> Memory leaks possible
-					ft_error_handle(map, "Error\n", "Can't load texture", 1);
+					ft_error_handle(map, "Error\n", "Can't load texture", -42);
+					ft_game_quit(cub, 1);
 				}
 				cub->textures[i].ea_anim_count++;
 			}
@@ -291,4 +234,28 @@ static void	ft_keys_init(t_keys *keys)
 	keys->backward = FALSE;
 	keys->rot_left = FALSE;
 	keys->rot_right = FALSE;
+}
+
+static void	ft_init_cub_array(t_cub *cub, t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < map->map_size_y)
+	{
+		cub->map_array[i] = ft_calloc(map->map_size_x, sizeof(t_tile));
+		if (!cub->map_array[i])
+		{
+			ft_error_handle(map, "Error\n", "Can't allocate memory", -42);
+			ft_game_quit(cub, 1);
+		}
+		j = 0;
+		while (j < map->map_size_x)
+		{
+			cub->map_array[i][j].type = map->map_array[i][j];
+			j++;
+		}
+		i++;
+	}
 }

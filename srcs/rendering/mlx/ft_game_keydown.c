@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:20:19 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 13:41:06 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 18:21:05 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 int	ft_game_keydown(int keycode, t_cub *cub)
 {
 	if (keycode == XK_Escape)
-		ft_game_quit(cub);
+		ft_game_quit(cub, 0);
 	if (keycode == XK_i)
 		cub->info = !cub->info;
 	if (BONUS && (keycode == XK_m

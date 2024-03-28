@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:10:09 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/21 07:32:48 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 18:19:26 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ static void	ft_destroy_img(void *mlx_ptr, void *img_ptr);
  * @brief Destroy, free, and quit the game with `exit(0)`.
  * 
  * @param cub 	The game structure
+ * @param code 	The exit code
  * 
  * @return int 	Always `0`
 */
-int	ft_game_quit(t_cub *cub)
+int	ft_game_quit(t_cub *cub, int code)
 {
 	int	i;
 
@@ -44,7 +45,7 @@ int	ft_game_quit(t_cub *cub)
 		free(cub->mlx);
 	}
 	write(1, "Bye !\n", 6);
-	exit(0);
+	exit(code);
 	return (0);
 }
 

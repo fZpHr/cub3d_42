@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:39 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/18 17:19:56 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 18:19:36 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int			ft_game_keydown(int keycode, t_cub *cub);
 int			ft_game_keyup(int keycode, t_cub *cub);
 int			ft_game_loop(t_cub *cub);
 int			ft_game_mouse(int x, int y, t_cub *cub);
-int			ft_game_quit(t_cub *cub);
+int			ft_game_quit(t_cub *cub, int code);
 int			ft_mlx_init(t_cub *cub);
 t_frame		ft_mlx_new_frame(t_cub *cub, t_bool free_old);
 
