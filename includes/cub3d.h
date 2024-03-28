@@ -314,5 +314,8 @@ t_frame	ft_load_texture(t_cub *cub, char *path);
 
 void	ft_cp_array(t_map *map);
 void	ft_map_into_array(t_map *map, char *map_file);
+void	ft_assign_vars(t_cub *cub);
+void	ft_assign_textures(t_cub *cub, t_map *map);
+void	ft_assign_textures_bonus(t_cub *cub, t_map *map);
 
 #endif

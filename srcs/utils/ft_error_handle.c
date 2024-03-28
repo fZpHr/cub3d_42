@@ -6,13 +6,13 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:03:58 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/28 18:17:39 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 18:36:18 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_free_end(t_map *map, int status)
+static void	ft_free_end(t_map *map, int status)
 {
 	int	i;
 	int	j;
@@ -45,7 +45,7 @@ void	ft_error_handle(t_map *map, char *error, char *str, int status)
 {
 	if (str)
 		ft_printf_error("%s%s\n", error, str);
-	else
+	else if (error)
 		ft_printf_error("%s\n", error);
 	ft_free_end(map, status);
 }

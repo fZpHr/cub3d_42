@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+         #
+#    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/03/22 15:54:16 by hbelle           ###   ########.fr        #
+#    Updated: 2024/03/28 18:54:18 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,9 @@ INCLUDES			= ./includes
 SRC_FILES			= \
 						srcs/main.c \
 						srcs/data/ft_map_into_array.c \
+						srcs/data/ft_assign_vars.c \
+						srcs/data/ft_assign_textures.c \
+						srcs/data/ft_assign_textures_bonus.c \
 						srcs/data/ft_assign_to_cube.c \
 						srcs/parses/ft_check_args.c \
 						srcs/parses/ft_check_map_file.c \
