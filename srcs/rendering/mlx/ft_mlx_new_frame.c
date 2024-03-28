@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:19:03 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 13:40:45 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 16:45:42 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_frame	ft_mlx_new_frame(t_cub *cub, t_bool free_old)
 		cub->frame.img = NULL;
 	}
 	frame.img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
+	frame.width = WIDTH;
+	frame.height = HEIGHT;
 	if (frame.img)
 		frame.addr = mlx_get_data_addr(frame.img,
 				&frame.bits_per_pixel, &frame.line_size, &frame.endian);

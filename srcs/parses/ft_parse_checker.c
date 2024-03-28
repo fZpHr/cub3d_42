@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_checker.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:35:34 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/22 15:39:31 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/22 23:47:25 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,8 @@ void	ft_free_after_check(t_map *map)
 }
 
 /**
-
-	* @brief Initialize the map struct and
-				parse the map file then assign to the cub struct
+ * @brief Initialize the map struct and
+ *			parse the map file then assign to the cub struct
  *
  * @param cube cub struct
  * @param ac number of arguments

@@ -221,6 +221,7 @@ typedef struct s_texture
 	t_ull	anim_delay;
 	t_ull	anim_counter;
 
+	int		type;
 	int		map_color;
 }	t_texture;
 

@@ -6,14 +6,14 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/21 07:28:20 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 17:16:56 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rendering.h"
 
-static void	ft_putstr(char *str);
-static void	ft_print_help(void);
+static void		ft_putstr(char *str);
+static void		ft_print_help(void);
 
 /**
  * @brief Initialize the MLX and start the rendering loop.
@@ -36,8 +36,8 @@ void	ft_rendering(t_cub *cub)
 				|| cub->map_array[i][j].type == 'W'
 				|| cub->map_array[i][j].type == 'E')
 				cub->map_array[i][j].type = '0';
-			cub->map_array[i][j].is_solid = cub->textures \
-				[(int) cub->map_array[i][j].type].no[0].img != NULL;
+			cub->map_array[i][j].is_solid = !!cub->textures \
+				[(int) cub->map_array[i][j].type].type;
 			j++;
 		}
 		i++;

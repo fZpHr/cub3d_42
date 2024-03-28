@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_color_parse.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:47:53 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/22 16:33:40 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/28 17:09:24 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_handle_option(t_map *map, char **array_line, int id)
 	else if (ft_handle_strncmp(map, array_line, "SP", 2) == 1)
 	{
 		map->text[id].sp = ft_atoi(array_line[2]);
-		if (map->text[id].sp < 0 || map->text[id].sp > 1000)
+		if (map->text[id].sp < 0 || map->text[id].sp > 15000)
 		{
 			ft_free_array(&array_line);
 			ft_error_handle(map, "Error\n", "Invalid speed", 1);

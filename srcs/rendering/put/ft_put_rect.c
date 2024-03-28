@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:07:51 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 13:40:22 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 16:43:11 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ void	ft_put_rect(t_frame frame, t_ipos pos, t_ipos size, int color)
 		j = 0;
 		while (j < size.y)
 		{
-			ft_put_pixel(frame, pos.x + i, pos.y + j, color);
+			if (pos.x + i >= 0 && pos.x + i < frame.width
+				&& pos.y + j >= 0 && pos.y + j < frame.height)
+				ft_put_pixel(frame, pos.x + i, pos.y + j, color);
 			j++;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:08:11 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 13:39:44 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 16:46:42 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ void	ft_put_line(t_frame frame, t_ipos start, t_ipos end, int color)
 	i = 0;
 	while (i < steps)
 	{
-		ft_put_pixel(frame, start.x + pos.x * i, start.y + pos.y * i, color);
+		if (start.x + pos.x * i >= 0 && start.x + pos.x * i < frame.width
+			&& start.y + pos.y * i >= 0 && start.y + pos.y * i < frame.height)
+			ft_put_pixel(frame, start.x + pos.x * i,
+				start.y + pos.y * i, color);
 		i++;
 	}
 }

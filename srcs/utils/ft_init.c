@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:22:23 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/21 13:50:58 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/28 17:11:04 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	ft_init_bonus(t_map *map)
 		map->text[i].we_idx = -1;
 		map->text[i].ea_idx = -1;
 		map->text[i].mp = -1;
-		map->text[i] = (t_text){0};
+		map->text[i].sp = -1;
+		map->text[i].ty = -1;
 	}
 	map->mp_c[0] = -1;
 	map->mp_c[1] = -1;
@@ -42,8 +43,7 @@ void	ft_init_bonus(t_map *map)
 
 void	ft_init(t_map *map)
 {
-	if (BONUS)
-		ft_init_bonus(map);
+	ft_init_bonus(map);
 	map->def_text = 0;
 	map->map_array = NULL;
 	map->map_array_copy = NULL;

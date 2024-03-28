@@ -1,12 +1,14 @@
 NO [<id>] <path_to_the_xpm_file>  // Required for id 1
 SO [<id>] <path_to_the_xpm_file>  // There can be multiple definition:
 WE [<id>] <path_to_the_xpm_file>  //    the images will be the frames of the animation.
-EA [<id>] <path_to_the_xpm_file>  // def_text id = 1
-                                  // def_text texture = NULL (transparent)
+EA [<id>] <path_to_the_xpm_file>  // def_text id=1
+                                  // def_text texture=NULL (transparent)
 
-MP <id> (<R>,<G>,<B>)    // def_text 1 = 238,238,238 ; 2 = 0,0,0 ; others = transparent
-TY <id> (1, 0)  // type def of bloc (1 collision, 0 pass)
-SP <id> <amim_delay_in_frames>    // def_text delay = 30
+MP <id> (<R>,<G>,<B>)             // def_text 1=238,238,238; 2=0,0,0; others=transparent
+TY <id> <type>                    // 0=no collision; 1=collision
+                                  // def_text for '0'    >> 0 (void)
+                                  // def_text for others >> 1 (wall)
+SP <id> <amim_delay_in_frames>    // def_text delay=30
 
 // Map rules:
 // 1. ' ' = void
@@ -21,6 +23,7 @@ SP <id> <amim_delay_in_frames>    // def_text delay = 30
 // Adds:
 // - 'X' = Closed Door >> Should be able to open
 // - 'O' = Opened Door >> Should be able to close
+// - '-' = Opening Door >> Automatically becomes 'O' once fully opened
 
 F (<R>,<G>,<B>)          // Required & Always end by C or F
 C (<R>,<G>,<B>)          // Required & Always end by C or F
