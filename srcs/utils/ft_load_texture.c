@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_load_texture.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 04:14:53 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/20 05:30:56 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  * @note	If there is a problem, `frame.img` is `NULL`.
  * 
  * @return t_frame 	The texture
-*/
+ */
 t_frame	ft_load_texture(t_cub *cub, char *path)
 {
 	t_frame	frame;

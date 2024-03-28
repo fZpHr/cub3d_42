@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 22:34:42 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/22 15:39:31 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:05:51 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 /**
  * @brief Check if the strncmp is valid, and if the default texture is full
  *
- * @param line line to check
- * @param str string to compare
- * @param i number of characters to compare
+ * @param map 	struct of the map
+ * @param line 	line to check
+ * @param str 	string to compare
+ * @param i 	number of characters to compare
+ * 
  * @return int 1 if the strncmp is valid, 0 otherwise
  */
 int	ft_handle_strncmp(t_map *map, char **line, char *str, int i)
@@ -39,7 +41,8 @@ int	ft_handle_strncmp(t_map *map, char **line, char *str, int i)
 /**
  * @brief Check if the texure/color is full
  *
- * @param map struct of the map
+ * @param map 	struct of the map
+ * 
  * @return int 1 if the texture/color is full, 0 otherwise
  */
 int	ft_check_if_full(t_map *map)
@@ -54,8 +57,9 @@ int	ft_check_if_full(t_map *map)
 /**
  * @brief Check if the texture/color is valid
  *
- * @param map struct of the map
- * @param array_line split of the line
+ * @param map 			struct of the map
+ * @param array_line 	split of the line
+ * 
  * @return int 1 if the texture/color is invalid, 0 otherwise
  */
 int	ft_check_texture_bonus(t_map *map, char **array_line)
@@ -119,9 +123,8 @@ void	ft_loop_bonus(t_map *map, char *line, char **array_line, int fd)
 /**
  * @brief Check if the map file is valid
  *
- * @param map struct of the map
- * @param line line of the map
- * @return void
+ * @param map 	struct of the map
+ * @param line 	line of the map
  */
 void	ft_check_map_file_bonus(t_map *map, char *file)
 {
@@ -133,9 +136,7 @@ void	ft_check_map_file_bonus(t_map *map, char *file)
 		ft_error_handle(map, "Invalid file format : ", file, 1);
 	fd = open(file, O_RDWR);
 	if (fd < 0)
-	{
 		ft_error_handle(map, "Error\n", "Invalid file", 1);
-	}
 	array_line = NULL;
 	line = get_next_line(fd);
 	ft_cut_extra_char(line);

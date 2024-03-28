@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_render_info.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:48:19 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/28 21:11:51 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	ft_put_float(t_cub *cub, t_ivec3 info, float n);
  * @brief	- `W` `A` `S` `D` (current pressed keys)
  * 
  * @param cub 	The game structure
-*/
+ */
 void	ft_render_info(t_cub *cub)
 {
 	ft_put_rect(cub->frame, (t_ipos){WIDTH - INFO_W - PADDING,

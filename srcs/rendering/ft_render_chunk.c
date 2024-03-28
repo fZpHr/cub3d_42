@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_render_chunk.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:24:59 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/28 17:24:18 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	ft_draw(t_cub *cub, int x, t_ivec3 info, t_frame texture);
  * @param x 		The x screen's pos of the left side of the chunk (in px)
  * @param size 		The size of the chunk (width, height, in px)
  * @param casting 	The result of the ray casting
-*/
+ */
 void	ft_render_chunk(t_cub *cub, int x, t_ipos size, t_casting casting)
 {
 	t_frame		texture;

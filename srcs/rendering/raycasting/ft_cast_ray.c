@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cast_ray.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:09:02 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/28 16:51:55 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	ft_update_casting(t_casting *casting);
  * @param angle 	The angle of the ray (in rad)
  * 
  * @return t_casting 	The result of the ray casting
-*/
+ */
 t_casting	ft_cast_ray(t_cub *cub, float angle)
 {
 	t_casting	casting;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_game_keydown.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:20:19 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/28 21:05:30 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
  * @param cub 		The game structure
  * 
  * @return int 		Always `0`
-*/
+ */
 int	ft_game_keydown(int keycode, t_cub *cub)
 {
 	if (keycode == XK_Escape)

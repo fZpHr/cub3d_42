@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_color_parse.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:47:53 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/28 17:09:24 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:10:22 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ int	ft_end_color(int *color)
 /**
  * @brief Check if the color is valid
  *
- * @param line line to check
- * @param color array of the color
+ * @param line 	line to check
+ * @param color 	array of the color
+ * 
  * @return int 1 if the color is invalid, 0 otherwise
  */
 int	ft_check_color_bonus_options(char **line, int *color)
@@ -65,12 +66,10 @@ void	ft_loop_color_bonus(char *line, int *i)
 /**
  * @brief Handle the option MP, SP, TY of the texture
  * 
- * @param map struct of the map
- * @param array_line splitted line
- * @param id id of the texture
- * 
- * @return void
-*/
+ * @param map 			struct of the map
+ * @param array_line 	splitted line
+ * @param id 			id of the texture
+ */
 void	ft_handle_option(t_map *map, char **array_line, int id)
 {
 	if (ft_handle_strncmp(map, array_line, "MP", 2) == 1)
@@ -98,8 +97,9 @@ void	ft_handle_option(t_map *map, char **array_line, int id)
 /**
  * @brief Check if the color is valid
  *
- * @param line line to check
- * @param color array of the color
+ * @param line 		line to check
+ * @param color 	array of the color
+ * 
  * @return int 1 if the color is invalid, 0 otherwise
  */
 int	ft_check_color_bonus(char **line, int *color)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ver_casting.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:08:35 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 13:36:57 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	ft_save_distance(t_cub *cub, t_casting *casting);
  * 
  * @param cub 		The game structure
  * @param casting 	The ray casting structure, with all the results !
-*/
+ */
 void	ft_ver_casting(t_cub *cub, t_casting *casting)
 {
 	ft_closest_hor_line(cub, casting);

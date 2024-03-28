@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_render_ceiling.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:05:35 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 13:10:34 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * 			from the top to the middle of the screen.
  * 
  * @param cub 	The game structure
-*/
+ */
 void	ft_render_ceiling(t_cub *cub)
 {
 	int	i;

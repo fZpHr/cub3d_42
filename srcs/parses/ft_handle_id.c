@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 16:39:14 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/22 16:29:05 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:10:39 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
  * 
  * @param array_line 	splitted line
  * @param i 			current i
- * @param opt 			number of arguments
+ * @param opt 			number of arguments.
+ * 
  * @return char** of the new array
  */
 char	**ft_handle_space(char **array_line, int i, int opt)
@@ -54,9 +55,7 @@ char	**ft_handle_space(char **array_line, int i, int opt)
  * @param map 			struct of the map
  * @param array_line 	splitted line
  * @param id 			id of the texture
- * 
- * @return void
-*/
+ */
 void	ft_handle_color_id(t_map *map, char **array_line, int id)
 {
 	if (ft_check_color_bonus_options(array_line, map->mp_c) == 1)
@@ -94,7 +93,7 @@ int	ft_check_id(t_map *map, char **array_line)
  * @param i 			current texture index
  * 
  * @return 1 if the default texture is valid, 0 otherwise
-*/
+ */
 int	ft_check_default(t_map *map, char **array_line, int i)
 {
 	if (map->def_text == 0)
@@ -109,8 +108,6 @@ int	ft_check_default(t_map *map, char **array_line, int i)
  * @param map 			struct of the map
  * @param array_line 	splitted line
  * @param i 			index
- * 
- * @return void
  */
 void	ft_handle_id(t_map *map, char **array_line, int i)
 {

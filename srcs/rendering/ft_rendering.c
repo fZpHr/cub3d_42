@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_rendering.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/28 17:16:56 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		ft_print_help(void);
  * @brief Initialize the MLX and start the rendering loop.
  * 
  * @param cub 	The game structure
-*/
+ */
 void	ft_rendering(t_cub *cub)
 {
 	int	i;

@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:24:32 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/19 17:44:05 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:09:04 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 /**
  * @brief Check if the texture extension is valid
  *
- * @param map struct of the map
- * @param line current line of the file, content of the texture path
- * @return void
+ * @param line 	current line of the file, content of the texture path
  */
-int	ft_check_extension(char *line)
+static int	ft_check_extension(char *line)
 {
 	if (ft_strncmp(line + (ft_strlen(line) - 4), ".xpm", 4) == 0)
 		return (0);
@@ -30,9 +28,9 @@ int	ft_check_extension(char *line)
 /**
  * @brief Check if the texture path is valid
  *
- * @param map struct of the map
- * @param line current line of the file, content of the texture path
- * @param i index of the line
+ * @param line 	current line of the file, content of the texture path
+ * @param i 	index in the line
+ * 
  * @return 1 if the texture path is invalid, 0 otherwise
  */
 int	ft_acces_texture(char *line, int i)
@@ -51,10 +49,7 @@ int	ft_acces_texture(char *line, int i)
 			return (1);
 		fd = open(line + i, O_RDONLY);
 		if (fd < 0)
-		{
-			close(fd);
 			return (1);
-		}
 		close(fd);
 	}
 	return (0);

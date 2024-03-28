@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_render_minimap.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:23:03 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/18 18:25:27 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	ft_render_player(t_cub *cub);
  * 
  * @param cub 		The game structure
  * @param castings 	The result of the ray casting
-*/
+ */
 void	ft_render_minimap(t_cub *cub, t_casting castings[RAYS])
 {
 	ft_render_map(cub);

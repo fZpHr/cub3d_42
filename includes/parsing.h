@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:00:56 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/28 17:34:08 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,20 @@ typedef struct s_text
 /**
  * @brief Structure for the map
  *
- * @param map_array the map array
- * @param map_array_copy copy of the map array for the flood fill algorithm
- * @param map_size_y size of the map in y
- * @param map_size_x size of the map in x
- * @param map_position position of the map in the file
- * @param no path of the north texture
- * @param so path of the south texture
- * @param we path of the west texture
- * @param ea path of the east texture
- * @param floor_c color of the floor
- * @param ceiling_c color of the ceiling
- * @param player_direction direction of the player
- * @param player_position position of the player
-*/
+ * @param map_array 		the map array
+ * @param map_array_copy 	copy of the map array for the flood fill algorithm
+ * @param map_size_y 		size of the map in y
+ * @param map_size_x 		size of the map in x
+ * @param map_position 		position of the map in the file
+ * @param no 				path of the north texture
+ * @param so 				path of the south texture
+ * @param we 				path of the west texture
+ * @param ea 				path of the east texture
+ * @param floor_c 			color of the floor
+ * @param ceiling_c 		color of the ceiling
+ * @param player_direction 	direction of the player
+ * @param player_position 	position of the player
+ */
 typedef struct s_map
 {
 	char	**map_array;

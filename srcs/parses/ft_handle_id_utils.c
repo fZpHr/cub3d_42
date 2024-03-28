@@ -6,17 +6,17 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 17:56:57 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/22 15:52:41 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /**
- * @brief add frame to the arrayls
- * @param frame frame to handle
- * @param array_line splitted line
- * @return void
+ * @brief Add frame to the arrayls
+ * 
+ * @param frame 		frame to handle
+ * @param array_line 	splitted line
  */
 void	ft_handle_frame(char **frame, char **array_line)
 {
@@ -66,12 +66,13 @@ void	ft_loop_nb_arg(t_map *map, char **array_line, int i)
 
 /**
  * @brief Check the number of arguments and if it's a default texture, handle it
- * @param map struct of the map
- * @param array_line splitted line
- * @param i current texture index
+ * 
+ * @param map 			struct of the map
+ * @param array_line 	splitted line
+ * @param i 			current texture index
  * 
  * @return 1 if the number of arguments is valid, 0 otherwise
-*/
+ */
 int	ft_nb_arg(t_map *map, char **array_line, int i)
 {
 	int	j;

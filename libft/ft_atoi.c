@@ -15,7 +15,7 @@
 
 #include "libft.h"
 
-void	ft_check_atoi(const char *nptr, int *i, int *sign)
+static void	ft_check_atoi(const char *nptr, int *i, int *sign)
 {
 	while (nptr[*i] == ' ' || nptr[*i] == '\f' || nptr[*i] == '\n'
 		|| nptr[*i] == '\r' || nptr[*i] == '\t' || nptr[*i] == '\v')
@@ -42,8 +42,8 @@ int	ft_atoi(const char *nptr)
 	ft_check_atoi(nptr, &i, &sign);
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		if (res > INT_MAX / 10 || (res == INT_MAX / 10 && nptr[i]
-				- '0' > INT_MAX % 10))
+		if (res > INT_MAX / 10 || (res == INT_MAX / 10
+				&& nptr[i] - '0' > INT_MAX % 10))
 		{
 			if (sign == -1)
 				return (INT_MIN);

@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 21:39:56 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/22 16:55:50 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:09:59 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 /**
  * @brief Check if the map is close with wall, with flood fill algorithm
  *
- * @param map struct of the map
- * @param x position of the player x in the map
- * @param y position of the player y in the map
- * @return void
+ * @param map 	struct of the map
+ * @param x 	position of the player x in the map
+ * @param y 	position of the player y in the map
  */
 void	ft_flood_fill(t_map *map, int x, int y)
 {

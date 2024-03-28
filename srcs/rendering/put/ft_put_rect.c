@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_put_rect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:07:51 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/28 16:43:11 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param pos 		The position of the rectangle (in px)
  * @param size 		The size of the rectangle (width, height, in px)
  * @param color 	The color to set (in ARGB format)
-*/
+ */
 void	ft_put_rect(t_frame frame, t_ipos pos, t_ipos size, int color)
 {
 	int	i;

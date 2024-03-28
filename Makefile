@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
+#    By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/03/28 21:04:50 by ysabik           ###   ########.fr        #
+#    Updated: 2024/03/28 21:15:26 by hbelle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,7 +119,7 @@ m_line_break :
 b_flags :
 	@$(eval CFLAGS += -D BONUS=1)
 	@$(eval CFLAGS += -D CAN_INFO=1)
-	@$(eval CFLAGS += -D HIDE_MOUSE=0)
+	@$(eval CFLAGS += -D HIDE_MOUSE=1)
 
 bonus : b_flags all
 

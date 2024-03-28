@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_game_mouse.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:21:55 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 11:22:06 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /**
  * @brief Handle the mouse event.
-*/
+ */
 int	ft_game_mouse(int x, int y, t_cub *cub)
 {
 	(void)y;

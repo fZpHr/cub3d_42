@@ -6,13 +6,13 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:00:16 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/19 16:07:12 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:09:40 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_loop_map(t_map *map, char *line, int fd, int full)
+static void	ft_loop_map(t_map *map, char *line, int fd, int full)
 {
 	while (line)
 	{
@@ -42,10 +42,9 @@ void	ft_loop_map(t_map *map, char *line, int fd, int full)
 /**
  * @brief Check if the file is a .cub file and open it
  * 
- * @param map struct of the map
- * @param map_file name of the file
- * @return void
-*/
+ * @param map 		struct of the map
+ * @param map_file 	name of the file
+ */
 void	ft_check_map_file(t_map *map, char *map_file)
 {
 	int		fd;
@@ -62,7 +61,6 @@ void	ft_check_map_file(t_map *map, char *map_file)
 	ft_cut_extra_char(line);
 	if (!line)
 	{
-		free(line);
 		close(fd);
 		ft_error_handle(map, "Error\n", "Empty file", 1);
 	}

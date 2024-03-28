@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mlx_new_frame.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:19:03 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/28 16:45:42 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param free_old 	Should we free the old frame ? (in cub is not NULL)
  * 
  * @return t_frame 	The new frame
-*/
+ */
 t_frame	ft_mlx_new_frame(t_cub *cub, t_bool free_old)
 {
 	t_frame	frame;

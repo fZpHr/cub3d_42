@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_put_pixel.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:07:32 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/18 12:57:59 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @param x 		The x position of the pixel
  * @param y 		The y position of the pixel
  * @param color 	The color to set (in ARGB format)
-*/
+ */
 void	ft_put_pixel(t_frame frame, int x, int y, int color)
 {
 	char	*dst;

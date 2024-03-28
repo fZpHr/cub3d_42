@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_game_keyup.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:19:44 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/28 20:51:10 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  * @param cub 		The game structure
  * 
  * @return int 		Always `0`
-*/
+ */
 int	ft_game_keyup(int keycode, t_cub *cub)
 {
 	if (keycode == XK_w || keycode == XK_Up)

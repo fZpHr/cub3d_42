@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_game_loop.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:15:20 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/18 16:59:21 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param cub 	The game structure
  * 
  * @return int 	Always `0`
-*/
+ */
 int	ft_game_loop(t_cub *cub)
 {
 	ft_handle_keys(cub);

@@ -37,7 +37,7 @@
  * 
  * @note	If `BONUS` is `0`, the program will be ignoring bonus adds
  * 			(like collisions, or advanced maps).
-*/
+ */
 #  define BONUS			0
 # endif
 
@@ -55,7 +55,7 @@
  * 
  * @note	- And when `HIDE_MOUSE` is `1`, the mouse IS hidden.
  * 			(But valgrind is not happy...)
-*/
+ */
 #  define HIDE_MOUSE	0
 # endif
 
@@ -68,43 +68,43 @@
  * 
  * @note	- If `CAN_INFO` is `0`, the player will not be able to
  * 			see the info of the game.
-*/
+ */
 #  define CAN_INFO		0
 # endif
 
 /**
  * @brief Name of the window
-*/
+ */
 # define NAME			"Cub3D"
 
 /**
  * @brief Height of the window (in px)
-*/
+ */
 # define HEIGHT			900
 
 /**
  * @brief Width of the window (in px)
-*/
+ */
 # define WIDTH			1200
 
 /**
  * @brief Field of view (in rad)
-*/
+ */
 # define FOV			PI_3
 
 /**
  * @brief Number of rays
-*/
+ */
 # define RAYS			600
 
 /**
  * @brief Walking speed (forward & backward) (in px/frame)
-*/
+ */
 # define WALK_SPEED		0.05
 
 /**
  * @brief Walking speed (left & right) (in px/frame)
-*/
+ */
 # define TRANSL_SPEED	0.02
 
 /**
@@ -113,21 +113,21 @@
  * @brief	- Using KEYS
  * 
  * @note	`PI_12 / 9` is `0.02908882086641849395`.
-*/
+ */
 # define ROT_SPEED		0.02908882086641849395
 
 /**
  * @brief Rotation speed (in rad/frame)
  * 
  * @brief	- Using MOUSE
-*/
-# define ROT_SPEED_MOUSE	0.00175
+ */
+# define ROT_SPEED_MOUSE	0.001
 
 typedef unsigned long long	t_ull;
 
 /**
  * @brief Direction type (`NORTH`, `SOUTH`, `WEST`, `EAST`)
-*/
+ */
 typedef enum e_direction
 {
 	NORTH,
@@ -138,7 +138,7 @@ typedef enum e_direction
 
 /**
  * @brief Boolean type (`FALSE`: 0, `TRUE`: 1)
-*/
+ */
 typedef enum e_bool
 {
 	FALSE,
@@ -147,7 +147,7 @@ typedef enum e_bool
 
 /**
  * @brief Position type (float, float)
-*/
+ */
 typedef struct s_pos
 {
 	float	x;
@@ -156,7 +156,7 @@ typedef struct s_pos
 
 /**
  * @brief Integer position type (int, int)
-*/
+ */
 typedef struct s_ipos
 {
 	int	x;
@@ -165,7 +165,7 @@ typedef struct s_ipos
 
 /**
  * @brief Integer vector3 type (int, int, int)
-*/
+ */
 typedef struct s_ivec3
 {
 	int	x;
@@ -183,7 +183,7 @@ typedef struct s_ivec3
  * @param width 			Width of the image (in px)
  * @param height 			Height of the image (in px)
  * @param endian 			Endian of the image (0: little, 1: big)
-*/
+ */
 typedef struct s_frame {
 	void	*img;
 	char	*addr;
@@ -211,7 +211,7 @@ typedef struct s_frame {
  * 
  * @param map_color 	Color of the texture on the map (in ARGB format)
  * 						(`0`: transparent)
-*/
+ */
 typedef struct s_texture
 {
 	t_bool	empty;
@@ -252,7 +252,7 @@ typedef struct s_texture
  * @param right 		Is the player pressing a right key ?
  * @param rot_left 		Is the player pressing a left rotation key ?
  * @param rot_right 	Is the player pressing a right rotation key ?
-*/
+ */
 typedef struct s_keys
 {
 	t_bool	forward;
@@ -290,7 +290,7 @@ typedef struct s_tile
  * @param keys 			Keys pressed by the player
  * 
  * @param frames 		Number of frames
-*/
+ */
 typedef struct s_cub
 {
 	void		*mlx;

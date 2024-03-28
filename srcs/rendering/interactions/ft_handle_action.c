@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_handle_action.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:21:11 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/28 16:35:17 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	ft_open_door(t_cub *cub, int x, int y);
  * 				AND the player is not inside the door: close it !
  * 
  * @param cub 	The game structure
-*/
+ */
 void	ft_handle_action(t_cub *cub)
 {
 	t_pos	pos;

@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:53:42 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/19 17:42:13 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:09:20 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_handle_bonus(t_map *map, char *line, int *i)
 	if (BONUS)
 	{
 		if (line[(*i)] != '2' && line[(*i)] != '3' && line[(*i)] != '4'
-			&& line[(*i)] != 'X')
+			&& line[(*i)] != 'X' && line[(*i)] != 'O' && line[(*i)] != '-')
 		{
 			free(line);
 			ft_error_handle(map, "Error\n", "Invalid map", 1);
@@ -33,8 +33,7 @@ void	ft_handle_bonus(t_map *map, char *line, int *i)
 /**
  * @brief Find the player position in the map, and store it in the struct
  *
- * @param map struct of the map
- * @return void
+ * @param map 	struct of the map
  **/
 void	ft_find_player_position(t_map *map)
 {
@@ -81,18 +80,13 @@ void	ft_player_direction(t_map *map, char *line, int i)
 		map->player_direction[3] = 1;
 }
 
-void	else_map_content(t_map *map, char *line, int *i, int *count_tmp_x)
+static void	else_map_content(t_map *map, char *line, int *i, int *count_tmp_x)
 {
 	map->map_size_y++;
 	while (line[(*i)])
 	{
 		(*count_tmp_x)++;
-		if (line[(*i)] == '\n' && line[(*i) + 1] != '\0')
-		{
-			free(line);
-			ft_error_handle(map, "Error\n", "Invalid map", 1);
-		}
-		else if (line[(*i)] != '0' && line[(*i)] != '1'
+		if (line[(*i)] != '0' && line[(*i)] != '1'
 			&& line[(*i)] != 'N' && line[(*i)] != 'S' && line[(*i)] != 'W'
 			&& line[(*i)] != 'E' && line[(*i)] != ' ' && line[(*i)] != '\n')
 			ft_handle_bonus(map, line, i);
@@ -108,9 +102,8 @@ void	else_map_content(t_map *map, char *line, int *i, int *count_tmp_x)
 /**
  * @brief Check if the map content is valid
  *
- * @param map struct of the map
- * @param fd file descriptor of the map, already used by gnl
- * @return void
+ * @param map 	struct of the map
+ * @param fd 	file descriptor of the map, already given by gnl
  */
 void	ft_check_map_content(t_map *map, int fd)
 {

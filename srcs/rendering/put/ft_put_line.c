@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_put_line.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:08:11 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/28 16:46:42 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param start 	The start position of the line (in px)
  * @param end 		The end position of the line (in px)
  * @param color 	The color to set (in ARGB format)
-*/
+ */
 void	ft_put_line(t_frame frame, t_ipos start, t_ipos end, int color)
 {
 	t_ipos	delta;

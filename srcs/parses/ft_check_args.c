@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 17:57:19 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/14 16:52:31 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:09:11 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 /**
  * @brief Check if the number of arguments is correct
  * 
- * @param ac number of arguments
- * @return void
+ * @param ac 	number of arguments
  */
 void	ft_check_args(int ac)
 {

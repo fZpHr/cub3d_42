@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_assign_textures_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 18:50:18 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/28 18:57:14 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 19:19:42 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	ft_assign_no(t_cub *cub, t_map *map, int i)
 		cub->textures[i].no[j] = ft_load_texture(cub, map->text[i].no[j]);
 		if (cub->textures[i].no[j].img == NULL)
 		{
-			ft_error_handle(map, "Error\n", "Can't load texture (NO)", -42);
+			ft_error_handle(map, "Error\n", "Can't load texture", -42);
 			ft_game_quit(cub, 1);
 		}
 		cub->textures[i].no_anim_count++;
@@ -82,7 +82,7 @@ static void	ft_assign_so(t_cub *cub, t_map *map, int i)
 		cub->textures[i].so[j] = ft_load_texture(cub, map->text[i].so[j]);
 		if (cub->textures[i].so[j].img == NULL)
 		{
-			ft_error_handle(map, "Error\n", "Can't load texture (SO)", -42);
+			ft_error_handle(map, "Error\n", "Can't load texture", -42);
 			ft_game_quit(cub, 1);
 		}
 		cub->textures[i].so_anim_count++;
@@ -103,7 +103,7 @@ static void	ft_assign_we(t_cub *cub, t_map *map, int i)
 		cub->textures[i].we[j] = ft_load_texture(cub, map->text[i].we[j]);
 		if (cub->textures[i].we[j].img == NULL)
 		{
-			ft_error_handle(map, "Error\n", "Can't load texture (WE)", -42);
+			ft_error_handle(map, "Error\n", "Can't load texture", -42);
 			ft_game_quit(cub, 1);
 		}
 		cub->textures[i].we_anim_count++;
@@ -124,7 +124,7 @@ static void	ft_assign_ea(t_cub *cub, t_map *map, int i)
 		cub->textures[i].ea[j] = ft_load_texture(cub, map->text[i].ea[j]);
 		if (cub->textures[i].ea[j].img == NULL)
 		{
-			ft_error_handle(map, "Error\n", "Can't load texture (EA)", -42);
+			ft_error_handle(map, "Error\n", "Can't load texture", -42);
 			ft_game_quit(cub, 1);
 		}
 		cub->textures[i].ea_anim_count++;

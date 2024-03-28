@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_game_quit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:10:09 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/28 18:19:26 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_destroy_img(void *mlx_ptr, void *img_ptr);
  * @param code 	The exit code
  * 
  * @return int 	Always `0`
-*/
+ */
 int	ft_game_quit(t_cub *cub, int code)
 {
 	int	i;
@@ -44,7 +44,8 @@ int	ft_game_quit(t_cub *cub, int code)
 		mlx_destroy_display(cub->mlx);
 		free(cub->mlx);
 	}
-	write(1, "Bye !\n", 6);
+	if (code == 0)
+		write(1, "Bye !\n", 6);
 	exit(code);
 	return (0);
 }

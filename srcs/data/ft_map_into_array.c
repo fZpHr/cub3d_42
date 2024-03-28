@@ -6,7 +6,7 @@
 /*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:56:58 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/19 16:48:08 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:50 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 /**
  * @brief Handle the line of the map, replace spaces and newlines by 'A'
  *
- * @param map struct of the map
- * @param line line to handle
- * @param j position of the line in the map
- * @param i position of the character in the line
- * @return void
- 
-*/
+ * @param map 	struct of the map
+ * @param line 	line to handle
+ * @param j 	position of the line in the map
+ * @param i 	position of the character in the line
+ */
 void	handle_line(t_map *map, char *line, int *j, int *i)
 {
 	if (line[(*i)] == ' ' || line[(*i)] == '\n')
@@ -86,11 +84,10 @@ void	fill_array(t_map *map, char *map_file)
 
 /**
  * @brief Fill the map array with the position of the map in the file,
-	and replace spaces and newlines by 'A'
+ * 			and replace spaces and newlines by 'A'
  *
- * @param map struct of the map
- * @param map_file name of the file
- * @return void
+ * @param map 		struct of the map
+ * @param map_file 	name of the file
  */
 void	ft_map_into_array(t_map *map, char *map_file)
 {

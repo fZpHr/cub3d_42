@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_does_collide.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:11:54 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 13:12:18 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @param position 	The position to check
  * 
  * @return t_bool 	`TRUE` if the player shouldn't be here, `FALSE` otherwise
-*/
+ */
 t_bool	ft_does_collide(t_cub *cub, t_pos position)
 {
 	if (!BONUS)

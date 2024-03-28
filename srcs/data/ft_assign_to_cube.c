@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_assign_to_cube.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:51:37 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/28 20:49:07 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:33 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	ft_assign_player(t_cub *cub, t_map *map);
 /**
  * @brief Assigns the map data to the cub structure
  *
- * @param cub cub structure
- * @param map map structure
+ * @param cub 	cub structure
+ * @param map 	map structure
  */
 void	ft_assign_to_cube(t_cub *cub, t_map *map)
 {
@@ -47,7 +47,7 @@ void	ft_assign_to_cube(t_cub *cub, t_map *map)
  * @note	Point: avoid `uninitialized values` errors.
  * 
  * @param keys 	The keys structure
-*/
+ */
 static void	ft_keys_init(t_keys *keys)
 {
 	keys->forward = FALSE;

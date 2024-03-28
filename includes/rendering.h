@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:39 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/28 20:56:31 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:07:31 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
  * @param distance 		Distance between the throwing and the hitting point
  * 						(-1 if no collision)
  * @param facing 		Facing of the collision
-*/
+ */
 typedef struct s_casting
 {
 	float		hor_x;

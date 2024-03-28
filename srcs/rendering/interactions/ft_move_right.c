@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_move_right.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:54:29 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/28 21:02:13 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
  * 				the player slide on the walls if he can !
  * 
  * @param cub 	The game structure
-*/
+ */
 void	ft_move_right(t_cub *cub)
 {
 	t_pos	rollback;

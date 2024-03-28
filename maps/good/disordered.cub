@@ -1,15 +1,15 @@
 
 
 
-SO   	 	 		 	 ./textures/bricks-blue-00.xpm
-C 	 	 225,30,0
+SO            ./textures/bricks-blue-00.xpm
+C     225,30,0
 
 
 F 220,100,0
 
 WE               ./textures/bricks-blue-00.xpm
 
-NO	./textures/bricks-blue-00.xpm
+NO ./textures/bricks-blue-00.xpm
 
 
 

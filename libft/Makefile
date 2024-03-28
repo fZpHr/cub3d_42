@@ -80,7 +80,7 @@ OBJTS	=	${SRCS:.c=.o}
 CC	=	cc
 RM	=	rm -f
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -fPIC
 
 .c.o:
 	@${CC} ${CFLAGS} -I includes -c $< -o ${<:.c=.o}
