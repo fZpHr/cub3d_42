@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:20:19 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/28 18:21:05 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 21:05:30 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_game_keydown(int keycode, t_cub *cub)
 {
 	if (keycode == XK_Escape)
 		ft_game_quit(cub, 0);
-	if (keycode == XK_i)
+	if (CAN_INFO && keycode == XK_i)
 		cub->info = !cub->info;
 	if (BONUS && (keycode == XK_m
 			|| keycode == XK_Shift_L || keycode == XK_Tab))
@@ -40,9 +40,13 @@ int	ft_game_keydown(int keycode, t_cub *cub)
 		cub->keys.forward = TRUE;
 	if (keycode == XK_s || keycode == XK_Down)
 		cub->keys.backward = TRUE;
-	if (keycode == XK_a || keycode == XK_Left)
+	if (keycode == XK_a)
+		cub->keys.left = TRUE;
+	if (keycode == XK_d)
+		cub->keys.right = TRUE;
+	if (keycode == XK_Left)
 		cub->keys.rot_left = TRUE;
-	if (keycode == XK_d || keycode == XK_Right)
+	if (keycode == XK_Right)
 		cub->keys.rot_right = TRUE;
 	return (0);
 }

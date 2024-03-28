@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:48:19 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 13:19:03 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 21:11:51 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #define INFO_H 320
 #define PADDING 10
 
+static void	ft_put_keys(t_cub *cub);
 static void	ft_put_str(t_cub *cub, t_ipos pos, char *str);
 static void	ft_put_lli(t_cub *cub, t_ivec3 info, long long n);
 static void	ft_put_float(t_cub *cub, t_ivec3 info, float n);
@@ -67,11 +68,18 @@ void	ft_render_info(t_cub *cub)
 	ft_put_lli(cub, (t_ivec3){55, 235, 13}, RAYS);
 	ft_put_str(cub, (t_ipos){0, 250}, "FOV (deg):");
 	ft_put_float(cub, (t_ivec3){55, 265, 13}, FOV * 180 / PI);
-	ft_put_str(cub, (t_ipos){45, 280}, "W  A  S  D");
-	ft_put_lli(cub, (t_ivec3){45, 295, 1}, cub->keys.forward);
-	ft_put_lli(cub, (t_ivec3){64, 295, 1}, cub->keys.backward);
-	ft_put_lli(cub, (t_ivec3){81, 295, 1}, cub->keys.rot_left);
-	ft_put_lli(cub, (t_ivec3){99, 295, 1}, cub->keys.rot_right);
+	ft_put_keys(cub);
+}
+
+static void	ft_put_keys(t_cub *cub)
+{
+	ft_put_str(cub, (t_ipos){26, 280}, "<  W  A  S  D  >");
+	ft_put_lli(cub, (t_ivec3){26, 295, 1}, cub->keys.rot_left);
+	ft_put_lli(cub, (t_ivec3){44, 295, 1}, cub->keys.forward);
+	ft_put_lli(cub, (t_ivec3){62, 295, 1}, cub->keys.left);
+	ft_put_lli(cub, (t_ivec3){80, 295, 1}, cub->keys.backward);
+	ft_put_lli(cub, (t_ivec3){98, 295, 1}, cub->keys.right);
+	ft_put_lli(cub, (t_ivec3){116, 295, 1}, cub->keys.rot_right);
 }
 
 static void	ft_put_str(t_cub *cub, t_ipos pos, char *str)

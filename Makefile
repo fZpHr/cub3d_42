@@ -6,7 +6,7 @@
 #    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/01 00:00:00 by ysabik            #+#    #+#              #
-#    Updated: 2024/03/28 18:54:18 by ysabik           ###   ########.fr        #
+#    Updated: 2024/03/28 21:04:50 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,8 @@ SRC_FILES			= \
 						srcs/rendering/interactions/ft_handle_keys.c \
 						srcs/rendering/interactions/ft_move_backward.c \
 						srcs/rendering/interactions/ft_move_forward.c \
+						srcs/rendering/interactions/ft_move_left.c \
+						srcs/rendering/interactions/ft_move_right.c \
 						srcs/rendering/mlx/ft_game_keydown.c \
 						srcs/rendering/mlx/ft_game_keyup.c \
 						srcs/rendering/mlx/ft_game_loop.c \
@@ -116,6 +118,7 @@ m_line_break :
 
 b_flags :
 	@$(eval CFLAGS += -D BONUS=1)
+	@$(eval CFLAGS += -D CAN_INFO=1)
 	@$(eval CFLAGS += -D HIDE_MOUSE=0)
 
 bonus : b_flags all

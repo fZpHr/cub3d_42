@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:39 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/28 18:19:36 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 20:56:31 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ void		ft_handle_doors(t_cub *cub);
 void		ft_handle_keys(t_cub *cub);
 void		ft_move_backward(t_cub *cub);
 void		ft_move_forward(t_cub *cub);
+void		ft_move_left(t_cub *cub);
+void		ft_move_right(t_cub *cub);
 
 int			ft_game_keydown(int keycode, t_cub *cub);
 int			ft_game_keyup(int keycode, t_cub *cub);

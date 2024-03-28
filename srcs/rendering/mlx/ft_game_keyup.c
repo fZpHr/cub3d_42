@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:19:44 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 11:20:05 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 20:51:10 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,13 @@ int	ft_game_keyup(int keycode, t_cub *cub)
 		cub->keys.forward = FALSE;
 	if (keycode == XK_s || keycode == XK_Down)
 		cub->keys.backward = FALSE;
-	if (keycode == XK_a || keycode == XK_Left)
+	if (keycode == XK_a)
+		cub->keys.left = FALSE;
+	if (keycode == XK_d)
+		cub->keys.right = FALSE;
+	if (keycode == XK_Left)
 		cub->keys.rot_left = FALSE;
-	if (keycode == XK_d || keycode == XK_Right)
+	if (keycode == XK_Right)
 		cub->keys.rot_right = FALSE;
 	return (0);
 }

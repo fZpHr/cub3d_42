@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:13:51 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/17 11:14:38 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 20:50:11 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ void	ft_handle_keys(t_cub *cub)
 		ft_move_forward(cub);
 	if (cub->keys.backward)
 		ft_move_backward(cub);
+	if (cub->keys.left)
+		ft_move_left(cub);
+	if (cub->keys.right)
+		ft_move_right(cub);
 	if (cub->keys.rot_left)
 		cub->orientation -= ROT_SPEED;
 	if (cub->keys.rot_right)

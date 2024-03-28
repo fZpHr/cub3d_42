@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:51:37 by hbelle            #+#    #+#             */
-/*   Updated: 2024/03/28 18:50:28 by ysabik           ###   ########.fr       */
+/*   Updated: 2024/03/28 20:49:07 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static void	ft_keys_init(t_keys *keys)
 {
 	keys->forward = FALSE;
 	keys->backward = FALSE;
+	keys->left = FALSE;
+	keys->right = FALSE;
 	keys->rot_left = FALSE;
 	keys->rot_right = FALSE;
 }

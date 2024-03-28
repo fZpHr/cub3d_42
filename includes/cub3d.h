@@ -38,7 +38,7 @@
  * @note	If `BONUS` is `0`, the program will be ignoring bonus adds
  * 			(like collisions, or advanced maps).
 */
-#  define BONUS		0
+#  define BONUS			0
 # endif
 
 # ifndef HIDE_MOUSE
@@ -56,7 +56,20 @@
  * @note	- And when `HIDE_MOUSE` is `1`, the mouse IS hidden.
  * 			(But valgrind is not happy...)
 */
-#  define HIDE_MOUSE		0
+#  define HIDE_MOUSE	0
+# endif
+
+# ifndef CAN_INFO
+/**
+ * @brief Display info (`0`: off, `1`: on)
+ * 
+ * @note	- If `CAN_INFO` is `1`, the player will be able to
+ * 			see the info of the game.
+ * 
+ * @note	- If `CAN_INFO` is `0`, the player will not be able to
+ * 			see the info of the game.
+*/
+#  define CAN_INFO		0
 # endif
 
 /**
@@ -85,9 +98,14 @@
 # define RAYS			600
 
 /**
- * @brief Walking speed (in px/frame)
+ * @brief Walking speed (forward & backward) (in px/frame)
 */
 # define WALK_SPEED		0.05
+
+/**
+ * @brief Walking speed (left & right) (in px/frame)
+*/
+# define TRANSL_SPEED	0.02
 
 /**
  * @brief Rotation speed (in rad/frame)
@@ -230,6 +248,8 @@ typedef struct s_texture
  * 
  * @param forward 		Is the player pressing a forward key ?
  * @param backward 		Is the player pressing a backward key ?
+ * @param left 			Is the player pressing a left key ?
+ * @param right 		Is the player pressing a right key ?
  * @param rot_left 		Is the player pressing a left rotation key ?
  * @param rot_right 	Is the player pressing a right rotation key ?
 */
@@ -237,6 +257,8 @@ typedef struct s_keys
 {
 	t_bool	forward;
 	t_bool	backward;
+	t_bool	left;
+	t_bool	right;
 	t_bool	rot_left;
 	t_bool	rot_right;
 }	t_keys;
