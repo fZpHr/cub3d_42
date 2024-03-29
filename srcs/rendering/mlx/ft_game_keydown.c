@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_game_keydown.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:20:19 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/29 04:19:01 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	ft_game_keydown(int keycode, t_cub *cub)
 	if (BONUS && (keycode == XK_e
 			|| keycode == XK_Shift_R || keycode == XK_space))
 		ft_handle_action(cub);
-	if (keycode == XK_w || keycode == XK_Up)
+	if (keycode == XK_w)
 		cub->keys.forward = TRUE;
-	if (keycode == XK_s || keycode == XK_Down)
+	if (keycode == XK_s)
 		cub->keys.backward = TRUE;
 	if (keycode == XK_a)
 		cub->keys.left = TRUE;

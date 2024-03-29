@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_game_keyup.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:19:44 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/03/29 04:18:49 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
  */
 int	ft_game_keyup(int keycode, t_cub *cub)
 {
-	if (keycode == XK_w || keycode == XK_Up)
+	if (keycode == XK_w)
 		cub->keys.forward = FALSE;
-	if (keycode == XK_s || keycode == XK_Down)
+	if (keycode == XK_s)
 		cub->keys.backward = FALSE;
 	if (keycode == XK_a)
 		cub->keys.left = FALSE;
