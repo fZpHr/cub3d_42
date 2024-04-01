@@ -16,7 +16,7 @@ Then compile the executable using (make for the mandatory part or make bonus for
 Finally, launch the game with
 
 ```bash
-  ./cub3D <your_map>
+  ./cub3D <path_of_ur_map>
 ```
 
     
