@@ -30,8 +30,32 @@ By using **M**, you can enable and disable the minimap.
 By using **I**, you can enable and disable info.  
 
 ## Map Requirement
+Here is an example of a working map for mandatory :
+```
+NO ./textures/bricks-blue-00.xpm
+SO ./textures/bricks-blue-00.xpm
+WE ./textures/bricks-blue-00.xpm
+EA ./textures/bricks-blue-00.xpm
 
-Here is an example of a working map :
+F 255,100,0
+C 225,30,0
+
+        1111111111111111111111111
+        1000000000110000000000001
+        1011000001110000000000001
+        1001000000000000000000001
+111111111011000001110000000000001
+100000000011000001110111111111111
+11110111111111011100000010001
+11110111111111011101010010001
+11000000110101011100000010001
+10000000000000001100000010001
+10000000000000001101010010001
+11000001110101011111011110N0111
+11110111 1110101 101111010001
+11111111 1111111 111111111111
+```
+Here is an example of a working map for bonus :
 ```
 NO [<id>] <path_to_the_xpm_file>  // Required for id 1
 SO [<id>] <path_to_the_xpm_file>  // There can be multiple definition:
