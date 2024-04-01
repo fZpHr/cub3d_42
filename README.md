@@ -1,4 +1,4 @@
-[Sujet](https://cdn.intra.42.fr/pdf/pdf/111470/en.subject.pdf)
+Look at subject for more information about the project
 
 ## Installation
 
