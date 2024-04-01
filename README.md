@@ -23,7 +23,7 @@ Finally, launch the game with
 ## Play
 
 You can play the game using the keys **W**, **A**, **S**, **D**.  
-Use your **mouse** to rotate the point of view.  
+Use your **mouse** / **left_arrow / right arrow** to rotate the point of view.  
 By using **M**, you can enable and disable the minimap.
 By using **I**, you can enable info.  
 
