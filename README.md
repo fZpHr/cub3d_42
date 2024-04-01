@@ -2,7 +2,7 @@
 
 ## Installation
 
-To install Cub3D, clone the project with
+To install Cub3D, clone the project and download the minilibx
 
 ```bash
   git clone git@github.com:fZpHr/cub3d_42.git && cd cub3d_42
