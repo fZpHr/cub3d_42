@@ -13,7 +13,7 @@ git clone git@github.com:fZpHr/cub3d_42.git
 cd cub3d_42
   
 ```
-```Download the minilibx
+```Downloading the minilibx
 wget https://cdn.intra.42.fr/document/document/22379/minilibx-linux.tgz
 tar -xf minilibx-linux
 ```
