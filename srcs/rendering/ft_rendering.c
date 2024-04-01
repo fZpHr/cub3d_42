@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_rendering.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelle <hbelle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 10:38:37 by ysabik            #+#    #+#             */
-/*   Updated: 2024/03/28 22:08:06 by hbelle           ###   ########.fr       */
+/*   Updated: 2024/04/01 13:39:48 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rendering.h"
 
-static void		ft_putstr(char *str);
-static void		ft_print_help(void);
+static void	ft_putstr(char *str);
+static void	ft_print_help(void);
 
 /**
  * @brief Initialize the MLX and start the rendering loop.
@@ -66,7 +66,8 @@ static void	ft_print_help(void)
 	if (BONUS)
 		ft_putstr("\n  > E or Space : Open/Close doors\n");
 	ft_putstr("\n");
-	ft_putstr("  > I          : Toggle info\n");
+	if (CAN_INFO)
+		ft_putstr("  > I          : Toggle info\n");
 	if (BONUS)
 		ft_putstr("  > M or Tab   : Toggle minimap\n");
 	ft_putstr("\n");
