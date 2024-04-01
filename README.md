@@ -3,15 +3,13 @@
 To install Cub3D, clone the project with
 
 ```bash
-  git clone the project
+  git clone git@github.com:fZpHr/cub3d_42.git && cd cub3d_42
   
 ```
-```Download the mlxlib
-wget https://cdn.intra.42.fr/document/document/22379/minilibx-linux.tgz
-decompress (tar -xf [name])
+```Download the minilibx
+wget https://cdn.intra.42.fr/document/document/22379/minilibx-linux.tgz && tar -xf minilibx-linux
 ```
-Then compile the executable using
-
+Then compile the executable using (make for the mandatory part or make bonus for the bonus)
 ```bash
   make
 ```
