@@ -1,4 +1,8 @@
-Look at subject for more information about the project
+## Cub3D Project Summary
+
+Cub3D is a 42 project where you create a simple 3D game using the raycasting technique. The goal is to build a small game engine capable of rendering a 3D environment from a 2D map, allowing the player to navigate through it in a first-person perspective. This project helps reinforce your understanding of graphics programming and computational geometry concepts.
+
+*For more information, please refer to the subject in the git.*
 
 ## Installation
 
