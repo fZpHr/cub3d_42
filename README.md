@@ -9,20 +9,22 @@ Cub3D is a 42 project where you create a simple 3D game using the raycasting tec
 To install Cub3D, clone the project and download the minilibx
 
 ```bash
-  git clone git@github.com:fZpHr/cub3d_42.git && cd cub3d_42
+git clone git@github.com:fZpHr/cub3d_42.git
+cd cub3d_42
   
 ```
 ```Download the minilibx
-wget https://cdn.intra.42.fr/document/document/22379/minilibx-linux.tgz && tar -xf minilibx-linux
+wget https://cdn.intra.42.fr/document/document/22379/minilibx-linux.tgz
+tar -xf minilibx-linux
 ```
 Then compile the executable using (make for the mandatory part or make bonus for the bonus)
 ```bash
-  make
+make
 ```
 Finally, launch the game with
 
 ```bash
-  ./cub3D <path_of_ur_map>
+./cub3D <path_of_ur_map>
 ```
 
     
