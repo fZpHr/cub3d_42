@@ -1,4 +1,4 @@
-
+## This project involved collaboration, and my teammate was https://github.com/Luzog78
 
 
 https://github.com/fZpHr/cub3d_42/assets/92046611/eca88560-edbe-43c4-9f0a-d648ca9117e4
