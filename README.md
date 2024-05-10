@@ -1,3 +1,11 @@
+
+
+
+https://github.com/fZpHr/cub3d_42/assets/92046611/eca88560-edbe-43c4-9f0a-d648ca9117e4
+
+
+
+
 ## Cub3D
 
 Cub3D is a 42 project where you create a simple 3D game using the raycasting technique. The goal is to build a small game engine capable of rendering a 3D environment from a 2D map, allowing the player to navigate through it in a first-person perspective. This project helps reinforce your understanding of graphics programming and computational geometry concepts.
